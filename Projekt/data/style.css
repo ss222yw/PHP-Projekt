@@ -1,0 +1,33 @@
+
+/*just a test style.......*/
+<style type="text/css">
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 50%;
+  font-family: sans-serif;
+  font-size: 15px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+input[type="password"] {
+  display: block;
+  margin: 0;
+  width: 50%;
+  font-family: sans-serif;
+  font-size: 15px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+#login fieldset{
+  width: 25%;
+  float: right;
+}
+
+
+</style>
