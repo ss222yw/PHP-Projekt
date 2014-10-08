@@ -24,11 +24,9 @@
 		private $imagestypes;
 		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!";
 		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!";
-		private $IMAGETYPE_GIF;
-		private $IMAGETYPE_jpeg;
-		private $IMAGETYPE_jpg;
-		private $IMAGETYPE_png;
 		private $imgRoot;
+		private $uploadPage;
+	
 
 		function __construct () {
 			$this->sessionModel = new SessionModel();
@@ -41,6 +39,7 @@
 			$this->validation = new validation();
 			$this->available = new available();
 			$this->imgRoot = getcwd()."/src/view/Images/";
+			$this->uploadPage = new upload();
 		}	
 
 		public function getuser() {
@@ -75,7 +74,7 @@
 			global $remote_ip;
 			global $b_ip;
 			global $user_agent;
-
+			$this->available->renderAllPics();
 			// Set page reload flag
 			$onReload = false;
 
@@ -85,7 +84,9 @@
 			$regView = clone $this->regView;
 			$sessionModel = clone $this->sessionModel;
 			$usermodel = clone $this->userModel;
+			//TODO: MOVE IT!!!
 		
+
 			if($loginView->userPressRegNewUser() == true) {
 				$regView->RenderRegForm();
 				return true;
@@ -130,9 +131,10 @@
 			// USER MAKES A LOGIN REQUEST
 			if ($loginView->UserPressLoginButton()) {
 				$result = $this->AuthenticateUser();
+				//TODO:: MOVE IT!!!
 				if ($result === true && $this->AdminID == 1)  {
 					# code...
-					 $this->available->Rendertest();
+					 $this->uploadPage->RenderUploadForm();
 				}
 				// If comparison to database succeeded login user and render memberarea.
 				if ($result === true) {
@@ -150,7 +152,7 @@
 			}
 			if ($sessionModel->IsAdminLoggedIn() && $sessionModel->IsLoggedIn() || ($memberView->RememberMe() && $memberView->RememberAdmin()))  {
 					# test code...
-					 $this->available->Rendertest();
+					 $this->uploadPage->RenderUploadForm();
 					
 				}
 
@@ -278,11 +280,11 @@
 		}
 
 		public function DidHasSubmit() {
-			return $this->available->hasSubmitToUpload();
+			return $this->uploadPage->hasSubmitToUpload();
 		}
 
 		public function getFileName() {
-			 return $this->available->GetImgName();
+			 return $this->uploadPage->GetImgName();
 		}
 
 		public function getImgPath() {
@@ -291,7 +293,7 @@
 
 		public function imgUpload() {
 
-
+	
 			//TODO:: READ MORE ABOUT phpinfo() , getcwd() , extension=php_mbstring.dll
 			// extension=php_exif.dll & exif_imagetype() IN PHP.NET....
 			//var_dump(phpinfo());
@@ -321,15 +323,21 @@
 						}
 						if ($_FILES[$upload]['size'] < 2000000) {
 							# code...
-								move_uploaded_file($_FILES[$upload]['tmp_name'], $this->imgRoot.$_FILES[$upload]['name']);
-								return $this->available->imageUpload(self::$UPLOADEDSUCCESSED);
+							 	if (move_uploaded_file($_FILES[$upload]['tmp_name'], $this->imgRoot.$_FILES[$upload]['name']) == true) {
+							 		# code...
+							 			$this->available->renderAllPics();
+							 			return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);
+							 	}
+								
 						}
 					}
-					return $this->available->imageUpload(self::$ErrorUPLOAD_ERR_TYPE);
+					else {
+							return $this->uploadPage->imageUpload(self::$ErrorUPLOAD_ERR_TYPE);
+						}
 				}
-			else {
-					return $this->available->imageUpload($this->validation->errorToMessage());
-				}
+				else {
+						return $this->uploadPage->imageUpload($this->validation->errorToMessage());
+					}
 			}
 		}
 	}

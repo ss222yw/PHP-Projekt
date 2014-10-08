@@ -38,6 +38,7 @@
 	require_once(ViewPath.DS.'information.php');
 	require_once(ViewPath.DS.'interestView.php');
 	require_once(ViewPath.DS.'serviceView.php');
+	require_once(ViewPath.DS.'upload.php');
 
 	// REQUIRE CONTROLLERS
 	require_once(ControllerPath.DS.'LoginController.php');
