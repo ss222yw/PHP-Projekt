@@ -41,11 +41,14 @@
 				$username = $_COOKIE[self::$sessionUsername];
 			}
 
-			$memberHTML = '<div>
-							<h2>' . $username . ' är inloggad.</h2>' .
+			$memberHTML = '<div id="memberView">'.
+						'<fieldset class="memberView">' .
+							'<h2>' . $username . ' är inloggad.</h2>' .
 							$successMessage .
-						'</div>
-						<a href="?logout">Logga ut<a/>';
+						
+						'<a href="?logout">Logga ut<a/>'.
+						'</fieldset>'.
+							'</div>';
 
 			return $memberHTML;
 		}

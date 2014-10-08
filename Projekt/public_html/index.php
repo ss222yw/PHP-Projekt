@@ -19,5 +19,6 @@
 
 	// Run Application
 	$loginController->RunLoginLogic();
+	$loginController->imgUpload();
 
 	

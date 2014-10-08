@@ -21,6 +21,14 @@
 		private $validation;
 		private $AdminID;
 		private $available;
+		private $imagestypes;
+		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!";
+		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!";
+		private $IMAGETYPE_GIF;
+		private $IMAGETYPE_jpeg;
+		private $IMAGETYPE_jpg;
+		private $IMAGETYPE_png;
+		private $imgRoot;
 
 		function __construct () {
 			$this->sessionModel = new SessionModel();
@@ -32,7 +40,7 @@
 			$this->cookie = new CookieStorage();
 			$this->validation = new validation();
 			$this->available = new available();
-
+			$this->imgRoot = getcwd()."/src/view/Images/";
 		}	
 
 		public function getuser() {
@@ -143,7 +151,7 @@
 			if ($sessionModel->IsAdminLoggedIn() && $sessionModel->IsLoggedIn() || ($memberView->RememberMe() && $memberView->RememberAdmin()))  {
 					# test code...
 					 $this->available->Rendertest();
-					 return true;
+					
 				}
 
 				
@@ -267,5 +275,61 @@
 		protected function LogoutUser ($isDefaultLogout = true) {
 			$this->memberView->LogoutUser();
 			$this->loginView->RenderLogoutView($isDefaultLogout);
+		}
+
+		public function DidHasSubmit() {
+			return $this->available->hasSubmitToUpload();
+		}
+
+		public function getFileName() {
+			 return $this->available->GetImgName();
+		}
+
+		public function getImgPath() {
+			$this->validation->getImgRoot($this->imgRoot);
+		}
+
+		public function imgUpload() {
+
+
+			//TODO:: READ MORE ABOUT phpinfo() , getcwd() , extension=php_mbstring.dll
+			// extension=php_exif.dll & exif_imagetype() IN PHP.NET....
+			//var_dump(phpinfo());
+
+			$counter = 1;
+			$upload = $this->getFileName();
+			$this->validation->getFileName($upload);
+			if ($this->DidHasSubmit() == true) {
+				# code...
+				if (is_uploaded_file($_FILES[$upload]['tmp_name'])) {
+					# code...
+					if (exif_imagetype($_FILES[$upload]['tmp_name']) == IMAGETYPE_GIF ||
+						 exif_imagetype($_FILES[$upload]['tmp_name']) == IMAGETYPE_JPEG ||
+						 	 exif_imagetype($_FILES[$upload]['tmp_name']) == IMAGETYPE_PNG) {
+						# code...
+						if (file_exists($this->imgRoot.$_FILES[$upload]['name'])) {
+							# code...
+							$FileNameInfo = new SplFileInfo($_FILES[$upload]['name']);
+							$extension = $FileNameInfo->getExtension();
+							$pointEx = substr(strrchr($_FILES[$upload]['name'],"."), -4);
+							$FileNameWithOutEx = $FileNameInfo->getBasename($pointEx);
+
+							while (file_exists($this->imgRoot.$_FILES[$upload]['name'])) {
+								# code...
+								$_FILES[$upload]['name'] = $FileNameWithOutEx."(".$counter++.")." . $extension;
+							}
+						}
+						if ($_FILES[$upload]['size'] < 2000000) {
+							# code...
+								move_uploaded_file($_FILES[$upload]['tmp_name'], $this->imgRoot.$_FILES[$upload]['name']);
+								return $this->available->imageUpload(self::$UPLOADEDSUCCESSED);
+						}
+					}
+					return $this->available->imageUpload(self::$ErrorUPLOAD_ERR_TYPE);
+				}
+			else {
+					return $this->available->imageUpload($this->validation->errorToMessage());
+				}
+			}
 		}
 	}

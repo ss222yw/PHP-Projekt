@@ -1,5 +1,4 @@
 
-/*just a test style.......*/
 <style type="text/css">
 
 input[type="text"] {
@@ -26,6 +25,10 @@ input[type="password"] {
 
 #login fieldset{
   width: 25%;
+  float: right;
+}
+#memberView fieldset{
+   width: 25%;
   float: right;
 }
 
