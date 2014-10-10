@@ -26,7 +26,12 @@
 		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!";
 		private $imgRoot;
 		private $uploadPage;
-	
+		private $fileName;
+		private $delImage;
+		private $imagesRepository;
+		private $images;
+		private $contact;
+		private $emailContact;
 
 		function __construct () {
 			$this->sessionModel = new SessionModel();
@@ -40,6 +45,11 @@
 			$this->available = new available();
 			$this->imgRoot = getcwd()."/src/view/Images/";
 			$this->uploadPage = new upload();
+			$this->fileName = $this->getFileName();
+			$this->imagesRepository = new ImagesRepository();
+			$this->contact = new contact();
+			$this->emailContact = new emailContact();
+
 		}	
 
 		public function getuser() {
@@ -69,12 +79,82 @@
 			return $this->loginView->GetPassword();
 		}
 
+		public function hasSubmitToDelImg() {
+			return $this->available->hasSubmitToDel();
+		}
+
+		// public function hasChecked() {
+		// 	return $this->available->hasChecked();
+		// }
+
+
+		//funcations for contact from 
+		public function getContctName() {
+			return $this->contact->getName();
+		}
+
+		public function getContactEmail() {
+			return $this->contact->getEmail();
+		}
+
+		public function getContactMsg() {
+			return $this->contact->getMsg();
+		}
+
+		public function didPressSend() {
+			return $this->contact->hasSubmitToSend();
+		}
+
+		public function sendContactFormInfo() {
+			$Name = $this->getContctName();
+			$Email = $this->getContactEmail();
+			$Message = $this->getContactMsg();
+			$this->validation->ContactFormValidation($Name,$Email,$Message);
+		}
+
+
+		public function getNameToEContact() {
+			$this->emailContact->getName($this->getContctName());
+		}
+
+		public function getEmailToContact() {
+			$this->emailContact->getEmail($this->getContactEmail());
+		}
+
+		public function getMsgToContact() {
+			$this->emailContact->getMessage($this->getContactMsg());
+		}
+
+		public function doContact() {
+			$Name = $this->getContctName();
+			$Email = $this->getContactEmail();
+			$Message = $this->getContactMsg();
+			var_dump($this->didPressSend() == true);
+			if ($this->didPressSend() == true) {
+				# code...
+				echo "string";
+				if ($this->validation->ContactFormValidation($Name,$Email,$Message) === true) {
+					# code...
+					//TODO:: Code for contact form....
+					$this->emailContact->EmailContact();
+				}
+				else {
+
+					return $this->contact->ContactForm($this->validation->ContactFormValidation($Name,$Email,$Message));
+				}
+				
+
+			}
+
+		}
 
 		public function RunLoginLogic () {
 			global $remote_ip;
 			global $b_ip;
 			global $user_agent;
 			$this->available->renderAllPics();
+
+
 			// Set page reload flag
 			$onReload = false;
 
@@ -85,7 +165,7 @@
 			$sessionModel = clone $this->sessionModel;
 			$usermodel = clone $this->userModel;
 			//TODO: MOVE IT!!!
-		
+			$this->contact->RenderContactForm();
 
 			if($loginView->userPressRegNewUser() == true) {
 				$regView->RenderRegForm();
@@ -292,40 +372,58 @@
 		}
 
 		public function imgUpload() {
-
 	
 			//TODO:: READ MORE ABOUT phpinfo() , getcwd() , extension=php_mbstring.dll
 			// extension=php_exif.dll & exif_imagetype() IN PHP.NET....
 			//var_dump(phpinfo());
 
 			$counter = 1;
-			$upload = $this->getFileName();
-			$this->validation->getFileName($upload);
+		//	$this->fileName = $this->getFileName();
+			$this->validation->getFileName($this->fileName);
+			$Images = glob("src/view/Images/*.*");
+			if ($this->hasSubmitToDelImg() == true) {
+				# code... 
+				foreach ($Images as $value) {
+					# code...
+
+						unlink($value);
+						//echo "bilden togs bort!!!!!!";
+				}
+			}
+			else{}	
+
+			
+
 			if ($this->DidHasSubmit() == true) {
 				# code...
-				if (is_uploaded_file($_FILES[$upload]['tmp_name'])) {
+				if (is_uploaded_file($_FILES[$this->fileName]['tmp_name'])) {
 					# code...
-					if (exif_imagetype($_FILES[$upload]['tmp_name']) == IMAGETYPE_GIF ||
-						 exif_imagetype($_FILES[$upload]['tmp_name']) == IMAGETYPE_JPEG ||
-						 	 exif_imagetype($_FILES[$upload]['tmp_name']) == IMAGETYPE_PNG) {
+					if (exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_GIF ||
+						 exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_JPEG ||
+						 	 exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_PNG) {
 						# code...
-						if (file_exists($this->imgRoot.$_FILES[$upload]['name'])) {
+						if (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
 							# code...
-							$FileNameInfo = new SplFileInfo($_FILES[$upload]['name']);
+							$FileNameInfo = new SplFileInfo($_FILES[$this->fileName]['name']);
 							$extension = $FileNameInfo->getExtension();
-							$pointEx = substr(strrchr($_FILES[$upload]['name'],"."), -4);
+							$pointEx = substr(strrchr($_FILES[$this->fileName]['name'],"."), -4);
 							$FileNameWithOutEx = $FileNameInfo->getBasename($pointEx);
 
-							while (file_exists($this->imgRoot.$_FILES[$upload]['name'])) {
+							while (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
 								# code...
-								$_FILES[$upload]['name'] = $FileNameWithOutEx."(".$counter++.")." . $extension;
+								$_FILES[$this->fileName]['name'] = $FileNameWithOutEx."(".$counter++.")." . $extension;
 							}
 						}
-						if ($_FILES[$upload]['size'] < 2000000) {
+						if ($_FILES[$this->fileName]['size'] < 2000000) {
 							# code...
-							 	if (move_uploaded_file($_FILES[$upload]['tmp_name'], $this->imgRoot.$_FILES[$upload]['name']) == true) {
+							 	if (move_uploaded_file($_FILES[$this->fileName]['tmp_name'], $this->imgRoot.$_FILES[$this->fileName]['name']) == true) {
 							 		# code...
+							 			$this->images = new Images($_FILES[$this->fileName]['name']);
+							 			
+							 			$this->imagesRepository->AddPics($this->images);
+
 							 			$this->available->renderAllPics();
+
 							 			return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);
 							 	}
 								

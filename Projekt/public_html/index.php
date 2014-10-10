@@ -20,5 +20,5 @@
 	// Run Application
 	$loginController->RunLoginLogic();
 	$loginController->imgUpload();
-
+	$loginController->doContact();
 	

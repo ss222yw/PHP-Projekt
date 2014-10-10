@@ -2,7 +2,14 @@
 
 	class validation {
 
+	private $didSubmit;
+	private $fileName;
+	private $imagestypes;
+	private $imgRoot;	
+
 	//static messages for validation.
+
+	//Messages for log in system.
 	private static $loginErrorMessage = "Felaktigt användarnamn och/eller lösenord.";
 	private static $emptyUsernameErrorMessage = "Användarnamn saknas.";
 	private static $emptyPasswordErrorMessage = "Lösenord saknas.";	
@@ -12,17 +19,26 @@
 	private static $ErrorHasTagsUsernameMessage = "Användarnamnet innehåller ogiltiga tecken";
 	private static $ErrorUserHasToken = "Användarnamnet är upptaget!";
 	private static $ErrorPasswordAndUserNameMessage = "Användarnamnet har för få tecken. Minst 3 tecken <br> Lösenorden har för få tecken. Minst 6 tecken";
-	private $didSubmit;
-	private $fileName;
-	private $imagestypes;
-	private $imgRoot;
+
+	//Messages for upload function.
 	private static $ErrorUPLOAD_ERR_FORM_SIZE = "Filen är för stort!!";
 	private static $ErrorUPLOAD_ERR_NO_FILE = "Välj en bild först sen tryck ladda upp!!!";
 	private static $ErrorUPLOAD_ERR_NO_TMP_DIR = "Som fel har inträffat";
 
+	//Message for Contact function.
+	private static $ErrorNameMessage = "Namnet var fel formterat!";
+	private static $ErrorEmailMessage = "Eposten var fel formterat!";
+	private static $ErrorEmptyMessage = "Du kan inte skicka en tom meddelande!";
+	private static $ErrorEmptyName = "Namnet måste anges!";
+	private static $ErrorEmptyEmail = "Eposten måste anges!";
 
+	private $emailExp;
+	private $Exp;
 
 	public function __construct(){
+
+		$this->emailExp = "/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/";
+		$this->Exp = "/^[A-Za-z .'-]+$/";
 
 	}
 
@@ -124,8 +140,36 @@
 			      else if($_FILES[$this->fileName]['error'] == 4) {
 				    	# code...
 				     	return self::$ErrorUPLOAD_ERR_NO_FILE;
-				   }
-			
+				   }	
 		}
+
+
+		public function ContactFormValidation($Name,$Email,$Message) {
+
+		    if ($Name == null) {
+
+				return self::$ErrorEmptyName;
+			}
+			
+			else if ($Email == null) {
+		
+				return self::$ErrorEmptyEmail;
+			}
+			else if ($Message == null) {
+		
+				return self::$ErrorEmptyMessage;
+			}
+			else  if(!preg_match($this->emailExp, $Email)) {
+
+				return self::$ErrorEmailMessage;
+			}	
+			else if(!preg_match($this->Exp, $Name)) {
+
+				return self::$ErrorNameMessage;
+			}		
+				return true;
+
+		}
+
 			
 }

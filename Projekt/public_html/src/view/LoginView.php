@@ -87,7 +87,7 @@
 			// Is called from LoginController
 			if (isset($_POST['username'])) {
 				
-				return $_POST['username'];
+				return htmlentities($_POST['username']);
 			}
 		}
 
@@ -96,7 +96,7 @@
 			// Is called from LoginController
 			if (isset($_POST['password'])) {
 				
-				return $_POST['password'];
+				return htmlentities($_POST['password']);
 			}
 		}
 

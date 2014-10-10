@@ -25,7 +25,7 @@ class RegView{
 
 	public function GetRegFormHTML($message = '') {
 
-		$responseMessages = '';
+		$responseMessages = ''; 
 
 			if ($message != '') {
 					
@@ -71,20 +71,20 @@ class RegView{
 
 	public function GetUserName() {
 		if (isset($_POST[$this->username])) {
-			return $_POST[$this->username];
+			return htmlentities($_POST[$this->username]);
 		}
 	}
 
 
 	public function GetPasswordOne() {
 		if (isset($_POST[$this->passwordOne])) {
-			return $_POST[$this->passwordOne];
+			return htmlentities($_POST[$this->passwordOne]);
 		}	
 	}
 
 	public function GetPasswordTwo() {
 		if (isset($_POST[$this->passwordTwo])) {
-			return $_POST[$this->passwordTwo];
+			return htmlentities($_POST[$this->passwordTwo]);
 		}
 	}
 

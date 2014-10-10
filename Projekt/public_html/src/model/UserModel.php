@@ -177,5 +177,8 @@
 			$hp = $ArrayUser[2];
 			return ($u === $username && $hp === $data);
 		}
+
+
+		
 	}
 

@@ -27,6 +27,12 @@
 	require_once(ModelPath.DS.'User.php');
 	require_once(ModelPath.DS.'validation.php');
 	require_once(ModelPath.DS.'SessionModel.php');
+	require_once(ModelPath.DS.'ImagesRepository.php');
+	require_once(ModelPath.DS.'Images.php');
+	require_once(ModelPath.DS.'emailContact.php');
+	require_once(ModelPath.DS.'emailInterest.php');
+	require_once(ModelPath.DS.'emailService.php');
+
 	// REQUIRE VIEWS
 	require_once(HelperPath.DS.'HTMLView.php');
 	require_once(ViewPath.DS.'LoginView.php');
@@ -34,7 +40,7 @@
 	require_once(ViewPath.DS.'CookieStorage.php');
 	require_once(ViewPath.DS.'RegView.php');
 	require_once(ViewPath.DS.'available.php');
-	require_once(ViewPath.DS.'about.php');
+	require_once(ViewPath.DS.'contact.php');
 	require_once(ViewPath.DS.'information.php');
 	require_once(ViewPath.DS.'interestView.php');
 	require_once(ViewPath.DS.'serviceView.php');

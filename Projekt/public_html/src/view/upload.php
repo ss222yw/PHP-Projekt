@@ -22,11 +22,11 @@ class upload {
 			'<div id=upload>'.
 			'<form id="upload" enctype="multipart/form-data" method="post" action="?upload">' .
 				'<fieldset class="upload">' .
-				'<input type="file" name="'.$this->images.'">'.
+				'<input type="File" name="'.$this->images.'">'.
 				'<input type="submit" name="'.$this->upload.'" value="Ladda upp">'.
 				'</fieldset>'.
 			'</form>'.
-				'</div>';
+			'</div>';
 			echo $responseMessages;
 			return $uploadForm;
 	}
@@ -43,8 +43,10 @@ class upload {
 	}
 
 	public function GetImgName() {
-
+		if (isset($_FILES[$this->images])) {
+			# code...
 			return $this->images;
+		}
 		
 	}
 
@@ -52,7 +54,7 @@ class upload {
 	public function hasSubmitToUpload() {
 		if (isset($_POST[$this->upload])) {
 			# code...
-			return $_POST[$this->upload] ;
+			return true;
 		}
 	}
 

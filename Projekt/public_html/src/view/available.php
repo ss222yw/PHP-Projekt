@@ -4,6 +4,8 @@ class available{
 // test code.............
 
 	private $mainView;
+	private $del = "delete";
+	private $checked = "checked";
 
 	public function __construct() {
 		$this->mainView = new HTMLView();
@@ -23,8 +25,9 @@ class available{
 		for ($i=0; $i < $NrOfImgs; $i++) { 
 			# code...
 			$pics .= '<img src="'.$Images[$i].'" id="ImgSize">';
+
 		}
-			$msgs = $responseMessages;
+			$msgs = $responseMessages;	
 			echo $responseMessages;
 		return $pics;	
 	}
@@ -34,4 +37,27 @@ class available{
 		echo $this->mainView->echoHTML($this->DisplayAllImages());
 	}
 
-}
+	public function deleteImg() {
+		$remove = '<form id="delete" enctype="multipart/form-data" method="post" action="?delete">'.
+	//	'<input type="checkbox" name="'.$this->checked.'">'.
+		'<input type="submit" name="'.$this->del.'" value="Ta bort">'.
+		'</form>';
+		return $remove;
+	}
+
+
+	public function hasSubmitToDel() {
+		if (isset($_POST[$this->del])) {
+			# code...
+			return true;
+		}
+	}
+
+	public function hasChecked() {
+		if (isset($_POST[$this->checked])) {
+			# code...
+			return true;
+		}
+	}
+
+}										
