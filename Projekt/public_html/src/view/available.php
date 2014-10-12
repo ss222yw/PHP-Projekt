@@ -34,7 +34,7 @@ class available{
 
 
 	public function renderAllPics() {
-		echo $this->mainView->echoHTML($this->DisplayAllImages());
+		echo $this->mainView->echoHTML($this->DisplayAllImages()) ."<br>";
 	}
 
 	public function deleteImg() {

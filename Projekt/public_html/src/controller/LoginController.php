@@ -14,24 +14,11 @@
 		private $regView;
 		private $user;
 		private $userModel;
-		private static $hashString = "sha256";
 		private $cookie;
 		private $username;
 		private $passwordSafe;
 		private $validation;
-		private $AdminID;
-		private $available;
-		private $imagestypes;
-		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!";
-		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!";
-		private $imgRoot;
-		private $uploadPage;
-		private $fileName;
-		private $delImage;
-		private $imagesRepository;
-		private $images;
-		private $contact;
-		private $emailContact;
+		private static $hashString = "sha256";
 
 		function __construct () {
 			$this->sessionModel = new SessionModel();
@@ -42,13 +29,6 @@
 			$this->user = new User($this->getuser(), $this->getSafePassword());
 			$this->cookie = new CookieStorage();
 			$this->validation = new validation();
-			$this->available = new available();
-			$this->imgRoot = getcwd()."/src/view/Images/";
-			$this->uploadPage = new upload();
-			$this->fileName = $this->getFileName();
-			$this->imagesRepository = new ImagesRepository();
-			$this->contact = new contact();
-			$this->emailContact = new emailContact();
 
 		}	
 
@@ -79,82 +59,15 @@
 			return $this->loginView->GetPassword();
 		}
 
-		public function hasSubmitToDelImg() {
-			return $this->available->hasSubmitToDel();
-		}
-
-		// public function hasChecked() {
-		// 	return $this->available->hasChecked();
-		// }
-
-
-		//funcations for contact from 
-		public function getContctName() {
-			return $this->contact->getName();
-		}
-
-		public function getContactEmail() {
-			return $this->contact->getEmail();
-		}
-
-		public function getContactMsg() {
-			return $this->contact->getMsg();
-		}
-
-		public function didPressSend() {
-			return $this->contact->hasSubmitToSend();
-		}
-
-		public function sendContactFormInfo() {
-			$Name = $this->getContctName();
-			$Email = $this->getContactEmail();
-			$Message = $this->getContactMsg();
-			$this->validation->ContactFormValidation($Name,$Email,$Message);
-		}
-
-
-		public function getNameToEContact() {
-			$this->emailContact->getName($this->getContctName());
-		}
-
-		public function getEmailToContact() {
-			$this->emailContact->getEmail($this->getContactEmail());
-		}
-
-		public function getMsgToContact() {
-			$this->emailContact->getMessage($this->getContactMsg());
-		}
-
-		public function doContact() {
-			$Name = $this->getContctName();
-			$Email = $this->getContactEmail();
-			$Message = $this->getContactMsg();
-			var_dump($this->didPressSend() == true);
-			if ($this->didPressSend() == true) {
-				# code...
-				echo "string";
-				if ($this->validation->ContactFormValidation($Name,$Email,$Message) === true) {
-					# code...
-					//TODO:: Code for contact form....
-					$this->emailContact->EmailContact();
-				}
-				else {
-
-					return $this->contact->ContactForm($this->validation->ContactFormValidation($Name,$Email,$Message));
-				}
-				
-
-			}
-
-		}
+	
 
 		public function RunLoginLogic () {
+
 			global $remote_ip;
 			global $b_ip;
 			global $user_agent;
-			$this->available->renderAllPics();
 
-
+			
 			// Set page reload flag
 			$onReload = false;
 
@@ -164,9 +77,9 @@
 			$regView = clone $this->regView;
 			$sessionModel = clone $this->sessionModel;
 			$usermodel = clone $this->userModel;
-			//TODO: MOVE IT!!!
-			$this->contact->RenderContactForm();
 
+
+			//TODO::MOVE IT...
 			if($loginView->userPressRegNewUser() == true) {
 				$regView->RenderRegForm();
 				return true;
@@ -211,11 +124,7 @@
 			// USER MAKES A LOGIN REQUEST
 			if ($loginView->UserPressLoginButton()) {
 				$result = $this->AuthenticateUser();
-				//TODO:: MOVE IT!!!
-				if ($result === true && $this->AdminID == 1)  {
-					# code...
-					 $this->uploadPage->RenderUploadForm();
-				}
+	
 				// If comparison to database succeeded login user and render memberarea.
 				if ($result === true) {
 
@@ -230,11 +139,6 @@
 				}
 
 			}
-			if ($sessionModel->IsAdminLoggedIn() && $sessionModel->IsLoggedIn() || ($memberView->RememberMe() && $memberView->RememberAdmin()))  {
-					# test code...
-					 $this->uploadPage->RenderUploadForm();
-					
-				}
 
 				
 
@@ -276,7 +180,7 @@
 			return $this->userModel->getUserCookie($username);
 			
 		}
-		protected function AuthenticateUser () {
+		public function AuthenticateUser () {
 			$username = $this->getUsernameFromLoginView();
 			$password = $this->getPasswordFromLoginView();
 			$message = $this->validation->Validate($username,$password);
@@ -359,83 +263,4 @@
 			$this->loginView->RenderLogoutView($isDefaultLogout);
 		}
 
-		public function DidHasSubmit() {
-			return $this->uploadPage->hasSubmitToUpload();
-		}
-
-		public function getFileName() {
-			 return $this->uploadPage->GetImgName();
-		}
-
-		public function getImgPath() {
-			$this->validation->getImgRoot($this->imgRoot);
-		}
-
-		public function imgUpload() {
-	
-			//TODO:: READ MORE ABOUT phpinfo() , getcwd() , extension=php_mbstring.dll
-			// extension=php_exif.dll & exif_imagetype() IN PHP.NET....
-			//var_dump(phpinfo());
-
-			$counter = 1;
-		//	$this->fileName = $this->getFileName();
-			$this->validation->getFileName($this->fileName);
-			$Images = glob("src/view/Images/*.*");
-			if ($this->hasSubmitToDelImg() == true) {
-				# code... 
-				foreach ($Images as $value) {
-					# code...
-
-						unlink($value);
-						//echo "bilden togs bort!!!!!!";
-				}
-			}
-			else{}	
-
-			
-
-			if ($this->DidHasSubmit() == true) {
-				# code...
-				if (is_uploaded_file($_FILES[$this->fileName]['tmp_name'])) {
-					# code...
-					if (exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_GIF ||
-						 exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_JPEG ||
-						 	 exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_PNG) {
-						# code...
-						if (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
-							# code...
-							$FileNameInfo = new SplFileInfo($_FILES[$this->fileName]['name']);
-							$extension = $FileNameInfo->getExtension();
-							$pointEx = substr(strrchr($_FILES[$this->fileName]['name'],"."), -4);
-							$FileNameWithOutEx = $FileNameInfo->getBasename($pointEx);
-
-							while (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
-								# code...
-								$_FILES[$this->fileName]['name'] = $FileNameWithOutEx."(".$counter++.")." . $extension;
-							}
-						}
-						if ($_FILES[$this->fileName]['size'] < 2000000) {
-							# code...
-							 	if (move_uploaded_file($_FILES[$this->fileName]['tmp_name'], $this->imgRoot.$_FILES[$this->fileName]['name']) == true) {
-							 		# code...
-							 			$this->images = new Images($_FILES[$this->fileName]['name']);
-							 			
-							 			$this->imagesRepository->AddPics($this->images);
-
-							 			$this->available->renderAllPics();
-
-							 			return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);
-							 	}
-								
-						}
-					}
-					else {
-							return $this->uploadPage->imageUpload(self::$ErrorUPLOAD_ERR_TYPE);
-						}
-				}
-				else {
-						return $this->uploadPage->imageUpload($this->validation->errorToMessage());
-					}
-			}
-		}
 	}

@@ -16,14 +16,13 @@
 		public function ContactForm($message = '') {
 
 			$responseMessages = ''; 
-
 			if ($message != '') {
 					
 				$responseMessages .= '<p>' . $message . '</p>';
 			}
-
+			echo $responseMessages;
 			$contactUs =
-			'<form id="contact" enctype="multipart/form-data" method="post" action="?contact">'.
+			'<form id="contact"  method="post" action="">'.
 			'<label>Ditt namn : </label>'.
 			'<input type="text" name="'.$this->name.'" maxlength="30">' .
 			'<label>Din epost : </label>'.
@@ -32,8 +31,7 @@
 			'<br>'.
 			'<textarea name="'.$this->msg.'" cols="50" rows="5" maxlength="500"></textarea>' .
 			'<br>'.
-			'<input type="submit" name"send" value="Skicka">'.
-			$responseMessages .
+			'<input type="submit" name="send" value="Skicka">'.
 			'</form>';
 			return $contactUs;
 		}
@@ -70,7 +68,8 @@
 				# code...
 				return true;
 			}
-			
+			return false;
+
 		}
 
 	}

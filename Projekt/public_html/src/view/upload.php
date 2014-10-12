@@ -20,7 +20,7 @@ class upload {
 
 		$uploadForm = 	'<br>'.
 			'<div id=upload>'.
-			'<form id="upload" enctype="multipart/form-data" method="post" action="?upload">' .
+			'<form id="upload" enctype="multipart/form-data" method="post" action="">' .
 				'<fieldset class="upload">' .
 				'<input type="File" name="'.$this->images.'">'.
 				'<input type="submit" name="'.$this->upload.'" value="Ladda upp">'.

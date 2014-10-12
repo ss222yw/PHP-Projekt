@@ -19,8 +19,13 @@
 	require_once(HelperPath.DS.'config.php');
 
 	// require database model (helper)
+	require_once(HelperPath.DS.'HTMLView.php');
 	require_once(HelperPath.DS.'Database.php');
 	require_once(HelperPath.DS.'style.css');
+	require_once(HelperPath.DS.'safe.php');
+	require_once(HelperPath.DS.'setting.php');
+	require_once(HelperPath.DS.'setting.php');
+	
 
 	// REQUIRE MODELS
 	require_once(ModelPath.DS.'UserModel.php');
@@ -34,7 +39,6 @@
 	require_once(ModelPath.DS.'emailService.php');
 
 	// REQUIRE VIEWS
-	require_once(HelperPath.DS.'HTMLView.php');
 	require_once(ViewPath.DS.'LoginView.php');
 	require_once(ViewPath.DS.'MemberView.php');
 	require_once(ViewPath.DS.'CookieStorage.php');
@@ -45,8 +49,11 @@
 	require_once(ViewPath.DS.'interestView.php');
 	require_once(ViewPath.DS.'serviceView.php');
 	require_once(ViewPath.DS.'upload.php');
+	require_once(ViewPath.DS.'NavigationView.php');
+	require_once(ViewPath.DS.'HomePageView.php');
 
 	// REQUIRE CONTROLLERS
 	require_once(ControllerPath.DS.'LoginController.php');
-	require_once(HelperPath.DS.'safe.php');
-	require_once(HelperPath.DS.'setting.php');
+	require_once(ControllerPath.DS.'UploadController.php');
+	require_once(ControllerPath.DS.'ContactController.php');
+	require_once(ControllerPath.DS.'NavigationController.php');

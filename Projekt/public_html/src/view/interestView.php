@@ -17,7 +17,7 @@
 		public function interestFrom() {
 			$Interest =
 			'<h4>Sökande</h4>'.
-			'<form id="interest" enctype="multipart/form-data" method="post" action="?interest">'.
+			'<form id="interest" enctype="multipart/form-data" method="post" action="">'.
 			'<label>Ditt namn : </label>'.
 			'<input type="text" name="'.$this->name.'">' .
 			'<label>Din epost : </label>'.

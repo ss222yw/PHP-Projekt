@@ -18,7 +18,7 @@
 
 		public function serviceForm() {
 			$service =
-			'<form id="interest" enctype="multipart/form-data" method="post" action="?interest">'.
+			'<form id="interest" enctype="multipart/form-data" method="post" action="">'.
 			'<label>Ditt namn : </label>'.
 			'<input type="text" name="'.$this->name.'">' .
 			'<label>Lgh Nr : </label>'.

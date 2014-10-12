@@ -2,7 +2,7 @@
 	
 
 	session_start();
-
+	echo "<h1>NybroHH fastigheter</h1>";
 	// Initialize security objects to identify hijacking.
 	$remote_ip = $_SERVER['REMOTE_ADDR'];
 	// $b_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -14,11 +14,19 @@
 	}
 
 	require_once("../data/pathConfig.php");
-	
-	$loginController = new LoginController();
+
+	$navigationController = new NavigationController();
+//	$regController = new RegController();
 
 	// Run Application
-	$loginController->RunLoginLogic();
-	$loginController->imgUpload();
-	$loginController->doContact();
-	
+    $navigationController->doControll();
+    //$regController->doShowRegPage();
+
+	setlocale(LC_ALL, 'swedish');
+	$day = utf8_encode(ucfirst(strftime("%A")));
+ 	$date = ucwords(strftime($day .'en. Den %d %B år %Y. Klockan är [%X].', strtotime('+1 hour')));
+	echo $date;	
+
+    			
+
+

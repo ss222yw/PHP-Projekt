@@ -150,23 +150,27 @@
 
 				return self::$ErrorEmptyName;
 			}
-			
+
 			else if ($Email == null) {
 		
 				return self::$ErrorEmptyEmail;
 			}
+
 			else if ($Message == null) {
 		
 				return self::$ErrorEmptyMessage;
 			}
-			else  if(!preg_match($this->emailExp, $Email)) {
 
-				return self::$ErrorEmailMessage;
-			}	
 			else if(!preg_match($this->Exp, $Name)) {
 
 				return self::$ErrorNameMessage;
-			}		
+			}
+
+			else if(!preg_match($this->emailExp, $Email)) {
+
+				return self::$ErrorEmailMessage;
+			}	
+				
 				return true;
 
 		}

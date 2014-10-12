@@ -33,7 +33,7 @@
 
 
 		public function EmailContact() {
-
+		
 			mail(self::$to, self::$subj, $this->message, $this->headers);
 		}
 
