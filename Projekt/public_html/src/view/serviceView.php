@@ -16,27 +16,45 @@
 		}
 
 
-		public function serviceForm() {
+		public function serviceForm($message = '') {
+
+			$responseMessages = ''; 
+			if ($message != '') {
+					
+				$responseMessages .= '<p>' . $message . '</p>';
+			}
+
+			echo '<h3>'.$responseMessages.'</h3>';
+
 			$service =
 			'<form id="interest" enctype="multipart/form-data" method="post" action="">'.
+			'<fieldset class="contact">' .
+			'<legend><h3>Felanmäla</h3></legend>' .
 			'<label>Ditt namn : </label>'.
-			'<input type="text" name="'.$this->name.'">' .
+			'<input type="text" name="'.$this->name.'" maxlength="30" placeholder="Namnet krävs" value="'.$this->getName().'">' .
+			'<br>'.
 			'<label>Lgh Nr : </label>'.
-			'<input type="text" name="'.$this->aprtM.'">' .
+			'<input type="text" name="'.$this->aprtM.'" maxlength="10" placeholder="Frivilligt" value="'.$this->getAprtNumber().'">' .
+			'<br>'.
 			'<label>Din epost : </label>'.
-			'<input type="text" name="'.$this->email.'">' .
+			'<input type="text" name="'.$this->email.'" maxlength="50" placeholder="Epost krävs" >' .
+			'<br>'.
 			'<label>Telefon : </label>'.
-			'<input type="text" name="'.$this->tel.'">' .
-			'<label>Önskemål & Inflyttningsdatum : </label>'.
-			'<textarea name="'.$this->msg.'" ></textarea>' .
-			'<input type="submit" name"'.$this->send.'" value="Skicka intresseanmälan">'.
+			'<input type="text" name="'.$this->tel.'" maxlength="30" placeholder="Frivilligt" value="'.$this->getTel().'">' .
+			'<br>'.
+			'<label>Ditt anmäla : </label>'.
+			'<br>'.
+			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv ditt felanmäla här...">'.$this->getMsg().'</textarea>' .
+			'<br>'.
+			'<input type="submit" name="'.$this->send.'" value="Skicka felanmäla">'.
+			'</fieldset>'.
 			'</form>';
 			return $service;
 		}
 
-		public function RenderServiceForm() {
+		public function RenderServiceForm($errorMessage = '') {
 
-			echo $this->mainView->echoHTML($this->serviceForm());
+			echo $this->mainView->echoHTML($this->serviceForm($errorMessage));
 		}
 
 

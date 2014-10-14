@@ -1,8 +1,7 @@
 <?php
 
 class available{
-// test code.............
-
+	
 	private $mainView;
 	private $del = "delete";
 	private $checked = "checked";
@@ -21,9 +20,9 @@ class available{
 
 		$Images = glob("src/view/Images/*.*");
 		$NrOfImgs = Count($Images);
-		$pics = "";
+		$pics = "<br><h2>Lediga lägenheter och lokaler.</h2><br><br><br>";
 		for ($i=0; $i < $NrOfImgs; $i++) { 
-			# code...
+		
 			$pics .= '<img src="'.$Images[$i].'" id="ImgSize">';
 
 		}
@@ -31,7 +30,6 @@ class available{
 			echo $responseMessages;
 		return $pics;	
 	}
-
 
 	public function renderAllPics() {
 		echo $this->mainView->echoHTML($this->DisplayAllImages()) ."<br>";
@@ -48,14 +46,12 @@ class available{
 
 	public function hasSubmitToDel() {
 		if (isset($_POST[$this->del])) {
-			# code...
 			return true;
 		}
 	}
 
 	public function hasChecked() {
 		if (isset($_POST[$this->checked])) {
-			# code...
 			return true;
 		}
 	}

@@ -12,7 +12,6 @@
 			$this->mainView = new HTMLView();
 		}
 
-
 		public function ContactForm($message = '') {
 
 			$responseMessages = ''; 
@@ -20,18 +19,24 @@
 					
 				$responseMessages .= '<p>' . $message . '</p>';
 			}
-			echo $responseMessages;
+			echo '<h3>'.$responseMessages.'</h3>';
 			$contactUs =
 			'<form id="contact"  method="post" action="">'.
-			'<label>Ditt namn : </label>'.
-			'<input type="text" name="'.$this->name.'" maxlength="30">' .
-			'<label>Din epost : </label>'.
-			'<input type="text" name="'.$this->email.'" maxlength="50">' .
-			'<label>Ditt meddelande : </label>'.
+			'<fieldset class="contact">' .
+			'<legend><h3>Var vänlig och kontakta oss</h3></legend>' .
+			'<label><strong>Ditt namn</strong> : </label>'.
+			'<input type="text" name="'.$this->name.'" maxlength="30" value="'.$this->getName().'" placeholder="Namnet krävs">' .
 			'<br>'.
-			'<textarea name="'.$this->msg.'" cols="50" rows="5" maxlength="500"></textarea>' .
+			'<label><strong>Din epost</strong> : </label>'.
+			'<input type="text" name="'.$this->email.'" maxlength="50"placeholder="Epost krävs">' .
+			'<br>'.
+		 	'<label><strong>Ditt meddelande</strong> : </label>'.
+			'<br>'.
+			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Skriv ditt meddelande här...">'.$this->getMsg().'</textarea>' .
+			'<br>'.
 			'<br>'.
 			'<input type="submit" name="send" value="Skicka">'.
+			'</fieldset>'.
 			'</form>';
 			return $contactUs;
 		}

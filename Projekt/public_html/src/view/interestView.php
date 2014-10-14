@@ -14,51 +14,63 @@
 		}
 
 
-		public function interestFrom() {
+		public function interestFrom($message = '') {
+
+			$responseMessages = ''; 
+			if ($message != '') {
+					
+				$responseMessages .= '<p>' . $message . '</p>';
+			}
+
+			echo '<h3>'.$responseMessages.'</h3>';
+
 			$Interest =
-			'<h4>Sökande</h4>'.
 			'<form id="interest" enctype="multipart/form-data" method="post" action="">'.
+			'<fieldset class="interest">' .
+			'<legend><h3>Sökande</h3></legend>' .
 			'<label>Ditt namn : </label>'.
-			'<input type="text" name="'.$this->name.'">' .
+			'<input type="text" name="'.$this->name.'" value="'.$this->getName().'" maxlength="30" placeholder="Namnet krävs">' .
+			'<br>'.
 			'<label>Din epost : </label>'.
-			'<input type="text" name="'.$this->email.'">' .
+			'<input type="text" name="'.$this->email.'" maxlength="50" placeholder="epost krävs">' .
+			'<br>'.
 			'<label>Önskemål & Inflyttningsdatum : </label>'.
-			'<textarea name="'.$this->msg.'" ></textarea>' .
-			'<input type="submit" name"'.$this->send.'" value="Skicka intresseanmälan">'.
+			'<br>'.
+			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv din önskemål här...">'.$this->getMsg().'</textarea>' .
+			'<br>'.
+			'<br>'.
+			'<input type="submit" name= "'.$this->send.'" value="Skicka intresseanmälan">'.
+			'</fieldset>'.
 			'</form>';
 			return $Interest;
 		}
+ 
+		public function RenderinterestFrom($errorMessage = '') {
 
-		public function RenderinterestFrom() {
-
-			echo $this->mainView->echoHTML($this->interestFrom());
+			echo $this->mainView->echoHTML($this->interestFrom($errorMessage));
 		}
 
 
 		public function getName() {
 			if (isset($_POST[$this->name])) {
-				# code...
 				return htmlentities($_POST[$this->name]);
 			}
 		}
 
 		public function getEmail() {
 			if (isset($_POST[$this->email])) {
-				# code...
 				return htmlentities($_POST[$this->email]);
 			}
 		}
 
 		public function getMsg() {
 			if (isset($_POST[$this->msg])) {
-				# code...
 				return htmlentities($_POST[$this->msg]);
 			}
 		}
 
 		public function hasSubmitToIntreset() {
 			if (isset($_POST[$this->send])) {
-				# code...
 				return true;
 			}
 		}

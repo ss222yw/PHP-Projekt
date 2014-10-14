@@ -53,7 +53,7 @@
 
 			}catch(PDOException $ex) {
 
-				die('An unknown error has happened jebla');
+				die('An unknown error has happened');
 			}
 
 		}
@@ -64,7 +64,7 @@
 
 			$pdo = $this->connectionToDataBase();
 			$sql ="SELECT COUNT(*) AS count 
-			FROM $this->tabel  WHERE BINARY username=?";
+			FROM $this->tabel  WHERE username=?";
 			$params = array($username);
 			$query = $pdo->prepare($sql);
 			$query->execute($params);

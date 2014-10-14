@@ -10,7 +10,7 @@
 		private $safeID;
 		private static $defaultLoginSuccessMessage = "Inloggning lyckades.";
 		private static $autoLoginSuccessMessage = "Inloggning lyckades och vi kommer ihåg dig nästa gång.";
-		private static $cookieLoginSuccessMessage = "Inloggning lyckades via cookies.";
+		private static $cookieLoginSuccessMessage = "";
 		private static $cookieUsernameErrMsg = 'CookieUsername does not exist!';
 		private static $cookiePasswordErrMsg = 'CookiePassword does not exist!';
 		private static $superGlobalGetValue = 'login';

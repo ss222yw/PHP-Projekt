@@ -1,5 +1,5 @@
 <?php
-
+	//Abstract class db to make connection to db.
 	abstract class Database {
 
 		protected $connection;

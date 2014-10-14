@@ -1,12 +1,10 @@
 <?php
 	
 	// DEFINE CORE PATHS (absolute).
-	
 	// Define a short for directory separator.
 	defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 	// Define a project root path.
 	defined('ProjectRootPath') ? null : define('ProjectRootPath', 'C:'.DS.'NewphpLogIn'.DS.'phpLogIn');
-	
 	// Define helper path.
 	defined('HelperPath') ? null : define('HelperPath', ProjectRootPath.DS.'data');
 	// Define MVC path.
@@ -24,7 +22,6 @@
 	require_once(HelperPath.DS.'style.css');
 	require_once(HelperPath.DS.'safe.php');
 	require_once(HelperPath.DS.'setting.php');
-	require_once(HelperPath.DS.'setting.php');
 	
 
 	// REQUIRE MODELS
@@ -35,8 +32,8 @@
 	require_once(ModelPath.DS.'ImagesRepository.php');
 	require_once(ModelPath.DS.'Images.php');
 	require_once(ModelPath.DS.'emailContact.php');
-	require_once(ModelPath.DS.'emailInterest.php');
 	require_once(ModelPath.DS.'emailService.php');
+	require_once(ModelPath.DS.'emailInterest.php');
 
 	// REQUIRE VIEWS
 	require_once(ViewPath.DS.'LoginView.php');
@@ -57,3 +54,7 @@
 	require_once(ControllerPath.DS.'UploadController.php');
 	require_once(ControllerPath.DS.'ContactController.php');
 	require_once(ControllerPath.DS.'NavigationController.php');
+	require_once(ControllerPath.DS.'InterestController.php');
+	require_once(ControllerPath.DS.'ServiceController.php');
+
+

@@ -11,6 +11,8 @@
 		private $sessionModel;
 		private $memberView;
 		private $homePageView;
+		private $interestController;
+		private $serviceController;
 
 
 
@@ -24,9 +26,12 @@
 			$this->memberView = new MemberView();
 			$this->available = new available();
 			$this->homePageView = new HomePageView();
+			$this->interestController = new InterestController();
+			$this->serviceController = new ServiceController();
 		} 
 
 		public function doControll() {
+					
 			$this->navigationView->renderShowMenu();
 			try {
 
@@ -63,11 +68,26 @@
 						break;
 					case NavigationView::$interest:
 						# code...
+					if ($this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe())  {
+
+								$this->controller->RunLoginLogic();
+						return $this->interestController->doInterest();
+					}
+					else {
 						$this->controller->RunLoginLogic();
+						echo "logga in först för att kunna skicka en intressanmäla!<br><br>";
+					}
 						break;
 					case NavigationView::$service:
+					if ($this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe())  {
 						# code...
 						$this->controller->RunLoginLogic();
+						return $this->serviceController->doService();
+					}
+					else {
+						$this->controller->RunLoginLogic();
+						echo "logga in först för att kunna skicka anmälan!<br><br>";
+					}
 						break;			
 
 					default:
@@ -88,7 +108,6 @@
 					die();
 				}
 			}
-
 
 		}
 	}

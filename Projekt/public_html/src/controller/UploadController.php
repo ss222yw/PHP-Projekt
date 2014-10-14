@@ -80,7 +80,7 @@
 								$_FILES[$this->fileName]['name'] = $FileNameWithOutEx."(".$counter++.")." . $extension;
 							}
 						}
-						if ($_FILES[$this->fileName]['size'] < 2000000) {
+						if ($_FILES[$this->fileName]['size'] < 5000000) {
 							# code...
 							 	if (move_uploaded_file($_FILES[$this->fileName]['tmp_name'], $this->imgRoot.$_FILES[$this->fileName]['name']) == true) {
 							 		# code...
