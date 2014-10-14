@@ -14,7 +14,7 @@
 
 		}
 
-
+		//Funcations for service form.
 		public function getServiceName() {
 			return $this->service->getName();
 		}
@@ -39,6 +39,7 @@
 			return $this->service->hasSubmitToService();
 		}
 
+		//Send input to validation method.
 		public function getInfoForValidtion() {
 
 			$Name = $this->getServiceName();
@@ -49,18 +50,7 @@
 			$this->validation->ServiceFormValidation($Name,$Email,$Message,$TEL,$AprtNr);
 		}
 
-		public function getNameToServiceModel() {
-			$this->emailService->getName($this->getServiceName());
-		}
-
-		public function getEmailToServiceModel() {
-			$this->emailService->getEmail($this->getServiceEmail());
-		}
-
-		public function getMsgToServiceModel() {
-			$this->emailService->getMsg($this->getServiceMsg());
-		}
-
+		// Render service form and make sure that everything is ok to make a servie message.
 		public function doService() {
 
 			$this->service->RenderServiceForm();
@@ -72,10 +62,15 @@
 			$AprtNr = $this->getServiceAprtNr();
 
 			if ($this->didPressSend() == true) {
-				# code...
 				if ($this->validation->ServiceFormValidation($Name,$Email,$Message,$TEL,$AprtNr) === true) {
-					# code...
-					$this->emailService->EmailService();
+
+				    $messages = "Namn:<br>" .$Name."<br><br>\r\nEpost:<br>". $Email."<br><br>\r\nTel:<br>".$TEL."<br><br>\r\nLägenhetesNummer:<br>".$AprtNr."<br><br>\r\nMeddelandet:<br>".$Message;
+					$headers  = "From:<br>".$Email."\r\n";
+			    	$headers .= "Reply-To:" .$Email;
+			    	$headers .= "MIME-Version: 1.0\r\n";
+			    	$headers .= "Content-type: text/html; charset=utf-8\r\n";	
+
+					$this->emailService->EmailService($messages,$headers);
 				}
 				else {
 					return $this->service->serviceForm($this->validation->ServiceFormValidation($Name,$Email,$Message,$TEL,$AprtNr));

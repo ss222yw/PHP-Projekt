@@ -14,7 +14,7 @@
 
 		}
 
-
+		//Funcation for interset form.
 		public function getInterstName() {
 			return $this->interest->getName();
 		}
@@ -31,6 +31,7 @@
 			return $this->interest->hasSubmitToIntreset();
 		}
 
+		// Send input to validation method.
 		public function getInfoForValidtion() {
 			$Name = $this->getInterstName();
 			$Email = $this->getInterstEmail();
@@ -38,26 +39,27 @@
 			$this->validation->InterestFormValidation($Name,$Email,$Message);
 		}
 
-		public function getNameToInterestModel() {
-			$this->emailInerest->getName($this->getInterstName());
-		}	
-
-		public function getEmailToInterestModel() {
-			$this->emailInerest->getEmail($this->getInterstEmail());
-		}
-
-		public function getMsgToInterestModel() {
-			$this->emailInerest->getMessage($this->getInterstMsg());
-		}
-
+		//Render interset form and make sure that all is ok to make a interset message.
 		public function doInterest() {
 
 			$this->interest->RenderinterestFrom();
+
+			$Name = $this->getInterstName();
+			$Email = $this->getInterstEmail();
+			$Message = $this->getInterstMsg();
+
 			if ($this->didPressSend() == true) {
-				# code...
+
 				if ($this->validation->InterestFormValidation($this->getInterstName(),$this->getInterstEmail(),$this->getInterstMsg()) === true)  {
-					# code...
-					$this->emailInterest->EmailInterest();
+
+						$messages = "Namn:<br>" .$Name."<br><br>\r\nEpost:<br>". $Email."<br><br>\r\nMeddelandet:<br>".$Message;
+						$headers  = "From:<br>".$Email."\r\n";
+			    		$headers .= "Reply-To:" .$Email;
+			    		$headers .= "MIME-Version: 1.0\r\n";
+			    		$headers .= "Content-type: text/html; charset=utf-8\r\n";
+
+
+						$this->emailInterest->EmailInterest($messages,$headers);
 				}
 				else {
 					return $this->interest->interestFrom($this->validation->InterestFormValidation($this->getInterstName(),$this->getInterstEmail(),$this->getInterstMsg()));

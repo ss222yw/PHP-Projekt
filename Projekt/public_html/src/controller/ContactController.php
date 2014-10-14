@@ -21,7 +21,6 @@
 		}
 
 		public function getContactEmail() {
-			//var_dump($this->contact->getEmail());
 			return $this->contact->getEmail();
 		}
 
@@ -33,56 +32,33 @@
 			return $this->contact->hasSubmitToSend();
 		}
 
+		//Send input to validation method.
 		public function sendContactFormInfo() {
 			$Name = $this->getContctName();
 			$Email = $this->getContactEmail();
 			$Message = $this->getContactMsg();
 			$this->validation->ContactFormValidation($Name,$Email,$Message);
 		}
- 
 
-		// public function MessagesAndHeaders() {
-
-		// 	$Name = $this->getContctName();
-		// 	$Email = $this->getContactEmail();
-		// 	$Message = $this->getContactMsg();
-
-		// }
-
-	
-		// public function getNameToEContact() {
-		// 	$this->emailContact->getName($this->getContctName());
-		// }
-
-		// public function getEmailToContact() {
-
-		// 	$this->emailContact->getEmail($this->getContactEmail());
-		// }
-
-		// public function getMsgToContact() {
-		// 	$this->emailContact->getMessage($this->getContactMsg());
-		// }
-
+		//Render contact form and make sure that all is right to make a contact message.
 		public function doContact() {
-
 			$this->contact->RenderContactForm();
 
 			$Name = $this->getContctName();
 			$Email = $this->getContactEmail();
 			$Message = $this->getContactMsg();
-			
 
 			if ($this->didPressSend() == true) {
+				
 				if ($this->validation->ContactFormValidation($Name,$Email,$Message) === true) {
-						$messages = "Namn: $Name\r\nEpost: $Email\r\nMeddelandet: $Message";
 
+						$messages = "Namn:<br>" .$Name."<br><br>\r\nEpost:<br>". $Email."<br><br>\r\nMeddelandet:<br>".$Message;
+						$headers  = "From:<br>".$Email."\r\n";
+			    		$headers .= "Reply-To:" .$Email;
+			    		$headers .= "MIME-Version: 1.0\r\n";
+			    		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 
-			$Email = $this->getContactEmail();
-			$headers = 'From: $Email' . "\r\n" .
-    						 'Reply-To: webmaster@example.com' .
-    						 'Content-type: text/plain; charset=UTF-8'."\r\n";	
-
-    		$this->emailContact->EmailContact($messages,$headers);
+    				    $this->emailContact->EmailContact($messages,$headers);
 				}
 				else {
 					return $this->contact->ContactForm($this->validation->ContactFormValidation($Name,$Email,$Message));
