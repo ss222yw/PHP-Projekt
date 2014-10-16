@@ -24,7 +24,7 @@
 
 	setlocale(LC_ALL, 'swedish');
 	$day = utf8_encode(ucfirst(strftime("%A")));
- 	$date = ucwords(strftime($day .'en. Den %d %B år %Y. Klockan är [%X].', strtotime('+1 hour')));
+ 	$date = ucwords(strftime($day .'en. Den %d %B år %Y. Klockan är [%X].'));
 	echo $date;	
 
     			

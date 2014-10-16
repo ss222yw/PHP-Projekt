@@ -27,7 +27,7 @@
 				$query->execute($params);
 				$result = $query->fetch();
 				return $result;
-
+ 
 			}catch(PDOException $ex) {
 
 				die('An unknown error hase happened');

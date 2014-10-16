@@ -10,6 +10,9 @@
 	    private $delImage;
 	    private $imagesRepository;
 	    private $images;
+	    private $imgName;
+	    private $uniqueKey;
+	    private $imagesModel;
 
 		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!";
 		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!";	
@@ -20,9 +23,12 @@
 			$this->validation = new validation();
 			$this->imgRoot = getcwd()."/src/view/Images/";
 			$this->uploadPage = new upload();
-			$this->imagesRepository = new ImagesRepository();
+			// $this->imagesRepository = new ImagesRepository();
 			$this->available = new available();
 			$this->fileName = $this->getFileName();
+		// 	$this->uniqueKey = uniqid();
+		// //	$this->images = new Images($this->getImgName());
+		// 	$this->imagesModel = new IMagesModel();
 
 		}
 
@@ -43,22 +49,89 @@
 			return $this->available->hasSubmitToDel();
 		}
 
+		// public function addImageToDb() {
+
+		// 	$this->images = new Images($this->imgName,$this->uniqueKey);
+		// 	$this->imagesModel->addImages($this->images);				 			
+		// }
+
+		public function getHiddenID() {
+			return $this->available->getHiddenId();
+		}
+
+		public function getHiddenImg() {
+			return $this->available->getSessionHidden();
+		}
+
+		public function getConforimYes() {
+			return $this->available->getYesDel();
+		}
+
+		public function getConforimNo() {
+			return $this->available->getNoDel();
+		}
+
+		public function removeImageFromFolder() {
+			
+			if ($this->hasSubmitToDelImg()) {
+				# code...
+				$Images = glob("src/view/Images/*.*");
+			foreach ($Images as $value) {
+				if (basename($value) == $this->getHiddenID()) {
+				  $this->available->renderAreYouSure();
+				}
+			}
+
+		
+			}
+
+				if ($this->getConforimYes()) {
+				# 	code...
+
+					$Images = glob("src/view/Images/*.*");
+			foreach ($Images as $value) {
+				if (basename($value) == $this->getHiddenImg()) {
+				unlink($value);
+				$PicName =basename($value);
+				echo "$PicName togs bort.";
+				}
+			}
+				//$this->removeImageFromDb();
+			}
+			else if ($this->getConforimNo()) {
+				# code...
+				header('Location: ?page=upload');	
+			}
+
+			
+					
+		}
+
+		// public function getImgNameFromDb() {
+		// 	$this->images = new Images($this->imgName,$this->uniqueKey);
+		// 	$unique = $this->images->getImgUniqueKey();
+		// 	//var_dump($unique);
+		// 	//$imgID = $this->imagesRepository->get();
+		// 	//var_dump($imgID);
+		// 	//$this->imagesModel->getImgFromDb();
+		// 	//$this->available->deleteImg($imgID);
+		// } 
+	
+	
 
 		public function imgUpload() {
-
-		$this->uploadPage->RenderUploadForm();
-
+			$this->uploadPage->RenderUploadForm();
+			$this->removeImageFromFolder();
+			//$this->available->renderAllPics();
+			// $heja =
+			// $hejaId = $heja[0];
+			// $this->available->deleteImg($heja);
+			// var_dump($hejaId);
 			$counter = 1;
 			$this->validation->getFileName($this->fileName);
-
-			// $Images = glob("src/view/Images/*.*");
-			// if ($this->hasSubmitToDelImg() == true) {
-			// 	# code... 
-			// 	foreach ($Images as $value) {
-			// 			unlink($value);
-			// 	}
-			// }
-			// else{}	
+	
+			
+			// else{echo "gick ej att ta bort bilden. :(";}	
 
 			if ($this->DidHasSubmit() == true) {
 				# code...
@@ -84,10 +157,10 @@
 							# code...
 							 	if (move_uploaded_file($_FILES[$this->fileName]['tmp_name'], $this->imgRoot.$_FILES[$this->fileName]['name']) == true) {
 							 		# code...
-							 			$this->images = new Images($_FILES[$this->fileName]['name']);
+							 			// $this->imgName = $_FILES[$this->fileName]['name'];
 							 			
-							 			$this->imagesRepository->AddPics($this->images);
-							 			
+							 			// $this->addImageToDb();	
+
 							 			$this->available->renderAllPics();
 
 							 			return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);

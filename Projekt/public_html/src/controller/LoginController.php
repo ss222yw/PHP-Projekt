@@ -29,6 +29,7 @@
 			$this->user = new User($this->getuser(), $this->getSafePassword());
 			$this->cookie = new CookieStorage();
 			$this->validation = new validation();
+		
 
 		}	
 

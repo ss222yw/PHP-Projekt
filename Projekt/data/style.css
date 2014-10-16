@@ -26,23 +26,19 @@
   #login fieldset {
     width: 25%;
     float: right;
-    background-color: cornsilk;
   }
   #memberView fieldset {
      width: 25%;
     float: right;
-    background-color: cornsilk;
   }
 
 
   #upload fieldset {
    width: 25%;
-   background-color: cornsilk;
   }
 
   #contact fieldset {
     width: 50%;
-    background-color: cornsilk;
   }
 
   #interest fieldset {
@@ -50,7 +46,7 @@
   }
 
   #ImgSize {
-    width: 20%;
+    width: 25%;
   }
 
   </style>

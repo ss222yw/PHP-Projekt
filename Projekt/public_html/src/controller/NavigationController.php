@@ -36,13 +36,21 @@
 			try {
 
 				switch ($this->navigationView->getPage()) {
-					// case NavigationView::$registrera:
-					// 	# code...
-					// 	break;
+
 					case NavigationView::$Avaliable:
 						# code...
-							   $this->controller->RunLoginLogic();
+					if ($this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&
+							 $this->sessionModel->IsLoggedIn() || ($this->memberView->RememberMe() &&
+							 										 $this->memberView->RememberAdmin()))  {
+
+						$this->controller->RunLoginLogic();
+						$this->uploadController->removeImageFromFolder();
 						return $this->available->renderAllPics();
+					}
+					else {
+							   $this->controller->RunLoginLogic();
+						return $this->available->renderAllPicsForUsers();
+					}
 						break;
 					case NavigationView::$HomePage:
 					 	# code...		
