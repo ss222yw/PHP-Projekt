@@ -37,6 +37,7 @@
 	private static $ErrorTel = "Telefon Nummer består av siffror!Ingen bokstav tilllåtet.";
 	private static $ErrorAprtNr = "Lägenhetens nummer består av siffror!Ingen bokstav tilllåtet.";
 
+	//Regex validation.
 	private $emailExp;
 	private $Exp;
 	private $NrExp;
@@ -79,7 +80,7 @@
 				return true;	
 		}
 
-		//validation to log in system.
+		//validation for log in system.
 		public function Validate ($username,$password) {
 
 			if ($username == null) {
@@ -94,12 +95,14 @@
 			return true;
 		}
 
-		//validation to log in system.
+
+		//Get error login messages.
 		public function GetLoginErrorMessage ($username) {
 			$_SESSION['LoginValues']['username'] = $username;
 			return self::$loginErrorMessage;
 		}
 
+		// return error massage that the name is tooken already.
 		public function validateUserIfEX() {
 			return self::$ErrorUserHasToken;
 		}
@@ -118,8 +121,7 @@
 		
 
 		public function errorToMessage() {
-
-
+			//error message 3 is the file is uploaded but not complete.
 		 if($_FILES[$this->fileName]['error'] == 3) {
 			if (file_exists($this->imgRoot . $_FILES[$this->fileName]['name'])) {
 				//Remove the wrong file that is not completed.
@@ -127,17 +129,18 @@
 			}	
 			return self::$ErrorUPLOAD_ERR_NO_TMP_DIR;
 		 }
-		
+			// error message 2 & 3 for the file is big or the file length is bigger than is php ini supported.
 	     else if($_FILES[$this->fileName]['error'] == 2 || $_FILES[$this->fileName]['error'] == 1) {
 				return self::$ErrorUPLOAD_ERR_FORM_SIZE;
 			}
-
+			// error file 4 is that the user trying to upload widthout file.
 	      else if($_FILES[$this->fileName]['error'] == 4) {
 		     	return self::$ErrorUPLOAD_ERR_NO_FILE;
 		   }	
      	}
 
 
+     	//Validation for contact form.
 		public function ContactFormValidation($Name,$Email,$Message) {
 
 			if ($Name == null && $Email == null && $Message == null) {
@@ -175,7 +178,7 @@
 				return true;
 		}
 
-
+		//Validation for interest form.
 		public function InterestFormValidation($Name,$Email,$Message) {
 
 			if ($Name == null && $Email == null && $Message == null) {
@@ -212,7 +215,7 @@
 				return true;
 		}
 
-
+		//validation for service form.
 		public function ServiceFormValidation($Name,$Email,$Message,$TEL,$AprtNr) {
 
 			if ($Name == null && $Email == null && $Message == null) {

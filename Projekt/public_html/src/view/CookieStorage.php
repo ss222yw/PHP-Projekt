@@ -19,7 +19,6 @@
 			setcookie(self::$usernameCookie, $username, $cookieTimestamp, "/");
 			setcookie(self::$passwordCookie, $password, $cookieTimestamp, "/");
 			if ($safeId == 1) {
-				# code...
 				$hashedID = $this->safe->create_hash($safeId);
 				setcookie(self::$admin, $hashedID , $cookieTimestamp, "/");
 			}

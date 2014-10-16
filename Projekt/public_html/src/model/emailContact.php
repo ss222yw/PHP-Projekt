@@ -10,7 +10,7 @@
 		public function __construct() {
 
 		}
-
+		// Mail function to send a message by contact from.
 		public function EmailContact($message, $header) {
 			if (mail(self::$to, self::$subj, $message, $header)) {
 

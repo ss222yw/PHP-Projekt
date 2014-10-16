@@ -5,6 +5,7 @@
 		private $name = "name";
 		private $email = "email";
 		private $msg = "message";
+		private $send = "send";
 		private $GetName;
 		private $GetMeg;
 		private $GetEmail;
@@ -16,6 +17,7 @@
 			$this->validation = new validation();
 		}
 
+		//render contact form.
 		public function ContactForm($message = '') {
 
 			if($this->validation->ContactFormValidation($this->getName(),$this->getEmail(),$this->getMsg()) !== true ){
@@ -29,7 +31,9 @@
 					
 				$responseMessages .= '<p>' . $message . '</p>';
 			}
+
 			echo '<h3>'.$responseMessages.'</h3>';
+
 			$contactUs =
 			'<form id="contact"  method="post" action="">'.
 			'<fieldset class="contact">' .
@@ -45,7 +49,7 @@
 			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Skriv ditt meddelande här...">'.$this->GetMeg.'</textarea>' .
 			'<br>'.
 			'<br>'.
-			'<input type="submit" name="send" value="Skicka">'.
+			'<input type="submit" name="'.$this->send.'" value="Skicka">'.
 			'</fieldset>'.
 			'</form>';
 			return $contactUs;
@@ -59,28 +63,24 @@
 
 		public function getName() {
 			if (isset($_POST[$this->name])) {
-				# code...
 				return htmlentities($_POST[$this->name]);
 			}
 		}
 
 		public function getEmail() {
 	 		if (isset($_POST[$this->email])) {
-				# code...
 				return htmlentities($_POST[$this->email]);
 			}
 		}
 
 		public function getMsg() {
 			if (isset($_POST[$this->msg])) {
-				# code...
 				return htmlentities($_POST[$this->msg]);
 			}
 		}
 
 		public function hasSubmitToSend() {
-			if (isset($_POST['send'])) {
-				# code...
+			if (isset($_POST[$this->send])) {
 				return true;
 			}
 			return false;

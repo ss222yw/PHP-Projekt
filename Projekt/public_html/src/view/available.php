@@ -4,58 +4,50 @@ class available{
 	
 	private $mainView;
 	private $del = "delete";
-	private $checked = "checked";
-	private $imgId;
-	private $imagesRepository;
-	private $imgName;
-	private $ID;
-	private $imgname;
-	private $imageid;
-	private $imagesModel;
 	private $session = "session";
+	private $hiddenImgID = "hiddenImgID";
+	private $hiddenImg = "hiddenImg";
+	private $yesDel = "yesDel";
+	private $NoDel = "NoDel";
+	private static $page = "page";
+	public static $upload ="upload";
 
 	public function __construct() {
-
 		$this->mainView = new HTMLView();
-		// $this->imagesRepository = new ImagesRepository();
-		// $this->imagesModel = new ImagesModel();
-		// $this->images = new Images($img="",$id="");
 	}
 
+	//Render all Images for Admin.
 	public function DisplayAllImages($msg = '') {
 
 		$responseMessages = '';
-
-			if ($msg != '') {
-				$responseMessages .= '<p>' . $msg . '</p>';
-			}
+		if ($msg != '') {
+			$responseMessages .= '<p>' . $msg . '</p>';
+		}
 
 		$Images = glob("src/view/Images/*.*");
-		//$NrOfImgs = Count($Images);
-		$pics = "<br>";
-		//for ($i=0; $i < $NrOfImgs; $i++) { 
-		foreach ($Images as $value) {
-			# code...
+		$pics = "<a href='?".self::$page."=".self::$upload."'>Ladda upp bilder</a>&nbsp;";
+		$pics .= "<br><br>";
 		
+		foreach ($Images as $value) {		
 			$pics .= '<img src="'.$value.'" id="ImgSize">';
-
 			$pics .= '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
-			'<input type="hidden" name="hiddenImgID" value="'.basename($value).'">'.
+			'<input type="hidden" name="'.$this->hiddenImgID.'" value="'.basename($value).'">'.
 			'<input type="submit" name="'.$this->del.'" value="Ta bort">'.
 			'</form>';
-
-		}
+			
+			}
 			$msgs = $responseMessages;	
 			echo $responseMessages;
-		return $pics;	
-	}
+			return $pics;	
 
+		}
+			
+
+	//Render all images for users.
 	public function DisplayAllImagesForUsers() {
-
 		$Images = glob("src/view/Images/*.*");
 		$pic = "<br><h2>Lediga lägenheter och lokaler.</h2><br><br><br>";
 		foreach ($Images as $value) {
-
 			$pic .= '<img src="'.$value.'" id="ImgSize">';
 		}
 		return $pic;	
@@ -70,14 +62,13 @@ class available{
 	}
 
 	
-
+	// confirm that admin want to remove an image or cancel.
 	public function areYouSure() {
-			
 			$remove = '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
 			'vill du verkligen ta bort '.$_SESSION[$this->session].'?'.
-			'<input type="hidden" name="hiddenImg" value="'.$_SESSION[$this->session].'">'.
-			'<input type="submit" name="yesDel" value="Ja!Ta bort">'.
-			'<input type="submit" name="NoDel" value ="Avbryt">'.
+			'<input type="hidden" name="'.$this->hiddenImg.'" value="'.$_SESSION[$this->session].'">'.
+			'<input type="submit" name="'.$this->yesDel.'" value="Ja!Ta bort">'.
+			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt">'.
 			'</form>';
 		
 		return $remove;
@@ -89,47 +80,34 @@ class available{
 
 
 	public function getYesDel() {
-		if (isset($_POST['yesDel'])) {
-			# code...
+		if (isset($_POST[$this->yesDel])) {
 			return true;
 		}
 	}
 
 	public function getNoDel() {
-		if (isset($_POST['NoDel'])) {
-			# code...
+		if (isset($_POST[$this->NoDel])) {
 			return true;
 		}
 	}
 
 
-
-
 	public function getHiddenId() {
-		if (isset($_POST['hiddenImgID'])) {
-			# code...
-			$_SESSION[$this->session] = $_POST['hiddenImgID'];
-
-			return $_POST['hiddenImgID'];
+		if (isset($_POST[$this->hiddenImgID])) {
+			$_SESSION[$this->session] = $_POST[$this->hiddenImgID];
+			return $_POST[$this->hiddenImgID];
 		}
 		
 	}
 
 	public function getSessionHidden() {
-		if (isset($_POST['hiddenImg'])) {
-			# code...
-			return $_POST['hiddenImg'];
+		if (isset($_POST[$this->hiddenImg])) {
+			return $_POST[$this->hiddenImg];
 		}
 	}
 
 	public function hasSubmitToDel() {
 		if (isset($_POST[$this->del])) {
-			return true;
-		}
-	}
-
-	public function hasChecked() {
-		if (isset($_POST[$this->checked])) {
 			return true;
 		}
 	}

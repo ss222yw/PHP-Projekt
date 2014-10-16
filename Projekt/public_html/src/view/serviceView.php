@@ -21,7 +21,7 @@
 			$this->validation = new validation();
 		}
 
-
+		//render service form.
 		public function serviceForm($message = '') {
 
 			if($this->validation->ContactFormValidation($this->getName(),$this->getEmail(),$this->getMsg(),$this->getTel(),$this->getAprtNumber()) !== true ){
@@ -74,42 +74,36 @@
 
 		public function getName() {
 			if (isset($_POST[$this->name])) {
-				# code...
 				return htmlentities($_POST[$this->name]);
 			}
 		}
 
 		public function getEmail() {
 			if (isset($_POST[$this->email])) {
-				# code...
 				return htmlentities($_POST[$this->email]);
 			}
 		}
 
 		public function getMsg() {
 			if (isset($_POST[$this->msg])) {
-				# code...
 				return htmlentities($_POST[$this->msg]);
 			}
 		}
 
 		public function getTel() {
 			if (isset($_POST[$this->tel])) {
-				# code...
 				return htmlentities($_POST[$this->tel]);
 			}
 		}
 
 		public function getAprtNumber() {
 			if (isset($_POST[$this->aprtM])) {
-				# code...
 				return htmlentities($_POST[$this->aprtM]);
 			}
 		}
 
 		public function hasSubmitToService() {
 			if (isset($_POST[$this->send])) {
-				# code...
 				return true;
 			}
 		}

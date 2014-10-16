@@ -32,7 +32,7 @@
 		
 
 		}	
-
+		//Get input from register class.
 		public function getuser() {
 			return $this->regView->GetUserName();
 		}
@@ -51,6 +51,7 @@
 			return $this->regView->GetPasswordTwo();
 		}
 
+		//Get input from login class.
 		public function getUsernameFromLoginView() {
 
 			return $this->loginView->GetUsername();
@@ -61,13 +62,12 @@
 		}
 
 	
-
+		//Render login and logut.
 		public function RunLoginLogic () {
 
 			global $remote_ip;
 			global $b_ip;
 			global $user_agent;
-
 			
 			// Set page reload flag
 			$onReload = false;
@@ -79,8 +79,6 @@
 			$sessionModel = clone $this->sessionModel;
 			$usermodel = clone $this->userModel;
 
-
-			//TODO::MOVE IT...
 			if($loginView->userPressRegNewUser() == true) {
 				$regView->RenderRegForm();
 				return true;
@@ -90,6 +88,7 @@
 					$username = $this->getuser();
 					$password = $this->getPassword();
 					$passwordTwo = $this->getPasswordTwo();
+
 				if($this->validation->ValidateRegistration($username,$password,$passwordTwo) === true) {
 					$getUserName = $this->user->getUsername();
 					$userEx = $this->userModel->userEX($getUserName);
@@ -157,10 +156,6 @@
 
 						return false;
 					}
-
-				// Check if somebody manipulated cookies.
-				//$userN = $this->cookie->GetCookieUsername();
-
 			
 				// This if statement only checks the or block if user klicked remember me because of the && - operator.
 				if ($memberView->RememberMe() && ($this->UserCredentialManipulated() || $this->CookieDateManipulated())) {
@@ -175,7 +170,6 @@
 
 		// HELPER FUNCTIONS FOR THIS CONTROLLER
 		// Authentication logic. 
-
 		public function GetUserCookie(){
 			$username = $this->loginView->GetUsername();
 			return $this->userModel->getUserCookie($username);
@@ -207,10 +201,8 @@
 
 			if ($final === $password && $userAuthenticated) {
 
-				// TODO: Check that this is not done more than once.
 				$this->sessionModel->LoginUser($this->user);
 				if ($this->loginView->AutoLoginIsChecked()) {
-					// TODO: Change 30 to a constant/variable.
 					$cookieTimestamp = time() + 60*60*24*30;
 					$this->memberView->SaveUserCredentials($username, $pws, $cookieTimestamp,$cryptId);
 					$this->userModel->SaveCookieTimestamp($cookieTimestamp,$this->sessionModel->GetUsername());
@@ -246,7 +238,6 @@
 		}
 
 		protected function CookieDateManipulated () {
-			// TODO: Move this logic to view.
 			$username = $this->memberView->GetCookieUsername();
 			$currentTime = time();
 			$cookieExpTime = ($this->userModel->GetCookieDateById($username));

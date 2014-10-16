@@ -16,7 +16,7 @@
 			$this->validation = new validation();
 		}
 
-
+		//render interest form.
 		public function interestFrom($message = '') {
 
 			if($this->validation->ContactFormValidation($this->getName(),$this->getEmail(),$this->getMsg()) !== true ){

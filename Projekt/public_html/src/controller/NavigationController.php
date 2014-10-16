@@ -14,7 +14,6 @@
 		private $interestController;
 		private $serviceController;
 
-		
 
 		public function __construct() {
 
@@ -30,15 +29,15 @@
 			$this->serviceController = new ServiceController();
 		} 
 
+		//Render menu.
 		public function doControll() {
 					
-			$this->navigationView->renderShowMenu();
+		$this->navigationView->renderShowMenu();
 			try {
 
 				switch ($this->navigationView->getPage()) {
 
 					case NavigationView::$Avaliable:
-						# code...
 					if ($this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&
 							 $this->sessionModel->IsLoggedIn() || ($this->memberView->RememberMe() &&
 							 										 $this->memberView->RememberAdmin()))  {
@@ -53,17 +52,14 @@
 					}
 						break;
 					case NavigationView::$HomePage:
-					 	# code...		
 								$this->controller->RunLoginLogic();
 						return 	$this->homePageView->renderHomePage();
 					 	break;		
 					case NavigationView::$contact:
-						# code...
 								$this->controller->RunLoginLogic();
 						return $this->contactController->doContact();
 						break;
-					case NavigationView::$upload:
-						# code...
+					case available::$upload:
 						if ($this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&
 							 $this->sessionModel->IsLoggedIn() || ($this->memberView->RememberMe() &&
 							 										 $this->memberView->RememberAdmin()))  {
@@ -71,6 +67,9 @@
 								   $this->controller->RunLoginLogic();		
 							return $this->uploadController->imgUpload();
 
+						}
+						else {
+							$this->controller->RunLoginLogic();
 						}
 
 						break;
@@ -99,7 +98,6 @@
 						break;			
 
 					default:
-						# code...
 						return $this->controller->RunLoginLogic();
 						break;	
 				}
@@ -108,7 +106,6 @@
 			catch (Exception $e) {
 				error_log($e->getMessage() . "\n", 3, \setting::$ERROR_LOG);
 				if (setting::$DO_DEBUG) {
-					# code...
 					throw $e;
 				}
 				else {

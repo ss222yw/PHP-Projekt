@@ -1,4 +1,5 @@
 <?php
+
 	class SessionModel {
 
 			private $isLoggedIn = false;
@@ -15,7 +16,7 @@
 			private $userModel;
 			private $safID;
 
-		function __construct () {
+		public function __construct () {
 				$this->userModel = new UserModel();
 			if (!isset($_SESSION[self::$sessionUserHeadCategory])) {
 				
@@ -50,9 +51,7 @@
 			}
 			else {
 					if ($safeId != 1) {
-					# code...
 						unset($_SESSION[self::$sessionAdmin]);
-
 					}
 
 			}
@@ -63,15 +62,12 @@
 
 
 		public function LoginUser (User $user) {
-			global $remote_ip;
-			global $user_agent;
-			// session_set_cookie_params(0);
-		
+				global $remote_ip;
+				global $user_agent;		
 				$this->username = $_SESSION[self::$sessionUsername] = $user->getUsername();
 				$_SESSION[self::$sessionUserHeadCategory][self::$sessionUsername] = $user->getUsername();
 				$_SESSION[self::$securitySessionName] = hash(self::$hashString, $remote_ip . $user_agent);
 				$this->isLoggedIn = true;
-			
 	    	
 		}
 

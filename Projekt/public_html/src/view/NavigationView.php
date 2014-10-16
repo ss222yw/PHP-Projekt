@@ -11,9 +11,6 @@
 
 		private static $page = "page";
 
-	//	public static $login = "login";
-	//	public static $logout = "logout";
-	//	public static $registrera = "Registrera";
 		public static $contact = "contact";
 		public static $upload ="upload";
 		public static $interest = "interest";
@@ -33,18 +30,8 @@
 
 		public function showMenu() {
 
-			    $html = "<div id='menu'>";
-		//	$html .= "<a href='?".self::$page."=".self::$login."'>Logga in</a>&nbsp;";
-		//	$html .= "<a href='?".self::$page."=".self::$logout."'>Logga out</a>&nbsp;";
-			if ($this->controller->AuthenticateUser() &&$this->AdminID == 1 ||
-				 $this->sessionModel->IsAdminLoggedIn() && $this->sessionModel->IsLoggedIn() || 
-				 		($this->memberView->RememberMe() && $this->memberView->RememberAdmin()))  {
-
-				$html .= "<a href='?".self::$page."=".self::$upload."'>Ladda upp</a>&nbsp;";
-			}
-				
+			    $html = "<div id='menu'>";	
 				$html .= "<a href='?".self::$page."=".self::$Avaliable."'>Ledigt</a>&nbsp;";
-			//	$html .= "<a href='?".self::$page."=".self::$registrera."'>Registrera</a>&nbsp;";
 				$html .= "<a href='?".self::$page."=".self::$contact."'>Kontakta</a>&nbsp;";
 				$html .= "<a href='?".self::$page."=".self::$interest."'>Intresse</a>&nbsp;";
 				$html .= "<a href='?".self::$page."=".self::$service."'>Felanmäla</a>&nbsp;";
@@ -71,7 +58,6 @@
  
 		public function getPage() {
 			if (isset($_GET[self::$page])) {
-				# code...
 				return $_GET[self::$page];
 			}
 			return self::$HomePage;

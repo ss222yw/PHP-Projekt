@@ -8,13 +8,12 @@
 		private static $autologin = "autologin";
 		private static $AdminId = 'AdminId';
 
-		// UNCOMMENTED FAKE AUTHENTICATION DATA
-			public function __construct () {
-				$this->tabel = "user";
-			}
+		public function __construct () {
+			$this->tabel = "user";
+		}
 
 		
-		//Get all from tabel name where username = login input username.
+		//Get everything from tabel name where username = login input username.
 		public function AuthenticateUser($username) {
 		
 			try {

@@ -10,21 +10,21 @@ class upload {
 		$this->mainView = new HTMLView();
 	}
 
+	//render upload form.
 	public function imageUpload($msg = '') {
 
 			$responseMessages = '';
-
 			if ($msg != '') {
 				$responseMessages .= '<p>' . $msg . '</p>';
 			}
 
-		$uploadForm = 	'<br>'.
+			$uploadForm = 	'<br>'.
 			'<div id=upload>'.
 			'<form id="upload" enctype="multipart/form-data" method="post" action="">' .
-				'<fieldset class="upload">' .
-				'<input type="File" name="'.$this->images.'">'.
-				'<input type="submit" name="'.$this->upload.'" value="Ladda upp">'.
-				'</fieldset>'.
+			'<fieldset class="upload">' .
+			'<input type="File" name="'.$this->images.'">'.
+			'<input type="submit" name="'.$this->upload.'" value="Ladda upp">'.
+			'</fieldset>'.
 			'</form>'.
 			'</div>';
 			echo $responseMessages;
@@ -44,16 +44,13 @@ class upload {
 
 	public function GetImgName() {
 		if (isset($_FILES[$this->images])) {
-			# code...
 			return $this->images;
 		}
 		
 	}
 
-
 	public function hasSubmitToUpload() {
 		if (isset($_POST[$this->upload])) {
-			# code...
 			return true;
 		}
 	}

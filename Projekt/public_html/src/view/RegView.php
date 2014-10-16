@@ -25,7 +25,7 @@ class RegView{
 
 	public function GetRegFormHTML($message = '') {
 
-		$responseMessages = ''; 
+		    $responseMessages = ''; 
 
 			if ($message != '') {
 					

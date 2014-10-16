@@ -7,14 +7,11 @@
 		private static $succesMessageMail = "Vi har tagit emot ditt intressanmäla , hör av oss så fort dyker upp en som matchar din önskemål. Tack!<br><br>";
 
 
-
-
-
 		public function __construct() {
 
 		}
 
-
+		// Mail function to send a message by Interset from.
 		public function EmailInterest($messages,$headers) {
 
 			if (mail(self::$to, self::$subj, $messages, $headers)) {
