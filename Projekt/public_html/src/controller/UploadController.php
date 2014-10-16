@@ -130,7 +130,6 @@
 			$counter = 1;
 			$this->validation->getFileName($this->fileName);
 	
-			
 			// else{echo "gick ej att ta bort bilden. :(";}	
 
 			if ($this->DidHasSubmit() == true) {
@@ -143,6 +142,9 @@
 						# code...
 						if (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
 							# code...
+
+
+
 							$FileNameInfo = new SplFileInfo($_FILES[$this->fileName]['name']);
 							$extension = $FileNameInfo->getExtension();
 							$pointEx = substr(strrchr($_FILES[$this->fileName]['name'],"."), -4);
@@ -152,15 +154,32 @@
 								# code...
 								$_FILES[$this->fileName]['name'] = $FileNameWithOutEx."(".$counter++.")." . $extension;
 							}
+				
+
 						}
+
 						if ($_FILES[$this->fileName]['size'] < 5000000) {
 							# code...
-							 	if (move_uploaded_file($_FILES[$this->fileName]['tmp_name'], $this->imgRoot.$_FILES[$this->fileName]['name']) == true) {
+							$imgCreateFromJ = imagecreatefromjpeg($_FILES[$this->fileName]['tmp_name']);
+							$imgWidth =	getimagesize($_FILES[$this->fileName]['tmp_name'])[0];
+							$imgHeigth = getimagesize($_FILES[$this->fileName]['tmp_name'])[1];
+							$newImgWidth = 400;
+							$newImgHeight = ($imgHeigth/$imgWidth) * $newImgWidth;
+							
+							$ImgCreateColor = imagecreatetruecolor($newImgWidth, $newImgHeight);
+							$hej = imagecopyresampled($ImgCreateColor, $imgCreateFromJ, 0, 0, 0, 0, $newImgWidth, $newImgHeight, $imgWidth, $imgHeigth);
+						
+							$imgToUpload = imagejpeg($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
+							//move_uploaded_file($imgToUpload , $this->imgRoot.$_FILES[$this->fileName]['name'])	
+
+							 	if ($imgToUpload) {
 							 		# code...
 							 			// $this->imgName = $_FILES[$this->fileName]['name'];
 							 			
 							 			// $this->addImageToDb();	
-
+							 	
+							 			imagedestroy($imgCreateFromJ);
+							        	imagedestroy($ImgCreateColor);
 							 			$this->available->renderAllPics();
 
 							 			return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);
