@@ -100,8 +100,8 @@
 			return $this->cookieStorage->RememberMe();
 		}
 
-		public function getSafeId($safeId) {
-			$this->sessionModel->LoginAdmin($safeId);
+		public function getSafeId($safeId,$web) {
+			$this->sessionModel->LoginAdmin($safeId,$web);
 		}
 
 		public function RememberAdmin() {

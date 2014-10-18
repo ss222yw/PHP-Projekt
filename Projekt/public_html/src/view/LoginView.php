@@ -9,13 +9,21 @@
 		private $mainView;
 		private $regView;
 		private $safe;
+		private $remote_ip;
+		private $user_agent;
  
 		function __construct () {
 
 			$this->mainView = new HTMLView();
 			$this->regView = new RegView();
 			$this->safe = new safe();
+			$this->remote_ip = $_SERVER['REMOTE_ADDR'];
+			$this->user_agent = $_SERVER['HTTP_USER_AGENT'];
 		}		
+
+		public function getWebBrowserAndIpAdress(){
+			return $this->remote_ip.$this->user_agent;
+		}
 
 		public function getSafeInputPassword() {
 			return $this->safe->create_hash($this->GetUsername());
@@ -48,7 +56,7 @@
 					'<legend>Login - Skriv in användarnamn och lösenord</legend>' .
 					$responseMessages .
 					'<label for="username">Användarnamn : </label>' .
-					'<input type="text" name="username" placeholder="Användarnamn" value="' . $_SESSION['LoginValues']['username'] . $this->getUserNameValue(). '" maxlength="30" id="username" /> ' .
+					'<input type="text" name="username" placeholder="Användarnamn" value="' . $this->GetUsername() . $this->getUserNameValue(). '" maxlength="30" id="username" /> ' .
 					'<br>'.
 					'<label for="password">Lösenord : </label>' .
 					'<input type="password" name="password" placeholder="Lösenord" maxlength="30" id="password" /> ' .

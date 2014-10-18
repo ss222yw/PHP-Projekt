@@ -19,6 +19,7 @@
 		private $passwordSafe;
 		private $validation;
 		private static $hashString = "sha256";
+			
 
 		function __construct () {
 			$this->sessionModel = new SessionModel();
@@ -29,9 +30,9 @@
 			$this->user = new User($this->getuser(), $this->getSafePassword());
 			$this->cookie = new CookieStorage();
 			$this->validation = new validation();
-		
+		}
 
-		}	
+
 		//Get input from register class.
 		public function getuser() {
 			return $this->regView->GetUserName();
@@ -61,14 +62,12 @@
 			return $this->loginView->GetPassword();
 		}
 
+		public function getWebSiteAndIpAdress(){
+ 			return $this->loginView->getWebBrowserAndIpAdress();
+ 		}
 	
 		//Render login and logut.
-		public function RunLoginLogic () {
-
-			global $remote_ip;
-			global $b_ip;
-			global $user_agent;
-			
+		public function RunLoginLogic () {	
 			// Set page reload flag
 			$onReload = false;
 
@@ -148,7 +147,7 @@
 				 	($memberView->RememberMe() && $memberView->RememberAdmin())) {
 
 					$onReload = true;
-					$validId = hash(self::$hashString, $remote_ip . $user_agent);
+					$validId = hash(self::$hashString,$this->getWebSiteAndIpAdress());
 
 					if ($sessionModel->IsStolen($validId)) {	
 						$this->memberView->LogoutUser();
@@ -191,7 +190,7 @@
 			$username = $userAuthenticated[1];
 			$password = $userAuthenticated[2];
 			$this->AdminID = $userAuthenticated[4];			
-			$this->memberView->getSafeId($this->AdminID);
+			$this->memberView->getSafeId($this->AdminID,$this->getWebSiteAndIpAdress());
 			$pass = $this->loginView->GetPassword();
 			$final = crypt($pass, $password);
 			$cryptId = $this->AdminID;
@@ -201,7 +200,7 @@
 
 			if ($final === $password && $userAuthenticated) {
 
-				$this->sessionModel->LoginUser($this->user);
+				$this->sessionModel->LoginUser($this->user,$this->getWebSiteAndIpAdress());
 				if ($this->loginView->AutoLoginIsChecked()) {
 					$cookieTimestamp = time() + 60*60*24*30;
 					$this->memberView->SaveUserCredentials($username, $pws, $cookieTimestamp,$cryptId);
