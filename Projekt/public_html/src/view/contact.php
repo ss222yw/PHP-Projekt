@@ -75,7 +75,8 @@
 
 		public function getMsg() {
 			if (isset($_POST[$this->msg])) {
-				return htmlentities($_POST[$this->msg]);
+				$message = nl2br($_POST[$this->msg]);
+				return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $message);
 			}
 		}
 

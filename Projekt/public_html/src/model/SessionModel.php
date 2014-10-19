@@ -18,11 +18,12 @@
 
 
 		public function __construct () {
-				$this->userModel = new UserModel();
+			$this->userModel = new UserModel();
 			if (!isset($_SESSION[self::$sessionUserHeadCategory])) {
 				
 				$_SESSION[self::$sessionUserHeadCategory][self::$sessionUsername] = '';
 			}
+			@session_start();
 		}
 
 		public function IsAdminLoggedIn() {
@@ -41,12 +42,8 @@
 			return $_SESSION[self::$sessionUserHeadCategory][self::$sessionUsername];
 		}
 
-		// public function getIpAndUserAgent($web) {
-		// 	$this->agent = $web;
-		// }
-
 		public function LoginAdmin($safeId,$web) {
-		var_dump($web);
+		
 				if ($safeId == 1) {
 				$_SESSION[self::$sessionAdmin] = $safeId;
 				$_SESSION[self::$securitySessionName] = hash(self::$hashString,$web);

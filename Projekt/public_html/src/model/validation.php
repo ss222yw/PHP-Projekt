@@ -43,9 +43,9 @@
 	private $NrExp;
 
 	public function __construct(){
-
-		$this->emailExp = "/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/";
-		$this->Exp = "/^[A-Za-z .'-]+$/";
+		//Regx took from http://www.phpportalen.net/.
+		$this->emailExp = "/^[a-z0-9\å\ä\ö._-]+@[a-z0-9\å\ä\ö.-]+\.[a-z]{2,6}$/i";
+		$this->Exp = "/^([a-zA-ZÅÄÖåäö]{2,10})([- ]{1})?([a-zA-ZÅÄÖåäö]{2,10})?$/";
 		$this->NrExp = "/^[0-9]+$/";
 
 	}
@@ -88,7 +88,7 @@
 			}
 
 			else if ($password == null) {
-				$_SESSION['LoginValues']['username'] = $username;
+			//	$_SESSION['LoginValues']['username'] = $username;
 				return self::$emptyPasswordErrorMessage;
 			}
 
@@ -98,7 +98,7 @@
 
 		//Get error login messages.
 		public function GetLoginErrorMessage ($username) {
-			$_SESSION['LoginValues']['username'] = $username;
+		//	$_SESSION['LoginValues']['username'] = $username;
 			return self::$loginErrorMessage;
 		}
 

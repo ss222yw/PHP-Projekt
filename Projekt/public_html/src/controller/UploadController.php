@@ -97,6 +97,7 @@
 						 	 exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_PNG) {
 
 						if (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
+
 							$FileNameInfo = new SplFileInfo($_FILES[$this->fileName]['name']);
 							$extension = $FileNameInfo->getExtension();
 							$pointEx = substr(strrchr($_FILES[$this->fileName]['name'],"."), -4);
@@ -119,6 +120,8 @@
 							$imgToUpload = imagejpeg($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
 
 							 if ($imgToUpload) {
+							 	//change filem mode, 0755 read and execute.
+							 	chmod($this->imgRoot.$_FILES[$this->fileName]['name'], 0755);
 							  	imagedestroy($imgCreateFromJ);
 						      	imagedestroy($ImgCreateColor);
 					 			$this->available->renderAllPicsForUsers();

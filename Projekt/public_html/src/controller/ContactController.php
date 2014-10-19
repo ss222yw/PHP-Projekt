@@ -52,11 +52,11 @@
 				
 				if ($this->validation->ContactFormValidation($Name,$Email,$Message) === true) {
 
-						$messages = "Namn:<br>" .$Name."<br><br>\r\nEpost:<br>". $Email."<br><br>\r\nMeddelandet:<br>".$Message;
-						$headers  = "From:<br>".$Email."\r\n";
+			    		$messages = "Namn:\r\n" .$Name."\r\nEpost:\r\n". $Email."\r\nMeddelandet:\r\n".$Message;
+						$headers  = "From:".$Email."\r\n";
 			    		$headers .= "Reply-To:" .$Email;
 			    		$headers .= "MIME-Version: 1.0\r\n";
-			    		$headers .= "Content-type: text/html; charset=utf-8\r\n";
+			    		$headers .= "Content-type: text/plain; charset=utf-8\r\n";
 
     				    $this->emailContact->EmailContact($messages,$headers);
 				}
