@@ -24,12 +24,14 @@
   }
 
   #login fieldset {
-    width: 25%;
+    width: 20%;
     float: right;
+    margin-top: -210px;
   }
   #memberView fieldset {
-     width: 25%;
+     width: 20%;
     float: right;
+    margin-top: -190px;
   }
 
 
@@ -43,6 +45,11 @@
 
   #interest fieldset {
     width: 50%;
+  }
+
+  #hh {
+    width: 25%;
+    height: 25%;
   }
 
 

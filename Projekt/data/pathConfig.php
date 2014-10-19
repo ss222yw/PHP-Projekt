@@ -32,6 +32,9 @@
 	require_once(ModelPath.DS.'emailContact.php');
 	require_once(ModelPath.DS.'emailService.php');
 	require_once(ModelPath.DS.'emailInterest.php');
+	require_once(ModelPath.DS.'Images.php');
+	require_once(ModelPath.DS.'ImagesRepository.php');
+	require_once(ModelPath.DS.'ImagesModel.php');
 	// REQUIRE VIEWS
 	require_once(ViewPath.DS.'LoginView.php');
 	require_once(ViewPath.DS.'MemberView.php');

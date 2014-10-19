@@ -30,12 +30,13 @@
 
 		public function showMenu() {
 
-			    $html = "<div id='menu'>";	
-				$html .= "<a href='?".self::$page."=".self::$Avaliable."'>Ledigt</a>&nbsp;";
-				$html .= "<a href='?".self::$page."=".self::$contact."'>Kontakta</a>&nbsp;";
-				$html .= "<a href='?".self::$page."=".self::$interest."'>Intresse</a>&nbsp;";
-				$html .= "<a href='?".self::$page."=".self::$service."'>Felanmäla</a>&nbsp;";
-				$html .= "<a href='?".self::$page."=".self::$HomePage."'>Start Sidan</a>&nbsp;";
+			    $html = "<div id='menu'>";
+			    $html .= "<a href='?".self::$page."=".self::$HomePage."'>Hem</a>&nbsp;&nbsp;";
+				$html .= "<a href='?".self::$page."=".self::$Avaliable."'>Ledigt</a>&nbsp&nbsp;";
+				$html .= "<a href='?".self::$page."=".self::$contact."'>Kontakta oss</a>&nbsp;&nbsp;";
+				$html .= "<a href='?".self::$page."=".self::$interest."'>Intresseanmälan</a>&nbsp;&nbsp;";
+				$html .= "<a href='?".self::$page."=".self::$service."'>Felanmälan</a><br>";
+			    $html .= "<a href='?".self::$page."=".self::$HomePage."'><img src='hhfastigheter.gif' id='hh'></a><br>";	
 				$html .= "</div>";
 				return $html;
 

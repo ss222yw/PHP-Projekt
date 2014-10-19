@@ -32,13 +32,6 @@
 			return self::$newUserSuccessMsg;
 		}
 
-		public function getUserNameValue() {
-			if ($this->regView->DidUserPressReg() == true) {
-				return $this->regView->GetUserName();
-			}
-			
-		}
-
 		public function GetLoginFormHTML ($message = '') {
 
 			// IF cookie with errors is set render a sertain view.
@@ -56,7 +49,7 @@
 					'<legend>Login - Skriv in användarnamn och lösenord</legend>' .
 					$responseMessages .
 					'<label for="username">Användarnamn : </label>' .
-					'<input type="text" name="username" placeholder="Användarnamn" value="' . $this->GetUsername() . $this->getUserNameValue(). '" maxlength="30" id="username" /> ' .
+					'<input type="text" name="username" placeholder="Användarnamn" value="' . $this->GetUsername() . '" maxlength="30" id="username" /> ' .
 					'<br>'.
 					'<label for="password">Lösenord : </label>' .
 					'<input type="password" name="password" placeholder="Lösenord" maxlength="30" id="password" /> ' .

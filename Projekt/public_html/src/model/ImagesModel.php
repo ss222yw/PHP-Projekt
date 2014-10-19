@@ -1,28 +1,21 @@
-// <?php
+<?php
 	
-// 	class ImagesModel {
+ 	class ImagesModel {
 
-// 		private $imagesRepository;
+ 		private $imagesRepository;
 
-// 		public function __construct() {
+ 		public function __construct() {
 
-// 			$this->imagesRepository = new ImagesRepository();
-// 		}
+ 			$this->imagesRepository = new ImagesRepository();
+ 		}
 
-// 		public function getImages($uniqueID) {
-// 			  $this->imagesRepository->get($uniqueID);
+ 		public function removeImages($img) {
 
-// 		}
-
-// 		public function removeImages($img) {
-			
-// 				# code...
-// 			var_dump($img);
-// 				$this->imagesRepository->delete($img);
+ 			$this->imagesRepository->delete($img);
 						 
-// 		}
+ 		}
 
-// 		public function addImages(Images $img) {
-// 			 $this->imagesRepository->AddPics($img);
-// 		}
-// 	}
+ 		public function addImages(Images $img) {
+ 			 $this->imagesRepository->AddPics($img);
+ 		}
+ 	}

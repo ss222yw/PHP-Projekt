@@ -6,6 +6,7 @@
 	    private $imgRoot;
 	    private $uploadPage;
 	    private $fileName;
+	    private $imagesModel;
 
 		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!";
 		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!";	
@@ -18,6 +19,7 @@
 			$this->uploadPage = new upload();
 			$this->available = new available();
 			$this->fileName = $this->getFileName();
+			$this->imagesModel = new ImagesModel();
 
 		}
 
@@ -71,8 +73,9 @@
 				$Images = glob("src/view/Images/*.*");
 				foreach ($Images as $value) {
 					if (basename($value) == $this->getHiddenImg()) {
-						unlink($value);
 						$PicName =basename($value);
+						$this->imagesModel->removeImages($PicName);
+						unlink($value);
 						echo "$PicName togs bort.";
 					}
 				}
@@ -121,6 +124,8 @@
 							$imgToUpload = imagejpeg($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
 
 							 if ($imgToUpload) {
+								$images = new Images($_FILES[$this->fileName]['name']);
+							 	$this->imagesModel->addImages($images);
 							 	//change filem mode, 0755 read and execute.
 							 	chmod($this->imgRoot.$_FILES[$this->fileName]['name'], 0755);
 							  	imagedestroy($imgCreateFromJ);
