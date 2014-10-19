@@ -51,7 +51,7 @@
 
 			$loginHTML = 
 			'<br>'.
-			'<form id="login" enctype="multipart/form-data" method="post" action="?login">' .
+			'<form id="login" enctype="multipart/form-data" method="post" action="">' .
 				'<fieldset class="login">' .
 					'<legend>Login - Skriv in användarnamn och lösenord</legend>' .
 					$responseMessages .
@@ -67,7 +67,7 @@
 					'<input type="submit" name="submit" id="submit" value="Logga in" />'.
 					'<br>'.
 					'<br>'.
-					'<a href="?registrera" name="registrera">Registrera ny användara</a>'.
+					'<a href="?registrera" name="registrera">Registrera dig</a>'.
 				'</fieldset>'.
 			'</form>';
 
@@ -85,7 +85,7 @@
 		public function RenderLogoutView ($isDefaultLogout = true) {
 
 			$isDefaultLogout ? $this->RenderLoginForm(self::$logOutSuccessMessage)
-							 : $this->RenderLoginForm(self::$corruptCookieLogoutMessage);
+		 					 : $this->RenderLoginForm(self::$corruptCookieLogoutMessage);
 							
 
 		}

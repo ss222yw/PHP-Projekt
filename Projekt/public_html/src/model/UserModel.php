@@ -17,8 +17,8 @@
 		public function AuthenticateUser($username) {
 		
 			try {
-				
-				$pdo = $this->connectionToDataBase();
+				$f = new UserModel();
+				$pdo = $f->connectionToDataBase();
 				$sql = "SELECT * from $this->tabel 
 				WHERE BINARY ". self::$username ." = ?";
 				$params = array($username);
@@ -173,7 +173,7 @@
 		public function UserCredentialManipulated ($username, $data) {
 			$ArrayUser = $this->getUser($username);
 			$u = $ArrayUser[1];
-			$hp = $ArrayUser[2];
+			$hp = $ArrayUser[2].$ArrayUser[4];
 			return ($u === $username && $hp === $data);
 		}
 

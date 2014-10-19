@@ -13,6 +13,7 @@
 		private $homePageView;
 		private $interestController;
 		private $serviceController;
+		private $loginView;
 
 
 		public function __construct() {
@@ -27,6 +28,7 @@
 			$this->homePageView = new HomePageView();
 			$this->interestController = new InterestController();
 			$this->serviceController = new ServiceController();
+			$this->loginView = new LoginView();
 		} 
 
 		//Render menu.
@@ -34,17 +36,23 @@
 					
 		$this->navigationView->renderShowMenu();
 			try {
-
+					 
+					
 				switch ($this->navigationView->getPage()) {
-
+				
 					case NavigationView::$Avaliable:
-					if ($this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&
-							 $this->sessionModel->IsLoggedIn() || ($this->memberView->RememberMe() &&
-							 										 $this->memberView->RememberAdmin()))  {
+					if ($this->loginView->UserPressLoginButton() && $this->controller->AuthenticateUser() === true && $this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&
+							 $this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe() && substr($this->memberView->GetCookiePassword(), -1) == 1)  {
 
 						$this->controller->RunLoginLogic();
 						$this->uploadController->removeImageFromFolder();
-						return $this->available->renderAllPics();
+					    $this->available->renderAllPics();
+
+					     if ($this->memberView->UserPressLogoutButton()) {
+							 header('Location: ?page=Avaliable');
+						 }
+
+
 					}
 					else {
 							   $this->controller->RunLoginLogic();
@@ -61,11 +69,15 @@
 						break;
 					case available::$upload:
 						if ($this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&
-							 $this->sessionModel->IsLoggedIn() || ($this->memberView->RememberMe() &&
-							 										 $this->memberView->RememberAdmin()))  {
+							 $this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe() && substr($this->memberView->GetCookiePassword(), -1) == 1) {
 
 								   $this->controller->RunLoginLogic();		
-							return $this->uploadController->imgUpload();
+								   $this->uploadController->imgUpload();
+
+								    if ($this->memberView->UserPressLogoutButton()) {
+										 header('Location: ?page=Avaliable');
+									 }
+
 
 						}
 						else {
@@ -75,10 +87,14 @@
 						break;
 					case NavigationView::$interest:
 						# code...
-					if ($this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe())  {
+					if ($this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe()|| $this->loginView->UserPressLoginButton() && $this->controller->AuthenticateUser() === true)  {
 
 								$this->controller->RunLoginLogic();
-						return $this->interestController->doInterest();
+							    $this->interestController->doInterest(); 
+
+							    if ($this->memberView->UserPressLogoutButton()) {
+							    	header('Location: ?page=interest');
+							    }
 					}
 					else {
 						$this->controller->RunLoginLogic();
@@ -86,10 +102,14 @@
 					}
 						break;
 					case NavigationView::$service:
-					if ($this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe())  {
+					if ($this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe()|| $this->loginView->UserPressLoginButton() && $this->controller->AuthenticateUser() === true)  {
 						# code...
 						$this->controller->RunLoginLogic();
-						return $this->serviceController->doService();
+					    $this->serviceController->doService();
+
+					      if ($this->memberView->UserPressLogoutButton()) {
+							  header('Location: ?page=service');
+						   }
 					}
 					else {
 						$this->controller->RunLoginLogic();

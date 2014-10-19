@@ -16,13 +16,9 @@
 		}
 
 		public function SaveUserCredentials ($username, $password, $cookieTimestamp,$safeId) {
+			$newPassword = $password.$safeId;
 			setcookie(self::$usernameCookie, $username, $cookieTimestamp, "/");
-			setcookie(self::$passwordCookie, $password, $cookieTimestamp, "/");
-			if ($safeId == 1) {
-				$hashedID = $this->safe->create_hash($safeId);
-				setcookie(self::$admin, $hashedID , $cookieTimestamp, "/");
-			}
-			
+			setcookie(self::$passwordCookie, $newPassword, $cookieTimestamp, "/");
 		
 		}
 
@@ -31,17 +27,11 @@
 
 			setcookie(self::$usernameCookie, "", 1, "/");
 			setcookie(self::$passwordCookie, "", 1, "/");
-			setcookie(self::$admin,"", 1, "/");
 		}
 
 		public function RememberMe () {
 
 			return isset($_COOKIE[self::$usernameCookie]);
-		}
-
-		public function RememberMeAdmin () {
-
-			return isset($_COOKIE[self::$admin]);
 		}
 
 		public function GetCookieUsername () {
@@ -52,6 +42,13 @@
 			}
 		
 
+		}
+
+		public function GetAdminSafeID() {
+			if (isset($_COOKIE[self::$admin])) {
+				# code...
+				return $_COOKIE[self::$admin];
+			}
 		}
 
 		public function GetCookiePassword () {

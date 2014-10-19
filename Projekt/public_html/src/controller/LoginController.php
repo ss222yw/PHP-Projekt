@@ -143,8 +143,7 @@
 
 			// USER IS ALREADY LOGGED IN AND RELOADS PAGE or USER LOGGED IN WITH REMEMBER ME AND RELOADS
 			if ($sessionModel->IsLoggedIn() || $memberView->RememberMe() ||
-				 $sessionModel->IsAdminLoggedIn() && $sessionModel->IsLoggedIn() || 
-				 	($memberView->RememberMe() && $memberView->RememberAdmin())) {
+				 $sessionModel->IsAdminLoggedIn() && $sessionModel->IsLoggedIn()){
 
 					$onReload = true;
 					$validId = hash(self::$hashString,$this->getWebSiteAndIpAdress());
@@ -235,6 +234,7 @@
 
 			return !@$this->userModel->UserCredentialManipulated($username, $password);
 		}
+
 
 		protected function CookieDateManipulated () {
 			$username = $this->memberView->GetCookieUsername();

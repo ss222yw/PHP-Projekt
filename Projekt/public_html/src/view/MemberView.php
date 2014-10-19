@@ -42,13 +42,16 @@
 			}
 
 			$memberHTML = '<div id="memberView">'.
+						'<form id="logout" enctype="multipart/form-data" method="post" action="">'.
 						'<fieldset class="memberView">' .
 							'<h2>' . $username . ' är inloggad.</h2>' .
 							$successMessage .
 						
-						'<a href="?logout">Logga ut<a/>'.
+						//'<a href="?logout">Logga ut<a/>'.
+						'<input type="submit" name="logout" id="submit" value="Logga ut" />'.
 						'</fieldset>'.
-							'</div>';
+							'</div>'.
+							'</form>';
 
 			return $memberHTML;
 		}
@@ -79,7 +82,7 @@
 
 		public function UserPressLogoutButton () {
 
-			if (isset($_GET['logout'])) {
+			if (isset($_POST['logout'])) {
 
 				return true;
 			}
@@ -102,12 +105,9 @@
 
 		public function getSafeId($safeId,$web) {
 			$this->sessionModel->LoginAdmin($safeId,$web);
-		}
 
-		public function RememberAdmin() {
-			return $this->cookieStorage->RememberMeAdmin();
 		}
-
+		
 		public function GetCookieUsername () {
 
 			try {

@@ -91,6 +91,7 @@
 			$this->validation->getFileName($this->fileName);
 	
 			if ($this->DidHasSubmit() == true) {
+			
 				if (is_uploaded_file($_FILES[$this->fileName]['tmp_name'])) {
 					if (exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_GIF ||
 						 exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_JPEG ||

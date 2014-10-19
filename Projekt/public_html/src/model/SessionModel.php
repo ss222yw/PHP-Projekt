@@ -48,7 +48,7 @@
 				$_SESSION[self::$sessionAdmin] = $safeId;
 				$_SESSION[self::$securitySessionName] = hash(self::$hashString,$web);
 				$this->isAdminLoggedIn = true;
-			}	
+			}
 			else {
 					if ($safeId != 1) {
 						unset($_SESSION[self::$sessionAdmin]);

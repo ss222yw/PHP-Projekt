@@ -88,7 +88,6 @@
 			}
 
 			else if ($password == null) {
-			//	$_SESSION['LoginValues']['username'] = $username;
 				return self::$emptyPasswordErrorMessage;
 			}
 
@@ -98,7 +97,6 @@
 
 		//Get error login messages.
 		public function GetLoginErrorMessage ($username) {
-		//	$_SESSION['LoginValues']['username'] = $username;
 			return self::$loginErrorMessage;
 		}
 
