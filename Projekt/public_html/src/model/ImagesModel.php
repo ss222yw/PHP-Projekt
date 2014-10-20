@@ -18,4 +18,12 @@
  		public function addImages(Images $img) {
  			 $this->imagesRepository->AddPics($img);
  		}
+
+ 		public function EditImagesInformation(Images $img) {
+ 			$this->imagesRepository->SaveEdit($img);
+ 		}
+
+ 		public function getImages($name) {
+			return $this->imagesRepository->getImagesInformation($name);
+		}
  	}

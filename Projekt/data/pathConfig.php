@@ -35,6 +35,9 @@
 	require_once(ModelPath.DS.'Images.php');
 	require_once(ModelPath.DS.'ImagesRepository.php');
 	require_once(ModelPath.DS.'ImagesModel.php');
+	require_once(ModelPath.DS.'Comments.php');
+	require_once(ModelPath.DS.'CommentsModel.php');
+	require_once(ModelPath.DS.'CommentsRepository.php');
 	// REQUIRE VIEWS
 	require_once(ViewPath.DS.'LoginView.php');
 	require_once(ViewPath.DS.'MemberView.php');

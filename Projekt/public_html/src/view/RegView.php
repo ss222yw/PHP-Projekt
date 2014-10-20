@@ -71,7 +71,7 @@ class RegView{
 
 	public function GetUserName() {
 		if (isset($_POST[$this->username])) {
-			return htmlentities($_POST[$this->username]);
+			return htmlentities($_POST[$this->username]);	
 		}
 	}
 

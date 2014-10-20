@@ -20,6 +20,8 @@
 			$this->available = new available();
 			$this->fileName = $this->getFileName();
 			$this->imagesModel = new ImagesModel();
+			$this->EditImagesInfo();
+			// $this->available->renderEditUploadedInformation();
 
 		}
 
@@ -32,6 +34,12 @@
 			 return $this->uploadPage->GetImgName();
 		}
 
+		public function GetComment() {
+			return $this->uploadPage->getComments();
+		}
+
+
+
 		//Send image path to validation class.
 		public function getImgPath() {
 			$this->validation->getImgRoot($this->imgRoot);
@@ -40,6 +48,10 @@
 		// Get input and other stuff from available view class.
 		public function hasSubmitToDelImg() {
 			return $this->available->hasSubmitToDel();
+		}
+
+		public function hasSubmitToEdits() {
+			return $this->available->hasSubmitToEdit();
 		}
 
 		public function getHiddenID() {
@@ -56,6 +68,10 @@
 
 		public function getConforimNo() {
 			return $this->available->getNoDel();
+		}
+
+		public function GetImageComments() {
+			return $this->available->GetImageComment();
 		}
 
 		//Delete Images from folder.
@@ -76,7 +92,7 @@
 						$PicName =basename($value);
 						$this->imagesModel->removeImages($PicName);
 						unlink($value);
-						echo "$PicName togs bort.";
+						echo "$PicName togs bort.<br><br>";
 					}
 				}
 			}
@@ -85,6 +101,32 @@
 				header('Location: ?page=Avaliable');	
 			}		
 		}
+
+		public function GetSaveds() {
+			return $this->available->GetSaved();
+		}
+
+		public function getHiddenImgEdit() {
+			return $this->available->getSessionHiddenEdit();
+		}
+
+		public function EditImagesInfo() {
+			//var_dump($this->hasSubmitToEdits());
+			if ($this->hasSubmitToEdits()) {
+				# code...
+				$this->available->renderEditUploadedInformation();
+			}
+				$Images = glob("src/view/Images/*.*");
+				foreach ($Images as $value) {
+					if (basename($value) == $this->getHiddenImgEdit()) {
+						if($this->GetSaveds()) {
+								$images = new Images($this->getHiddenImgEdit(),$this->GetImageComments());
+							  	$this->imagesModel->EditImagesInformation($images);
+						}
+					}
+				}
+		}
+		
 
 		//Render upload funcation.
 		public function imgUpload() {
@@ -124,7 +166,7 @@
 							$imgToUpload = imagejpeg($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
 
 							 if ($imgToUpload) {
-								$images = new Images($_FILES[$this->fileName]['name']);
+								$images = new Images($_FILES[$this->fileName]['name'],$this->GetComment());
 							 	$this->imagesModel->addImages($images);
 							 	//change filem mode, 0755 read and execute.
 							 	chmod($this->imgRoot.$_FILES[$this->fileName]['name'], 0755);

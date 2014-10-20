@@ -8,7 +8,7 @@
 	echo "<h1>NybroHH fastigheter</h1>";
 	// Run Application
     $navigationController->doControll();
-
+    
 
     //Show time and date in swedish.
 	setlocale(LC_ALL, 'swedish');

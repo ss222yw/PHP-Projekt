@@ -7,14 +7,23 @@ class available{
 	private $session = "session";
 	private $hiddenImgID = "hiddenImgID";
 	private $hiddenImg = "hiddenImg";
+	private $hiddenImgEdit = "hiddenImgEdit";
 	private $yesDel = "yesDel";
 	private $NoDel = "NoDel";
 	private static $page = "page";
 	public static $upload ="upload";
+	private $uploadPage;
+	private $msg = "message";
+	private $EditInfo = "Edit";
+	private $SaveEdit ="saveEDIT";
+	private $imagesModel;
 
 	public function __construct() {
 		$this->mainView = new HTMLView();
+		$this->uploadPage = new upload();
+		$this->imagesModel = new ImagesModel();
 	}
+
 
 	//Render all Images for Admin.
 	public function DisplayAllImages($msg = '') {
@@ -24,19 +33,30 @@ class available{
 			$responseMessages .= '<p>' . $msg . '</p>';
 		}
 
+			
+ 
 		$Images = glob("src/view/Images/*.*");
 		$pics = "<a href='?".self::$page."=".self::$upload."'>Ladda upp bilder</a>&nbsp;";
 		$pics .= "<br><br>";
 		
-		foreach ($Images as $value) {		
+		foreach ($Images as $value) {	
+			$img = $this->imagesModel->getImages(basename($value));	
 			$pics .= '<img src="'.$value.'" id="ImgSize">';
 			$pics .= '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
+			'<br>'.
+			'<strong>Bildbeskrivning</strong>'.
+			'<br>'.
+			'<br>'.
+			$img->GetMSG().
+			'<br>'.
+			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImgID.'" value="'.basename($value).'">'.
 			'<input type="submit" name="'.$this->del.'" value="Ta bort">'.
+			'<input type="submit" name="'.$this->EditInfo.'" value="Redigera">'.
 			'</form>';
 			
 			}
-			$msgs = $responseMessages;	
+			$msgs = $responseMessages;				
 			echo $responseMessages;
 			return $pics;	
 
@@ -65,17 +85,49 @@ class available{
 	// confirm that admin want to remove an image or cancel.
 	public function areYouSure() {
 			$remove = '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
-			'vill du verkligen ta bort '.$_SESSION[$this->session].'?'.
+			'<strong>Vill du verkligen ta bort '.$_SESSION[$this->session].' med beskrivningen ?</strong>'.
+			'<br>'.
+			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImg.'" value="'.$_SESSION[$this->session].'">'.
-			'<input type="submit" name="'.$this->yesDel.'" value="Ja!Ta bort">'.
+			'<input type="submit" name="'.$this->yesDel.'" value="Ja!Ta bort">&nbsp;&nbsp;'.
 			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt">'.
 			'</form>';
 		
 		return $remove;
 	}
 
+
+	public function EditUploadedInformation() {
+
+			$img = $this->imagesModel->getImages($this->getHiddenId());
+			$saveEdit = "<strong>Redigera ".$img->getImgName()."</strong><br><br>";
+ 			$saveEdit .= '<form id="SaveEdit" enctype="multipart/form-data" method="post" action="">'.
+			'&nbsp;'.
+			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Beskriv bilden här...">'.$img->GetMSG().'</textarea>' .
+			'<br>'.
+			'<br>'.
+			'<input type="hidden" name="'.$this->hiddenImgEdit.'" value="'.$img->getImgName().'">'.
+			'<input type="submit" name="'.$this->SaveEdit.'" value="Spara">&nbsp;&nbsp;'.
+			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt">'.
+			'</form>';
+		
+			return $saveEdit;
+	}
+
+	public function renderEditUploadedInformation() {
+		echo $this->mainView->echoHTML($this->EditUploadedInformation()) ."<br>";
+	}
+
 	public function renderAreYouSure() {
 		echo $this->mainView->echoHTML($this->areYouSure()) ."<br>";
+	}
+
+	public function hasSubmitToEdit() {
+		//var_dump(isset($_POST[$this->EditInfo]));
+		if (isset($_POST[$this->EditInfo])) {
+			# code...
+			return true;
+		}
 	}
 
 
@@ -106,8 +158,30 @@ class available{
 		}
 	}
 
+	public function getSessionHiddenEdit() {
+		if (isset($_POST[$this->hiddenImgEdit])) {
+			# code...
+			return $_POST[$this->hiddenImgEdit];
+		}
+	}
+
 	public function hasSubmitToDel() {
 		if (isset($_POST[$this->del])) {
+			return true;
+		}
+	}
+
+
+	public function GetImageComment() {
+		if (isset($_POST[$this->msg])) {
+			# code...
+			return $_POST[$this->msg];
+		}
+	}
+
+	public function GetSaved() {
+		if (isset($_POST[$this->SaveEdit])) {
+			# code...
 			return true;
 		}
 	}
