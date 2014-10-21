@@ -51,9 +51,8 @@
 					     if ($this->memberView->UserPressLogoutButton()) {
 							 header('Location: ?page=Avaliable');
 						 }
-
-
 					}
+					
 					else {
 							   $this->controller->RunLoginLogic();
 						return $this->available->renderAllPicsForUsers();

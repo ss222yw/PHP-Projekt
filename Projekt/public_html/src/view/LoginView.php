@@ -3,9 +3,9 @@
 	require_once(HelperPath.DS.'HTMLView.php');
 
 	class LoginView {
-		private static $newUserSuccessMsg = 'Registrering av ny användare lyckades';
-		private static $logOutSuccessMessage = "Du är nu utloggad.";
-		private static $corruptCookieLogoutMessage = "Fel information i cookie.";
+		private static $newUserSuccessMsg = 'Registrering av ny användare lyckades.<br>';
+		private static $logOutSuccessMessage = "Du är nu utloggad.<br>";
+		private static $corruptCookieLogoutMessage = "Fel information i cookie.<br>";
 		private $mainView;
 		private $regView;
 		private $safe;
@@ -39,7 +39,7 @@
 
 			if ($message != '') {
 					
-				$responseMessages .= '<p>' . $message . '</p>';
+				$responseMessages .= '<strong>' . $message . '</strong>';
 			}
 
 			$loginHTML = 

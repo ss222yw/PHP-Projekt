@@ -10,32 +10,35 @@
 	//static messages for validation.
 
 	//Messages for log in system.
-	private static $loginErrorMessage = "Felaktigt användarnamn och/eller lösenord.";
-	private static $emptyUsernameErrorMessage = "Användarnamn saknas.";
-	private static $emptyPasswordErrorMessage = "Lösenord saknas.";	
-	private static $ErrorUserNameMessage = "Användarnamnet har för få tecken. Minst 3 tecken";
-	private static $ErrorPasswordMessage = "Lösenorden har för få tecken. Minst 6 tecken";
-	private static $ErrorDiffrentPasswordMessage = "Lösenorden matchar inte";
-	private static $ErrorHasTagsUsernameMessage = "Användarnamnet innehåller ogiltiga tecken";
-	private static $ErrorUserHasToken = "Användarnamnet är upptaget!";
-	private static $ErrorPasswordAndUserNameMessage = "Användarnamnet har för få tecken. Minst 3 tecken <br> Lösenorden har för få tecken. Minst 6 tecken";
+	private static $loginErrorMessage = "Felaktigt användarnamn och/eller lösenord.<br>";
+	private static $emptyUsernameErrorMessage = "Användarnamn saknas.<br>";
+	private static $emptyPasswordErrorMessage = "Lösenord saknas.<br>";	
+	private static $emptyUernameAndPassword = "Användarnamn & Lösenord saknas!<br>";
+
+	//Messages for Reg system.
+	private static $ErrorUserNameMessage = "Användarnamnet har för få tecken. Minst 3 tecken<br>";
+	private static $ErrorPasswordMessage = "Lösenorden har för få tecken. Minst 6 tecken<br>";
+	private static $ErrorDiffrentPasswordMessage = "Lösenorden matchar inte<br>";
+	private static $ErrorHasTagsUsernameMessage = "Användarnamnet innehåller ogiltiga tecken<br>";
+	private static $ErrorUserHasToken = "Användarnamnet är upptaget!<br>";
+	private static $ErrorPasswordAndUserNameMessage = "Användarnamnet har för få tecken. Minst 3 tecken <br> Lösenorden har för få tecken. Minst 6 tecken<br>";
 
 	//Messages for upload function.
-	private static $ErrorUPLOAD_ERR_FORM_SIZE = "Filen är för stort!!";
-	private static $ErrorUPLOAD_ERR_NO_FILE = "Välj en bild först sen tryck ladda upp!!!";
-	private static $ErrorUPLOAD_ERR_NO_TMP_DIR = "Som fel har inträffat";
+	private static $ErrorUPLOAD_ERR_FORM_SIZE = "Filen är för stort!!<br>";
+	private static $ErrorUPLOAD_ERR_NO_FILE = "Välj en bild först sen tryck ladda upp!!!<br><br>";
+	private static $ErrorUPLOAD_ERR_NO_TMP_DIR = "Som fel har inträffat<br>";
 
 	//Message for Contact function.
-	private static $ErrorNameMessage = "Namnet var fel formlerat!";
-	private static $ErrorEmailMessage = "Eposten var fel formlerat!";
-	private static $ErrorEmptyMessage = "Du kan inte skicka en tom meddelande!";
-	private static $ErrorEmptyName = "Namnet måste anges!";
-	private static $ErrorEmptyEmail = "Eposten måste anges!";
-	private static $ERRORInput = "Namnet måste anges!<br> Eposten måste anges! <br> Meddelandet kan inte vara tom!";
-	private static $ErrorMiniName ="Namet kan inte vara mindre än 3 tecken!";
-	private static $ErrorMiniMsg = "Meddelandet kan inte vara mindre än tre tecken!";
-	private static $ErrorTel = "Telefon Nummer består av siffror!Ingen bokstav tilllåtet.";
-	private static $ErrorAprtNr = "Lägenhetens nummer består av siffror!Ingen bokstav tilllåtet.";
+	private static $ErrorNameMessage = "Namnet var fel formlerat!<br>";
+	private static $ErrorEmailMessage = "Eposten var fel formlerat!<br>";
+	private static $ErrorEmptyMessage = "Du kan inte skicka en tom meddelande!<br>";
+	private static $ErrorEmptyName = "Namnet måste anges!<br>";
+	private static $ErrorEmptyEmail = "Eposten måste anges!<br>";
+	private static $ERRORInput = "Namnet måste anges!<br> Eposten måste anges! <br> Meddelandet kan inte vara tom!<br>";
+	private static $ErrorMiniName ="Namet kan inte vara mindre än 3 tecken!<br>";
+	private static $ErrorMiniMsg = "Meddelandet kan inte vara mindre än tre tecken!<br>";
+	private static $ErrorTel = "Telefon Nummer består av siffror!Ingen bokstav tilllåtet.<br>";
+	private static $ErrorAprtNr = "Lägenhetens nummer består av siffror!Ingen bokstav tilllåtet.<br>";
 
 	//Regex validation.
 	private $emailExp;
@@ -50,9 +53,9 @@
 
 	}
 
-	public function getImgName($upload) {
-		$this->fileName = $upload;
-	}
+	// public function getImgName($upload) {
+	// 	$this->fileName = $upload;
+	// }
 
 	//validation to reistration.
 	public function ValidateRegistration ($username,$password,$passwordTwo) {
@@ -82,8 +85,12 @@
 
 		//validation for log in system.
 		public function Validate ($username,$password) {
+			if ($username == null && $password == null) {
+				# code...
+				return self::$emptyUernameAndPassword;
+			}
 
-			if ($username == null) {
+			else if ($username == null) {
 				return self::$emptyUsernameErrorMessage;
 			}
 
@@ -134,7 +141,8 @@
 			// error file 4 is that the user trying to upload widthout file.
 	      else if($_FILES[$this->fileName]['error'] == 4) {
 		     	return self::$ErrorUPLOAD_ERR_NO_FILE;
-		   }	
+		   }
+	
      	}
 
 
@@ -202,6 +210,10 @@
 				return self::$ErrorMiniMsg;
 			}
 
+			else if ($Message != strip_tags($Message)) {
+				return self::$ErrorHasTagsUsernameMessage;
+			}
+
 			else if(!preg_match($this->Exp, $Name)) {
 				return self::$ErrorNameMessage;
 			}
@@ -237,6 +249,10 @@
 
 			else if(mb_strlen($Message) < 3) {
 				return self::$ErrorMiniMsg;
+			}
+
+			else if ($Message != strip_tags($Message)) {
+				return self::$ErrorHasTagsUsernameMessage;
 			}
 
 			else if(!preg_match($this->Exp, $Name)) {

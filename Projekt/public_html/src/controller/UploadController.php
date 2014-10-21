@@ -8,8 +8,8 @@
 	    private $fileName;
 	    private $imagesModel;
 
-		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!";
-		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!";	
+		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!<br><br>";
+		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!<br><br>";	
 
 
 		public function __construct() {
@@ -20,7 +20,6 @@
 			$this->available = new available();
 			$this->fileName = $this->getFileName();
 			$this->imagesModel = new ImagesModel();
-			$this->EditImagesInfo();
 			// $this->available->renderEditUploadedInformation();
 
 		}
@@ -76,6 +75,7 @@
 
 		//Delete Images from folder.
 		public function removeImageFromFolder() {
+			$this->EditImagesInfo();
 			if ($this->hasSubmitToDelImg()) {
 				$Images = glob("src/view/Images/*.*");
 				foreach ($Images as $value) {
@@ -92,7 +92,7 @@
 						$PicName =basename($value);
 						$this->imagesModel->removeImages($PicName);
 						unlink($value);
-						echo "$PicName togs bort.<br><br>";
+						echo "<strong> $PicName togs bort.</strong><br><br>";
 					}
 				}
 			}
@@ -122,6 +122,7 @@
 						if($this->GetSaveds()) {
 								$images = new Images($this->getHiddenImgEdit(),$this->GetImageComments());
 							  	$this->imagesModel->EditImagesInformation($images);
+							  	echo "<strong>Uppdatering av ".$this->getHiddenImgEdit(). "  har sparat!</strong><br><br>";
 						}
 					}
 				}
@@ -132,10 +133,12 @@
 		public function imgUpload() {
 			$this->uploadPage->RenderUploadForm();
 			$this->removeImageFromFolder();
+
 			$counter = 1;
 			$this->validation->getFileName($this->fileName);
 	
 			if ($this->DidHasSubmit() == true) {
+
 			
 				if (is_uploaded_file($_FILES[$this->fileName]['tmp_name'])) {
 					if (exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_GIF ||
@@ -154,6 +157,7 @@
 							}
 				
 						}
+						
 						//Resize images before uploaded to folder.
 						if ($_FILES[$this->fileName]['size'] < 5000000) {
 							$imgCreateFromJ = imagecreatefromjpeg($_FILES[$this->fileName]['tmp_name']);
@@ -177,6 +181,7 @@
 							 	}	
 						}
 					}
+
 
 					else {
 							return $this->uploadPage->imageUpload(self::$ErrorUPLOAD_ERR_TYPE);

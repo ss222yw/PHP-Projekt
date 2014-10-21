@@ -7,7 +7,6 @@ class upload {
 	private $show;
 	private $msg = "message";
 
-
 	public function __construct() {
 		$this->mainView = new HTMLView();
 	}
@@ -16,29 +15,30 @@ class upload {
 
 	//render upload form.
 	public function imageUpload($msg = '') {
-
+			
 			$responseMessages = '';
 			if ($msg != '') {
-				$responseMessages .= '<p>' . $msg . '</p>';
+				$responseMessages .= '<strong>' . $msg . '</strong>';
 			}
-
-			$uploadForm = 	'<h3>Ladda upp en bild på bostad/lokal med information.</h3><br>'.
+			echo  $responseMessages;
+			$uploadForm = 	'<h3>Ladda upp en bild på bostad/lokal med/utan beskrivning.</h3><br>'.
 			'<div id=upload>'.
 			'<form id="upload" enctype="multipart/form-data" method="post" action="">' .
 			'<fieldset class="upload">' .
+			'Välj en bild'.
+			'<br>'.
 			'<input type="File" name="'.$this->images.'">'.
 			'<br>'.
 			'<br>'.
 			'Beskriv bilden'.
 			'<br>'.
-			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Beskriv bilden här...">'.$this->getComments().'</textarea>' .
+			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Beskriv bilden här... " wrap="hard">'.$this->getComments().'</textarea>' .
 			'<br>'.
 			'<br>'.
 			'<input type="submit" name="'.$this->upload.'" value="Ladda upp">'.
 			'</fieldset>'.
 			'</form>'.
 			'</div>';
-			echo $responseMessages;
 			return $uploadForm;
 	}
 
@@ -48,8 +48,7 @@ class upload {
 
 	public function getComments() {
 		if (isset($_POST[$this->msg])) {
-			# code...
-			return $_POST[$this->msg];
+			return nl2br($_POST[$this->msg]);
 		}
 	}
 

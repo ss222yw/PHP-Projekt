@@ -35,7 +35,7 @@
 			$responseMessages = ''; 
 			if ($message != '') {
 					
-				$responseMessages .= '<p>' . $message . '</p>';
+				$responseMessages .= '<strong>' . $message . '</strong>';
 			}
 
 			echo '<h3>'.$responseMessages.'</h3>';
@@ -58,7 +58,7 @@
 			'<br>'.
 			'<label>Ditt anmäla : </label>'.
 			'<br>'.
-			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv ditt felanmäla här...">'.$this->GetMeg.'</textarea>' .
+			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv ditt felanmäla här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
 			'<br>'.
 			'<input type="submit" name="'.$this->send.'" value="Skicka felanmäla">'.
 			'</fieldset>'.

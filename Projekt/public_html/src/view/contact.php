@@ -29,7 +29,7 @@
 			$responseMessages = ''; 
 			if ($message != '') {
 					
-				$responseMessages .= '<p>' . $message . '</p>';
+				$responseMessages .= '<strong>' . $message . '</strong>';
 			}
 
 			echo '<h3>'.$responseMessages.'</h3>';
@@ -46,7 +46,7 @@
 			'<br>'.
 		 	'<label><strong>Ditt meddelande</strong> : </label>'.
 			'<br>'.
-			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Skriv ditt meddelande här...">'.$this->GetMeg.'</textarea>' .
+			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Skriv ditt meddelande här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
 			'<br>'.
 			'<br>'.
 			'<input type="submit" name="'.$this->send.'" value="Skicka">'.

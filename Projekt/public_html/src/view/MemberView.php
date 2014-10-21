@@ -8,8 +8,8 @@
 		private $mainView;
 		private $sessionModel;
 		private $safeID;
-		private static $defaultLoginSuccessMessage = "Inloggning lyckades.";
-		private static $autoLoginSuccessMessage = "Inloggning lyckades och vi kommer ihåg dig nästa gång.";
+		private static $defaultLoginSuccessMessage = "Inloggning lyckades.<br>";
+		private static $autoLoginSuccessMessage = "Inloggning lyckades och vi kommer ihåg dig nästa gång.<br>";
 		private static $cookieLoginSuccessMessage = "";
 		private static $cookieUsernameErrMsg = 'CookieUsername does not exist!';
 		private static $cookiePasswordErrMsg = 'CookiePassword does not exist!';
@@ -28,7 +28,7 @@
 
 		public function GetMemberStartHTML ($message = '') {
 
-			$successMessage = isset($_GET[self::$superGlobalGetValue]) ? '<p>' . $message . '</p>' : "";
+			$successMessage = isset($_GET[self::$superGlobalGetValue]) ? '<strong>' . $message . '</strong>' : "";
 			$username = '';
 
 			if (isset($_SESSION[self::$sessionUserHeadCategory][self::$sessionUsername])) {
@@ -93,12 +93,12 @@
 			$this->cookieStorage->SaveUserCredentials($username, $password, $cookieTimestamp,$cryptId);
 		}
 
-		public function DeleteUserCredentials () {
+		public function DeleteUserCredentials() {
 
 			$this->cookieStorage->DeleteUserCredentials();
 		}
 
-		public function RememberMe () {
+		public function RememberMe() {
 
 			return $this->cookieStorage->RememberMe();
 		}
@@ -107,8 +107,8 @@
 			$this->sessionModel->LoginAdmin($safeId,$web);
 
 		}
-		
-		public function GetCookieUsername () {
+
+		public function GetCookieUsername() {
 
 			try {
 
@@ -120,7 +120,7 @@
 			}
 		}
 
-		public function GetCookiePassword () {
+		public function GetCookiePassword() {
 
 			try {
 

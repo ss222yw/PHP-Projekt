@@ -30,7 +30,7 @@ class available{
 
 		$responseMessages = '';
 		if ($msg != '') {
-			$responseMessages .= '<p>' . $msg . '</p>';
+			$responseMessages .= '<strong>' . $msg . '</strong>';
 		}
 
 			
@@ -41,6 +41,11 @@ class available{
 		
 		foreach ($Images as $value) {	
 			$img = $this->imagesModel->getImages(basename($value));	
+				$SoSoon = "";
+			if($img->GetMSG() == "") {
+				$SoSoon .="Finns ingen beskrivning i nu läge...<br> TRYCK redigera! för att kunna lägga till beskrivningen ";
+			}
+
 			$pics .= '<img src="'.$value.'" id="ImgSize">';
 			$pics .= '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
 			'<br>'.
@@ -48,10 +53,11 @@ class available{
 			'<br>'.
 			'<br>'.
 			$img->GetMSG().
+			$SoSoon.
 			'<br>'.
 			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImgID.'" value="'.basename($value).'">'.
-			'<input type="submit" name="'.$this->del.'" value="Ta bort">'.
+			'<input type="submit" name="'.$this->del.'" value="Ta bort">&nbsp;'.
 			'<input type="submit" name="'.$this->EditInfo.'" value="Redigera">'.
 			'</form>';
 			
@@ -65,10 +71,27 @@ class available{
 
 	//Render all images for users.
 	public function DisplayAllImagesForUsers() {
+
+
 		$Images = glob("src/view/Images/*.*");
 		$pic = "<br><h2>Lediga lägenheter och lokaler.</h2><br><br><br>";
 		foreach ($Images as $value) {
-			$pic .= '<img src="'.$value.'" id="ImgSize">';
+			$img = $this->imagesModel->getImages(basename($value));
+			$SoSoon = "";
+			if($img->GetMSG() == "") {
+				$SoSoon .="Finns ingen beskrivning i nu läge...";
+			}
+			$pic .= '<img src="'.$value.'" id="ImgSize">'.
+			'<br>'.
+			'<br>'.
+			'<strong>Bildbeskrivning</strong>'.
+			'<br>'.
+			'<br>'.
+			$img->GetMSG().
+			$SoSoon.
+			'<br>'.
+			'<br>';
+
 		}
 		return $pic;	
 	}
@@ -85,12 +108,14 @@ class available{
 	// confirm that admin want to remove an image or cancel.
 	public function areYouSure() {
 			$remove = '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
+			'<fieldset class="Edit">'.
 			'<strong>Vill du verkligen ta bort '.$_SESSION[$this->session].' med beskrivningen ?</strong>'.
 			'<br>'.
 			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImg.'" value="'.$_SESSION[$this->session].'">'.
 			'<input type="submit" name="'.$this->yesDel.'" value="Ja!Ta bort">&nbsp;&nbsp;'.
 			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt">'.
+			'</fieldset>'.
 			'</form>';
 		
 		return $remove;
@@ -102,13 +127,15 @@ class available{
 			$img = $this->imagesModel->getImages($this->getHiddenId());
 			$saveEdit = "<strong>Redigera ".$img->getImgName()."</strong><br><br>";
  			$saveEdit .= '<form id="SaveEdit" enctype="multipart/form-data" method="post" action="">'.
+ 			'<fieldset class="Edit">'.
 			'&nbsp;'.
-			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Beskriv bilden här...">'.$img->GetMSG().'</textarea>' .
+			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Beskriv bilden här..." wrap="hard">'.strip_tags($img->GetMSG()).'</textarea>' .
 			'<br>'.
 			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImgEdit.'" value="'.$img->getImgName().'">'.
 			'<input type="submit" name="'.$this->SaveEdit.'" value="Spara">&nbsp;&nbsp;'.
 			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt">'.
+			'</fieldset>'.
 			'</form>';
 		
 			return $saveEdit;
@@ -175,7 +202,7 @@ class available{
 	public function GetImageComment() {
 		if (isset($_POST[$this->msg])) {
 			# code...
-			return $_POST[$this->msg];
+			return nl2br($_POST[$this->msg]);
 		}
 	}
 

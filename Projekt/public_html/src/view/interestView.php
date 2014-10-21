@@ -28,7 +28,7 @@
 			$responseMessages = ''; 
 			if ($message != '') {
 					
-				$responseMessages .= '<p>' . $message . '</p>';
+				$responseMessages .= '<strong>' . $message . '</strong>';
 			}
 
 	 		echo '<h3>'.$responseMessages.'</h3>';
@@ -45,7 +45,7 @@
 			'<br>'.
 			'<label>Önskemål & Inflyttningsdatum : </label>'.
 			'<br>'.
-			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv din önskemål här...">'.$this->GetMeg.'</textarea>' .
+			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv din önskemål här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
 			'<br>'.
 			'<br>'.
 			'<input type="submit" name= "'.$this->send.'" value="Skicka intresseanmälan">'.

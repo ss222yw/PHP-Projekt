@@ -29,7 +29,7 @@ class RegView{
 
 			if ($message != '') {
 					
-				$responseMessages .= '<p>' . $message . '</p>';
+				$responseMessages .= '<strong>' . $message . '</strong>';
 			}
 
 

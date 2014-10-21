@@ -24,14 +24,14 @@
   }
 
   #login fieldset {
-    width: 20%;
+    width: 24%;
     float: right;
-    margin-top: -210px;
+    margin-top: -180px;
   }
   #memberView fieldset {
-     width: 20%;
+     width: 24%;
     float: right;
-    margin-top: -190px;
+    margin-top: -170px;
   }
 
 
@@ -39,6 +39,7 @@
    width: 25%;
   }
 
+ 
   #contact fieldset {
     width: 50%;
   }
@@ -52,6 +53,10 @@
     height: 25%;
   }
 
+  textarea {
+    resize: none;
+    overflow: auto;
+  }
 
 
   </style>
