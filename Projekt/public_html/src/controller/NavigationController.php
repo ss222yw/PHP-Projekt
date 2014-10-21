@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 	class NavigationController {
 
 		private $available;
@@ -46,13 +46,16 @@
 
 						$this->controller->RunLoginLogic();
 						$this->uploadController->removeImageFromFolder();
-					    $this->available->renderAllPics();
+					    $this->available->renderAllPics();	
 
 					     if ($this->memberView->UserPressLogoutButton()) {
+					     	 
+					     	//die($this->available->renderAllPics());
 							 header('Location: ?page=Avaliable');
+
 						 }
 					}
-					
+
 					else {
 							   $this->controller->RunLoginLogic();
 						return $this->available->renderAllPicsForUsers();
@@ -137,3 +140,5 @@
 
 		}
 	}
+
+	ob_flush();

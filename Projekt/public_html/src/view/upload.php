@@ -20,6 +20,7 @@ class upload {
 			if ($msg != '') {
 				$responseMessages .= '<strong>' . $msg . '</strong>';
 			}
+			
 			echo  $responseMessages;
 			$uploadForm = 	'<h3>Ladda upp en bild på bostad/lokal med/utan beskrivning.</h3><br>'.
 			'<div id=upload>'.

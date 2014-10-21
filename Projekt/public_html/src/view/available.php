@@ -17,12 +17,15 @@ class available{
 	private $EditInfo = "Edit";
 	private $SaveEdit ="saveEDIT";
 	private $imagesModel;
+	private $cookieStorage;
 
 	public function __construct() {
 		$this->mainView = new HTMLView();
 		$this->uploadPage = new upload();
 		$this->imagesModel = new ImagesModel();
+		$this->cookieStorage = new CookieStorage();
 	}
+
 
 
 	//Render all Images for Admin.
@@ -33,14 +36,16 @@ class available{
 			$responseMessages .= '<strong>' . $msg . '</strong>';
 		}
 
-			
+		   $MsgSuccesUpload = $this->cookieStorage->GetMessageCookie();
+		   echo '<strong>' .$MsgSuccesUpload . '</strong>';
+		   $this->cookieStorage->DeleteMessageCookie();	
  
 		$Images = glob("src/view/Images/*.*");
 		$pics = "<a href='?".self::$page."=".self::$upload."'>Ladda upp bilder</a>&nbsp;";
 		$pics .= "<br><br>";
 		
 		foreach ($Images as $value) {	
-			$img = $this->imagesModel->getImages(basename($value));	
+ 			$img = $this->imagesModel->getImages(basename($value));	
 				$SoSoon = "";
 			if($img->GetMSG() == "") {
 				$SoSoon .="Finns ingen beskrivning i nu läge...<br> TRYCK redigera! för att kunna lägga till beskrivningen ";

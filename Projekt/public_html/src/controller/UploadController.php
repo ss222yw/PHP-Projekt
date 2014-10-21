@@ -7,6 +7,7 @@
 	    private $uploadPage;
 	    private $fileName;
 	    private $imagesModel;
+	    private $cookieStorage;
 
 		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!<br><br>";
 		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!<br><br>";	
@@ -20,6 +21,7 @@
 			$this->available = new available();
 			$this->fileName = $this->getFileName();
 			$this->imagesModel = new ImagesModel();
+			$this->cookieStorage = new CookieStorage();
 			// $this->available->renderEditUploadedInformation();
 
 		}
@@ -176,8 +178,10 @@
 							 	chmod($this->imgRoot.$_FILES[$this->fileName]['name'], 0755);
 							  	imagedestroy($imgCreateFromJ);
 						      	imagedestroy($ImgCreateColor);
-					 			$this->available->renderAllPicsForUsers();
-							 	return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);
+						      	$this->cookieStorage->SaveMessageCookie(self::$UPLOADEDSUCCESSED);
+						      	header('Location: ?page=Avaliable');
+					 			//$this->available->renderAllPicsForUsers();
+							 	//return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);
 							 	}	
 						}
 					}
