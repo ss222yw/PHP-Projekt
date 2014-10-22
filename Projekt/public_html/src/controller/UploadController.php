@@ -1,4 +1,11 @@
 <?php
+	
+	//the require once here just to show the coupling between classes.
+	require_once(ModelPath.DS.'validation.php');
+	require_once(ViewPath.DS.'upload.php');
+	require_once(ViewPath.DS.'available.php');
+	require_once(ModelPath.DS.'ImagesModel.php');
+	require_once(ViewPath.DS.'CookieStorage.php');
 
 	class UploadController {
 
@@ -22,7 +29,6 @@
 			$this->fileName = $this->getFileName();
 			$this->imagesModel = new ImagesModel();
 			$this->cookieStorage = new CookieStorage();
-			// $this->available->renderEditUploadedInformation();
 
 		}
 
@@ -112,10 +118,9 @@
 			return $this->available->getSessionHiddenEdit();
 		}
 
+		//Edit comments
 		public function EditImagesInfo() {
-			//var_dump($this->hasSubmitToEdits());
 			if ($this->hasSubmitToEdits()) {
-				# code...
 				$this->available->renderEditUploadedInformation();
 			}
 				$Images = glob("src/view/Images/*.*");
@@ -139,9 +144,9 @@
 			$counter = 1;
 			$this->validation->getFileName($this->fileName);
 	
-			if ($this->DidHasSubmit() == true) {
+			if ($this->DidHasSubmit() == true) {	
 
-			
+				// check if has file and make sure that the file have a right type.
 				if (is_uploaded_file($_FILES[$this->fileName]['tmp_name'])) {
 					if (exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_GIF ||
 						 exif_imagetype($_FILES[$this->fileName]['tmp_name']) == IMAGETYPE_JPEG ||
@@ -154,14 +159,16 @@
 							$pointEx = substr(strrchr($_FILES[$this->fileName]['name'],"."), -4);
 							$FileNameWithOutEx = $FileNameInfo->getBasename($pointEx);
 
+							// While file is existes , add a counter to the name of the file .
 							while (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
 								$_FILES[$this->fileName]['name'] = $FileNameWithOutEx."(".$counter++.")." . $extension;
 							}
 				
 						}
 						
-						//Resize images before uploaded to folder.
+						
 						if ($_FILES[$this->fileName]['size'] < 5000000) {
+							//Resize images before uploaded to folder.
 							$imgCreateFromJ = imagecreatefromjpeg($_FILES[$this->fileName]['tmp_name']);
 							$imgWidth =	getimagesize($_FILES[$this->fileName]['tmp_name'])[0];
 							$imgHeigth = getimagesize($_FILES[$this->fileName]['tmp_name'])[1];

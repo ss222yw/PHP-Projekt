@@ -1,5 +1,11 @@
 <?php
 	
+
+	//the require once here just to show the coupling between classes.	
+	require_once(ViewPath.DS.'InterestView.php');
+	require_once(ModelPath.DS.'validation.php');
+	require_once(ModelPath.DS.'emailInterest.php');
+
 	class InterestController {
 
 		private $validation;
@@ -51,7 +57,7 @@
 			if ($this->didPressSend() == true) {
 
 				if ($this->validation->InterestFormValidation($this->getInterstName(),$this->getInterstEmail(),$this->getInterstMsg()) === true)  {
-
+						//Parameters sends to mail function.
 						$messages = "Namn:\r\n" .$Name."\r\nEpost:\r\n". $Email."\r\nMeddelandet:\r\n".$Message;
 						$headers  = "From:".$Email."\r\n";
 			    		$headers .= "Reply-To:" .$Email;

@@ -1,5 +1,11 @@
 <?php 
 	
+
+	//the require once here just to show the coupling between classes.	
+	require_once(ViewPath.DS.'serviceView.php');
+	require_once(ModelPath.DS.'validation.php');
+	require_once(ModelPath.DS.'emailService.php');
+
 	class ServiceController {
 
 		private $validation;
@@ -63,7 +69,7 @@
 
 			if ($this->didPressSend() == true) {
 				if ($this->validation->ServiceFormValidation($Name,$Email,$Message,$TEL,$AprtNr) === true) {
-
+					//Parameters send to mail fucntion.
 				   	$messages = "Namn:\r\n" .$Name."\r\nEpost:\r\n". $Email."\r\nMeddelandet:\r\n".$Message;
 					$headers  = "From:".$Email."\r\n";
 			    	$headers .= "Reply-To:" .$Email;

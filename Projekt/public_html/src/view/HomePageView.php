@@ -9,8 +9,18 @@
 			$this->mainView = new HTMLView();
 		}
 
+
+		
+
 		public function homePageForm() {
-			return $htmlHomePage = "test så kan se om allt kopplat rätt ..............<br>";
+			$Images = glob("src/view/Images/*.*");
+			$htmlHomePage = "<h2>Välkommen till HH fastigheter , här är våran ledigt.</h2>";
+			$htmlHomePage .= '<div class="fadein">';
+			foreach ($Images as $value) {
+				 $htmlHomePage .= '<img src="'.$value.'" id="ImgSize">';
+			}
+			$htmlHomePage .= '</div>';
+			return $htmlHomePage;
 		}
 
 		public function renderHomePage() {

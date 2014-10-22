@@ -113,7 +113,7 @@ class available{
 	// confirm that admin want to remove an image or cancel.
 	public function areYouSure() {
 			$remove = '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
-			'<fieldset class="Edit">'.
+			'<fieldset class="delete">'.
 			'<strong>Vill du verkligen ta bort '.$_SESSION[$this->session].' med beskrivningen ?</strong>'.
 			'<br>'.
 			'<br>'.

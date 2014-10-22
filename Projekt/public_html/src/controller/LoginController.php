@@ -1,10 +1,15 @@
 <?php
-
+	
+	//the require once here just to show the coupling between classes.
 	require_once(ModelPath.DS.'UserModel.php');
 	require_once(HelperPath.DS.'HTMLView.php');
 	require_once(ViewPath.DS.'LoginView.php');
 	require_once(ViewPath.DS.'MemberView.php');
 	require_once(ViewPath.DS.'RegView.php');
+	require_once(ModelPath.DS.'validation.php');
+	require_once(ModelPath.DS.'SessionModel.php');
+	require_once(ModelPath.DS.'User.php');
+	require_once(ViewPath.DS.'CookieStorage.php');
 
 	class LoginController  {
 		// REMINDER: WHEN CREATING MODELS, THE MODEL MIGHT HAVE TO INHERIT FROM THE DATABASE OBJECTS IN THE HELPERS FOLDER?
@@ -78,11 +83,13 @@
 			$sessionModel = clone $this->sessionModel;
 			$usermodel = clone $this->userModel;
 
+			// If user press register a new user , render register form.
 			if($loginView->userPressRegNewUser() == true) {
-				$regView->RenderRegForm();
+				$regView->RenderRegForm();die();
 				return true;
 			}	
 
+			// If user press register button , do ....
 			if ($regView->DidUserPressReg() == true ) {
 					$username = $this->getuser();
 					$password = $this->getPassword();
@@ -235,7 +242,7 @@
 			return !@$this->userModel->UserCredentialManipulated($username, $password);
 		}
 
-
+		// try to safe date cookie agianst manipulated.
 		protected function CookieDateManipulated () {
 			$username = $this->memberView->GetCookieUsername();
 			$currentTime = time();

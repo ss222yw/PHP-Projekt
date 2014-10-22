@@ -1,4 +1,4 @@
-
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <style type="text/css">
 
   input[type="text"] {
@@ -28,10 +28,11 @@
     float: right;
     margin-top: -180px;
   }
-  #memberView fieldset {
-     width: 24%;
+   #memberView fieldset {
+    width: 24%;
     float: right;
     margin-top: -170px;
+    background-color: rgb(188, 228, 149);
   }
 
 
@@ -59,4 +60,33 @@
   }
 
 
+  .fadein { 
+    position:relative;
+    height:100%; 
+    width:100%; 
+   }
+
+   .fadein img {
+   position:absolute;
+    left: 4%;
+  }
+
+  fieldset.Edit {
+  width: 26%;
+  }
+
+  fieldset.delete {
+    width: 40%;
+    background-color: rgb(102, 33, 33);
+    color: azure;
+  }
   </style>
+
+
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>
+  $(function(){
+    $('.fadein img:gt(0)').hide();
+    setInterval(function(){$('.fadein :first-child').fadeOut().next('img').fadeIn().end().appendTo('.fadein');}, 3500);
+    });
+  </script>

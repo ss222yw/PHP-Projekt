@@ -1,5 +1,11 @@
 <?php
 	
+
+	//the require once here just to show the coupling between classes.	
+	require_once(ViewPath.DS.'contact.php');
+	require_once(ModelPath.DS.'validation.php');
+	require_once(ModelPath.DS.'emailContact.php');
+
 	class ContactController {
 
 		private $validation;
@@ -51,7 +57,7 @@
 			if ($this->didPressSend() == true) {
 				
 				if ($this->validation->ContactFormValidation($Name,$Email,$Message) === true) {
-
+						// parameters to send to mail function .
 			    		$messages = "Namn:\r\n" .$Name."\r\nEpost:\r\n". $Email."\r\nMeddelandet:\r\n".$Message;
 						$headers  = "From:".$Email."\r\n";
 			    		$headers .= "Reply-To:" .$Email;

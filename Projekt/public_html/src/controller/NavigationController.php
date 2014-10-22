@@ -1,5 +1,24 @@
 <?php
 ob_start();
+
+	//the require once here just to show the coupling between classes.
+	require_once(ViewPath.DS.'NavigationView.php');
+	require_once(ControllerPath.DS.'LoginController.php');
+	require_once(ControllerPath.DS.'UploadController.php');
+	require_once(ControllerPath.DS.'ContactController.php');
+	require_once(ModelPath.DS.'UserModel.php');
+	require_once(ViewPath.DS.'LoginView.php');
+	require_once(ViewPath.DS.'MemberView.php');
+	require_once(ModelPath.DS.'SessionModel.php');
+	require_once(ModelPath.DS.'User.php');
+	require_once(ViewPath.DS.'CookieStorage.php');
+	require_once(ViewPath.DS.'HomePageView.php');
+	require_once(ControllerPath.DS.'InterestController.php');
+	require_once(ControllerPath.DS.'ServiceController.php');
+	require_once(ViewPath.DS.'available.php');
+
+
+
 	class NavigationController {
 
 		private $available;
@@ -41,6 +60,7 @@ ob_start();
 				switch ($this->navigationView->getPage()) {
 				
 					case NavigationView::$Avaliable:
+					//If Admin presss log in , is Admin is logged in , or is Admin logged width cookies DO...
 					if ($this->loginView->UserPressLoginButton() && $this->controller->AuthenticateUser() === true && $this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&
 							 $this->sessionModel->IsLoggedIn() || $this->memberView->RememberMe() && substr($this->memberView->GetCookiePassword(), -1) == 1)  {
 
@@ -50,7 +70,6 @@ ob_start();
 
 					     if ($this->memberView->UserPressLogoutButton()) {
 					     	 
-					     	//die($this->available->renderAllPics());
 							 header('Location: ?page=Avaliable');
 
 						 }
