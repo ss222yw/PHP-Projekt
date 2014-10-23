@@ -59,7 +59,6 @@
 			'<br>'.
 			'<form class="form-horizontal" enctype="multipart/form-data" method="post" action="">' .
 					'<h3>Login - Skriv in användarnamn och lösenord</h3>' .
-				'<div class="navbar navbar-default">'.
 					$responseMessages .
 					'<div class="form-group">'.
 					'<div class="col-xs-8">'.
@@ -79,7 +78,6 @@
 					'<br>'.
 					'<br>'.
 					'<a href="?registrera" name="registrera">Registrera dig</a>'.
-					'</div>'.
 			'</form>';
 
 			$_SESSION['LoginValues']['username'] = "";

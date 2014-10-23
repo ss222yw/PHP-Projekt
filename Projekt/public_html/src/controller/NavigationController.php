@@ -35,6 +35,7 @@ ob_start();
 		private $loginView;
 
 
+
 		public function __construct() {
 
 			$this->navigationView = new NavigationView();
@@ -58,7 +59,8 @@ ob_start();
 					 
 					
 				switch ($this->navigationView->getPage()) {
-				
+					
+
 					case NavigationView::$Avaliable:
 					//If Admin presss log in , is Admin is logged in , or is Admin logged width cookies DO...
 					if ($this->loginView->UserPressLoginButton() && $this->controller->AuthenticateUser() === true && $this->AdminID == 1 || $this->sessionModel->IsAdminLoggedIn() &&

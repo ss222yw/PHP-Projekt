@@ -36,7 +36,7 @@ class RegView{
 			$RegHTML =
 
 					'<h2>Registrera ny användare</h2> '.
-					'<form  class="form-horizontal" enctype="multipart/form-data" method="post" action="?Registrera">' .
+					'<form  class="form-horizontal" enctype="multipart/form-data" method="post" action="?page=Registrera">' .
 					$responseMessages .
 					'<div class="form-group">'.
 					'<div class="col-xs-4">'.
