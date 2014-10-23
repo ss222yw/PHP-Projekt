@@ -10,35 +10,35 @@
 	//static messages for validation.
 
 	//Messages for log in system.
-	private static $loginErrorMessage = "Felaktigt användarnamn och/eller lösenord.<br>";
-	private static $emptyUsernameErrorMessage = "Användarnamn saknas.<br>";
-	private static $emptyPasswordErrorMessage = "Lösenord saknas.<br>";	
-	private static $emptyUernameAndPassword = "Användarnamn & Lösenord saknas!<br>";
+	private static $loginErrorMessage = "<p class='text-danger'>Felaktigt användarnamn och/eller lösenord.</p><br>";
+	private static $emptyUsernameErrorMessage = "<p class='text-danger'>Användarnamn saknas.</p><br>";
+	private static $emptyPasswordErrorMessage = "<p class='text-danger'>Lösenord saknas.</p><br>";	
+	private static $emptyUernameAndPassword = "<p class='text-danger'>Användarnamn & Lösenord saknas!</p><br>";
 
 	//Messages for Reg system.
-	private static $ErrorUserNameMessage = "Användarnamnet har för få tecken. Minst 3 tecken<br>";
-	private static $ErrorPasswordMessage = "Lösenorden har för få tecken. Minst 6 tecken<br>";
-	private static $ErrorDiffrentPasswordMessage = "Lösenorden matchar inte<br>";
-	private static $ErrorHasTagsUsernameMessage = "Användarnamnet innehåller ogiltiga tecken<br>";
-	private static $ErrorUserHasToken = "Användarnamnet är upptaget!<br>";
-	private static $ErrorPasswordAndUserNameMessage = "Användarnamnet har för få tecken. Minst 3 tecken <br> Lösenorden har för få tecken. Minst 6 tecken<br>";
+	private static $ErrorUserNameMessage = "<p class='text-danger'>Användarnamnet har för få tecken. Minst 3 tecken</p><br>";
+	private static $ErrorPasswordMessage = "<p class='text-danger'>Lösenorden har för få tecken. Minst 6 tecken</p><br>";
+	private static $ErrorDiffrentPasswordMessage = "<p class='text-danger'>Lösenorden matchar inte</p><br>";
+	private static $ErrorHasTagsUsernameMessage = "<p class='text-danger'>Användarnamnet innehåller ogiltiga tecken</p><br>";
+	private static $ErrorUserHasToken = "<p class='text-warning'>Användarnamnet är upptaget!</p><br>";
+	private static $ErrorPasswordAndUserNameMessage = "<p class='text-danger'>Användarnamnet har för få tecken. Minst 3 tecken <br> Lösenorden har för få tecken. Minst 6 tecken</p><br>";
 
 	//Messages for upload function.
-	private static $ErrorUPLOAD_ERR_FORM_SIZE = "Filen är för stort!!<br>";
-	private static $ErrorUPLOAD_ERR_NO_FILE = "Välj en bild först sen tryck ladda upp!!!<br><br>";
-	private static $ErrorUPLOAD_ERR_NO_TMP_DIR = "Som fel har inträffat<br>";
+	private static $ErrorUPLOAD_ERR_FORM_SIZE = "<p class='bg-danger'>Filen är för stort!!</p><br>";
+	private static $ErrorUPLOAD_ERR_NO_FILE = "<p class='bg-danger'>Välj en bild först sen tryck ladda upp!!!</p><br><br>";
+	private static $ErrorUPLOAD_ERR_NO_TMP_DIR = "<p class='bg-danger'>Som fel har inträffat</p><br>";
 
 	//Message for Contact function.
-	private static $ErrorNameMessage = "Namnet var fel formlerat!<br>";
-	private static $ErrorEmailMessage = "Eposten var fel formlerat!<br>";
-	private static $ErrorEmptyMessage = "Du kan inte skicka en tom meddelande!<br>";
-	private static $ErrorEmptyName = "Namnet måste anges!<br>";
-	private static $ErrorEmptyEmail = "Eposten måste anges!<br>";
-	private static $ERRORInput = "Namnet måste anges!<br> Eposten måste anges! <br> Meddelandet kan inte vara tom!<br>";
-	private static $ErrorMiniName ="Namet kan inte vara mindre än 3 tecken!<br>";
-	private static $ErrorMiniMsg = "Meddelandet kan inte vara mindre än tre tecken!<br>";
-	private static $ErrorTel = "Telefon Nummer består av siffror!Ingen bokstav tilllåtet.<br>";
-	private static $ErrorAprtNr = "Lägenhetens nummer består av siffror!Ingen bokstav tilllåtet.<br>";
+	private static $ErrorNameMessage = "<p class='bg-danger'>Namnet var fel formlerat!</p><br>";
+	private static $ErrorEmailMessage = "<p class='bg-danger'>Eposten var fel formlerat!</p><br>";
+	private static $ErrorEmptyMessage = "<p class='bg-danger'>Du kan inte skicka en tom meddelande!</p><br>";
+	private static $ErrorEmptyName = "<p class='bg-danger'>Namnet måste anges!</p><br>";
+	private static $ErrorEmptyEmail = "<p class='bg-danger'>Eposten måste anges!</p><br>";
+	private static $ERRORInput = "<p class='bg-danger'>Namnet måste anges!<br> Eposten måste anges! <br> Meddelandet kan inte vara tom!</p><br>";
+	private static $ErrorMiniName ="<p class='bg-danger'>Namet kan inte vara mindre än 3 tecken!</p><br>";
+	private static $ErrorMiniMsg = "<p class='bg-danger'>Meddelandet kan inte vara mindre än tre tecken!</p><br>";
+	private static $ErrorTel = "<p class='bg-danger'>Telefon Nummer består av siffror!Ingen bokstav tilllåtet.</p><br>";
+	private static $ErrorAprtNr = "<p class='bg-danger'>Lägenhetens nummer består av siffror!Ingen bokstav tilllåtet.</p><br>";
 
 	//Regex validation.
 	private $emailExp;

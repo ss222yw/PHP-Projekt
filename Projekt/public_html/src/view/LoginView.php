@@ -3,9 +3,9 @@
 	require_once(HelperPath.DS.'HTMLView.php');
 
 	class LoginView {
-		private static $newUserSuccessMsg = 'Registrering av ny användare lyckades.<br>';
-		private static $logOutSuccessMessage = "Du är nu utloggad.<br>";
-		private static $corruptCookieLogoutMessage = "Fel information i cookie.<br>";
+		private static $newUserSuccessMsg = '<p class="text-success">Registrering av ny användare lyckades.</p><br>';
+		private static $logOutSuccessMessage = "<p class='text-success'>Du är nu utloggad.</p><br>";
+		private static $corruptCookieLogoutMessage = "<p class='text-danger'>Fel information i cookie.</p><br>";
 		private $mainView;
 		private $regView;
 		private $safe;
@@ -44,24 +44,27 @@
 
 			$loginHTML = 
 			'<br>'.
-			'<form id="login" enctype="multipart/form-data" method="post" action="">' .
-				'<fieldset class="login">' .
+			'<form id="upload" class="form-horizontal" enctype="multipart/form-data" method="post" action="">' .
 					'<legend>Login - Skriv in användarnamn och lösenord</legend>' .
 					$responseMessages .
-					'<label for="username">Användarnamn : </label>' .
-					'<input type="text" name="username" placeholder="Användarnamn" value="' . $this->GetUsername() . '" maxlength="30" id="username" /> ' .
-					'<br>'.
-					'<label for="password">Lösenord : </label>' .
-					'<input type="password" name="password" placeholder="Lösenord" maxlength="30" id="password" /> ' .
-					'<br>'.
-					'<br>'.
+					'<div class="form-group">'.
+					'<div class="col-xs-8">'.
+					'<label for="username">Användarnamn: </label>' .
+					'<input type="text" name="username" class="form-control" placeholder="Användarnamn" value="' . $this->GetUsername() . '" maxlength="30" id="username" /> ' .
+					'</div>'.
+					'</div>'.
+					'<div class="form-group">'.
+					'<div class="col-xs-8" >'.
+					'<label for="password">Lösenord: </label>' .
+					'<input type="password" name="password" class="form-control" placeholder="Lösenord" maxlength="30" id="password" /> ' .
+					'</div>'.
+					'</div>'.
 					'<label for="rememberMe">Håll mig inloggad :</label>'.
 					'<input id="rememberMe" type="checkbox" name="rememberMe">'.
-					'<input type="submit" name="submit" id="submit" value="Logga in" />'.
+		 			'<input type="submit" name="submit" id="submit" value="Logga in" class="btn btn-primary " />'.
 					'<br>'.
 					'<br>'.
 					'<a href="?registrera" name="registrera">Registrera dig</a>'.
-				'</fieldset>'.
 			'</form>';
 
 			$_SESSION['LoginValues']['username'] = "";

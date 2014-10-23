@@ -36,9 +36,9 @@ class available{
 			$responseMessages .= '<strong>' . $msg . '</strong>';
 		}
 
-		   $MsgSuccesUpload = $this->cookieStorage->GetMessageCookie();
-		   echo '<strong>' .$MsgSuccesUpload . '</strong>';
-		   $this->cookieStorage->DeleteMessageCookie();	
+		$MsgSuccesUpload = $this->cookieStorage->GetMessageCookie();
+		echo '<strong>' .$MsgSuccesUpload . '</strong>';
+	    $this->cookieStorage->DeleteMessageCookie();	
  
 		$Images = glob("src/view/Images/*.*");
 		$pics = "<a href='?".self::$page."=".self::$upload."'>Ladda upp bilder</a>&nbsp;";
@@ -51,7 +51,7 @@ class available{
 				$SoSoon .="Finns ingen beskrivning i nu läge...<br> TRYCK redigera! för att kunna lägga till beskrivningen ";
 			}
 
-			$pics .= '<img src="'.$value.'" id="ImgSize">';
+			$pics .= '<img src="'.$value.'" id="ImgSize" class="img-responsive">';
 			$pics .= '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
 			'<br>'.
 			'<strong>Bildbeskrivning</strong>'.
@@ -62,8 +62,8 @@ class available{
 			'<br>'.
 			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImgID.'" value="'.basename($value).'">'.
-			'<input type="submit" name="'.$this->del.'" value="Ta bort">&nbsp;'.
-			'<input type="submit" name="'.$this->EditInfo.'" value="Redigera">'.
+			'<input type="submit" name="'.$this->del.'" value="Ta bort" class="btn btn-danger">&nbsp;'.
+			'<input type="submit" name="'.$this->EditInfo.'" value="Redigera" class="btn btn-warning">'.
 			'</form>';
 			
 			}
@@ -86,7 +86,7 @@ class available{
 			if($img->GetMSG() == "") {
 				$SoSoon .="Finns ingen beskrivning i nu läge...";
 			}
-			$pic .= '<img src="'.$value.'" id="ImgSize">'.
+			$pic .= '<img src="'.$value.'" id="ImgSize" class="img-responsive">'.
 			'<br>'.
 			'<br>'.
 			'<strong>Bildbeskrivning</strong>'.
@@ -118,8 +118,8 @@ class available{
 			'<br>'.
 			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImg.'" value="'.$_SESSION[$this->session].'">'.
-			'<input type="submit" name="'.$this->yesDel.'" value="Ja!Ta bort">&nbsp;&nbsp;'.
-			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt">'.
+			'<input type="submit" name="'.$this->yesDel.'" value="Ja!Ta bort" class="btn btn-danger">&nbsp;&nbsp;'.
+			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt" class="btn btn-success">'.
 			'</fieldset>'.
 			'</form>';
 		
@@ -138,8 +138,8 @@ class available{
 			'<br>'.
 			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImgEdit.'" value="'.$img->getImgName().'">'.
-			'<input type="submit" name="'.$this->SaveEdit.'" value="Spara">&nbsp;&nbsp;'.
-			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt">'.
+			'<input type="submit" name="'.$this->SaveEdit.'" value="Spara" class="btn btn-success">&nbsp;&nbsp;'.
+			'<input type="submit" name="'.$this->NoDel.'" value ="Avbryt" class="btn btn-default">'.
 			'</fieldset>'.
 			'</form>';
 		

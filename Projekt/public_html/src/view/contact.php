@@ -35,21 +35,31 @@
 			echo '<h3>'.$responseMessages.'</h3>';
 
 			$contactUs =
-			'<form id="contact"  method="post" action="">'.
-			'<fieldset class="contact">' .
-			'<legend><h3>Var vänlig och kontakta oss</h3></legend>' .
+			'<h2>Var vänlig och kontakta oss</h2>'.
+			'<form class="form-horizontal"  method="post" action="">'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 			'<label><strong>Ditt namn</strong> : </label>'.
-			'<input type="text" name="'.$this->name.'" maxlength="30" value="'.$this->GetName.'" placeholder="Namnet krävs">' .
-			'<br>'.
+			'<input type="text" name="'.$this->name.'" maxlength="30" value="'.$this->GetName.'"  class="form-control" placeholder="Namnet krävs">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4" >'.
 			'<label><strong>Din epost</strong> : </label>'.
-			'<input type="text" name="'.$this->email.'" maxlength="50"placeholder="Epost krävs" value="'.$this->GetEmail.'">' .
-			'<br>'.
+			'<input type="email" name="'.$this->email.'" maxlength="50" class="form-control" placeholder="Epost krävs" value="'.$this->GetEmail.'">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 		 	'<label><strong>Ditt meddelande</strong> : </label>'.
-			'<br>'.
-			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Skriv ditt meddelande här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
-			'<br>'.
-			'<br>'.
-			'<input type="submit" name="'.$this->send.'" value="Skicka">'.
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
+			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" class="form-control" placeholder="Skriv ditt meddelande här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
+			'</div>'.
+			'</div>'.
+			'<input type="submit" name="'.$this->send.'" value="Skicka" class="btn btn-default">'.
 			'</fieldset>'.
 			'</form>';
 			return $contactUs;

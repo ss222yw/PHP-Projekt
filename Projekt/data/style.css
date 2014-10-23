@@ -1,53 +1,24 @@
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <style type="text/css">
 
-  input[type="text"] {
-    display: block;
-    margin: 0;
-    width: 50%;
-    font-family: sans-serif;
-    font-size: 15px;
-    appearance: none;
-    box-shadow: none;
-    border-radius: none;
-  }
 
-  input[type="password"] {
-    display: block;
-    margin: 0;
-    width: 50%;
-    font-family: sans-serif;
-    font-size: 15px;
-    appearance: none;
-    box-shadow: none;
-    border-radius: none;
-  }
 
-  #login fieldset {
-    width: 24%;
-    float: right;
+  form#upload {
+      float: right;
     margin-top: -180px;
+    background-color: #C5E4FF;
   }
    #memberView fieldset {
     width: 24%;
     float: right;
     margin-top: -170px;
-    background-color: rgb(188, 228, 149);
+    background-color: #C5E4FF;
   }
 
 
-  #upload fieldset {
-   width: 25%;
-  }
 
- 
-  #contact fieldset {
-    width: 50%;
-  }
 
-  #interest fieldset {
-    width: 50%;
-  }
+
 
   #hh {
     width: 25%;
@@ -68,11 +39,12 @@
 
    .fadein img {
    position:absolute;
-    left: 4%;
+    left: 1%;
   }
 
   fieldset.Edit {
   width: 26%;
+  background-color: whitesmoke;
   }
 
   fieldset.delete {
@@ -90,3 +62,5 @@
     setInterval(function(){$('.fadein :first-child').fadeOut().next('img').fadeIn().end().appendTo('.fadein');}, 3500);
     });
   </script>
+
+

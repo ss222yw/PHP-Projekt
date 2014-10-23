@@ -119,7 +119,10 @@ ob_start();
 					}
 					else {
 						$this->controller->RunLoginLogic();
-						echo "logga in först för att kunna skicka en intressanmäla!<br><br>";
+						echo '<div class="alert alert-danger alert-dismissible" role="alert">
+  							  <button type="button" class="close" data-dismiss="alert">
+  							  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  							  <strong>Logga in</strong> först för att kunna skicka intressanmälan!</div><br><br>';
 					}
 						break;
 					case NavigationView::$service:
@@ -134,7 +137,10 @@ ob_start();
 					}
 					else {
 						$this->controller->RunLoginLogic();
-						echo "logga in först för att kunna skicka anmälan!<br><br>";
+						echo '<div class="alert alert-danger alert-dismissible" role="alert">
+  							  <button type="button" class="close" data-dismiss="alert">
+  							  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  							  <strong>Logga in</strong> först för att kunna skicka anmälan!</div><br><br>';
 					}
 						break;			
 

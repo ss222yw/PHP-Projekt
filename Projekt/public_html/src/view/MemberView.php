@@ -8,8 +8,8 @@
 		private $mainView;
 		private $sessionModel;
 		private $safeID;
-		private static $defaultLoginSuccessMessage = "Inloggning lyckades.<br>";
-		private static $autoLoginSuccessMessage = "Inloggning lyckades och vi kommer ihåg dig nästa gång.<br>";
+		private static $defaultLoginSuccessMessage = "<p class='text-success'>Inloggning lyckades.</p><br>";
+		private static $autoLoginSuccessMessage = "<p class='text-success'>Inloggning lyckades och vi kommer ihåg dig nästa gång.</p><br>";
 		private static $cookieLoginSuccessMessage = "";
 		private static $cookieUsernameErrMsg = 'CookieUsername does not exist!';
 		private static $cookiePasswordErrMsg = 'CookiePassword does not exist!';
@@ -48,7 +48,7 @@
 							$successMessage .
 						
 						//'<a href="?logout">Logga ut<a/>'.
-						'<input type="submit" name="logout" id="submit" value="Logga ut" />'.
+						'<input type="submit" name="logout" id="submit" value="Logga ut" class="btn btn-primary"/>'.
 						'</fieldset>'.
 							'</div>'.
 							'</form>';

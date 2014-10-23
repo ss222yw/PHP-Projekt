@@ -34,22 +34,31 @@
 	 		echo '<h3>'.$responseMessages.'</h3>';
 
 			$Interest =
-			'<form id="interest" enctype="multipart/form-data" method="post" action="">'.
-			'<fieldset class="interest">' .
-			'<legend><h3>Sökande</h3></legend>' .
+			'<h2>Sökande</h2>'.
+			'<form class="form-horizontal" enctype="multipart/form-data" method="post" action="">'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 			'<label>Ditt namn : </label>'.
-			'<input type="text" name="'.$this->name.'" value="'.$this->GetName.'" maxlength="30" placeholder="Namnet krävs">' .
-			'<br>'.
+			'<input type="text" name="'.$this->name.'" value="'.$this->GetName.'" maxlength="30" class="form-control" placeholder="Namnet krävs">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4" >'.
 			'<label>Din epost : </label>'.
-			'<input type="text" name="'.$this->email.'" maxlength="50" placeholder="epost krävs" value="'.$this->GetEmail.'">' .
-			'<br>'.
+			'<input type="email" name="'.$this->email.'" maxlength="50"  class="form-control" placeholder="epost krävs" value="'.$this->GetEmail.'">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 			'<label>Önskemål & Inflyttningsdatum : </label>'.
-			'<br>'.
-			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv din önskemål här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
-			'<br>'.
-			'<br>'.
-			'<input type="submit" name= "'.$this->send.'" value="Skicka intresseanmälan">'.
-			'</fieldset>'.
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
+			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" class="form-control" placeholder="Beskriv din önskemål här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
+			'</div>'.
+			'</div>'.
+			'<input type="submit" name= "'.$this->send.'" value="Skicka intresseanmälan" class="btn btn-default">'.
 			'</form>';
 			return $Interest;
 		}

@@ -41,27 +41,39 @@
 			echo '<h3>'.$responseMessages.'</h3>';
 
 			$service =
-			'<form id="interest" enctype="multipart/form-data" method="post" action="">'.
-			'<fieldset class="contact">' .
-			'<legend><h3>Felanmäla</h3></legend>' .
+			'<h2>Felanmälan</h2>'.
+			'<form class="form-horizontal" role="form" enctype="multipart/form-data" method="post" action="">'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 			'<label>Ditt namn : </label>'.
-			'<input type="text" name="'.$this->name.'" maxlength="30" placeholder="Namnet krävs" value="'.$this->GetName.'">' .
-			'<br>'.
+			'<input type="text" name="'.$this->name.'" maxlength="30" class="form-control" placeholder="Namnet krävs" value="'.$this->GetName.'">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4" >'.
 			'<label>Lgh Nr : </label>'.
-			'<input type="text" name="'.$this->aprtM.'" maxlength="10" placeholder="Frivilligt" value="'.$this->GetApartNr.'">' .
-			'<br>'.
+			'<input type="text" name="'.$this->aprtM.'" maxlength="10" class="form-control" placeholder="Frivilligt" value="'.$this->GetApartNr.'">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 			'<label>Din epost : </label>'.
-			'<input type="text" name="'.$this->email.'" maxlength="50" placeholder="Epost krävs" value="'.$this->GetEmail.'">' .
-			'<br>'.
+			'<input type="email" name="'.$this->email.'" maxlength="50" class="form-control" placeholder="Epost krävs" value="'.$this->GetEmail.'">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 			'<label>Telefon : </label>'.
-			'<input type="text" name="'.$this->tel.'" maxlength="30" placeholder="Frivilligt" value="'.$this->GetTel.'">' .
-			'<br>'.
+			'<input type="tel" name="'.$this->tel.'" maxlength="30" class="form-control"  placeholder="Frivilligt" value="'.$this->GetTel.'">' .
+			'</div>'.
+			'</div>'.
+			'<div class="form-group">'.
+			'<div class="col-xs-4">'.
 			'<label>Ditt anmäla : </label>'.
-			'<br>'.
-			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" placeholder="Beskriv ditt felanmäla här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
-			'<br>'.
-			'<input type="submit" name="'.$this->send.'" value="Skicka felanmäla">'.
-			'</fieldset>'.
+			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" class="form-control" rows="5" placeholder="Beskriv ditt felanmäla här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
+			'</div>'.
+			'</div>'.
+			'<input type="submit" name="'.$this->send.'" value="Skicka felanmäla" class="btn btn-default">'.
 			'</form>';
 			return $service;
 		}

@@ -16,8 +16,8 @@
 	    private $imagesModel;
 	    private $cookieStorage;
 
-		private static $UPLOADEDSUCCESSED = "Bilden har laddats upp!<br><br>";
-		private static $ErrorUPLOAD_ERR_TYPE = "Bilden måste vara av typen gif,jepg,jpg eller png!<br><br>";	
+		private static $UPLOADEDSUCCESSED = "<p class='bg-success col-sm-4'>Bilden har laddats upp!</p><br><br>";
+		private static $ErrorUPLOAD_ERR_TYPE = "<p class='bg-warning col-sm-4'>Bilden måste vara av typen gif,jepg,jpg eller png!</p><br><br>";	
 
 
 		public function __construct() {
@@ -100,7 +100,7 @@
 						$PicName =basename($value);
 						$this->imagesModel->removeImages($PicName);
 						unlink($value);
-						echo "<strong> $PicName togs bort.</strong><br><br>";
+						echo "<p class='bg-success col-sm-4'><strong> $PicName togs bort.</strong></p><br><br>";
 					}
 				}
 			}
@@ -129,7 +129,7 @@
 						if($this->GetSaveds()) {
 								$images = new Images($this->getHiddenImgEdit(),$this->GetImageComments());
 							  	$this->imagesModel->EditImagesInformation($images);
-							  	echo "<strong>Uppdatering av ".$this->getHiddenImgEdit(). "  har sparat!</strong><br><br>";
+							  	echo "<p class='bg-success col-sm-4'><strong>Uppdatering av ".$this->getHiddenImgEdit(). "  har sparat!</p></strong><br><br>";
 						}
 					}
 				}

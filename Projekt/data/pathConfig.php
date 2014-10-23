@@ -19,7 +19,9 @@
 	// require database model (helper)
 	require_once(HelperPath.DS.'HTMLView.php');
 	require_once(HelperPath.DS.'Database.php');
-	require_once(HelperPath.DS.'style.css');
+	 require_once(HelperPath.DS.'style.css');
+
+
 	require_once(HelperPath.DS.'safe.php');
 	require_once(HelperPath.DS.'setting.php');
 	

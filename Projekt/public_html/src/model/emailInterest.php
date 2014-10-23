@@ -4,7 +4,7 @@
 
 		private static $to = "ss222yw@student.lnu.se";
 		private static $subj = "Intressanmäla";
-		private static $succesMessageMail = "Vi har tagit emot ditt intressanmäla , hör av oss så fort dyker upp en som matchar din önskemål. Tack!<br><br>";
+		private static $succesMessageMail = "<p class='bg-success'>Vi har tagit emot ditt intressanmäla , hör av oss så fort dyker upp en som matchar din önskemål. Tack!</p><br><br>";
 
 
 		public function __construct() {
