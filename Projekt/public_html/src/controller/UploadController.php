@@ -16,8 +16,16 @@
 	    private $imagesModel;
 	    private $cookieStorage;
 
-		private static $UPLOADEDSUCCESSED = "<p class='bg-success col-sm-4'>Bilden har laddats upp!</p><br><br>";
-		private static $ErrorUPLOAD_ERR_TYPE = "<p class='bg-warning col-sm-4'>Bilden måste vara av typen gif,jepg,jpg eller png!</p><br><br>";	
+		private static $UPLOADEDSUCCESSED = '<div class="alert alert-success alert-dismissible" role="alert">
+  							 				 <button type="button" class="close" data-dismiss="alert">
+  											 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  										     <strong>Bilden har laddats upp!</strong></div><br><br>';
+
+		private static $ErrorUPLOAD_ERR_TYPE = '<div class="alert alert-success alert-dismissible" role="alert">
+  							 				    <button type="button" class="close" data-dismiss="alert">
+  											    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  										        <strong>Bilden måste vara av typen gif,jepg,jpg eller png!</strong></div><br><br>';
+
 
 
 		public function __construct() {
@@ -100,7 +108,11 @@
 						$PicName =basename($value);
 						$this->imagesModel->removeImages($PicName);
 						unlink($value);
-						echo "<p class='bg-success col-sm-4'><strong> $PicName togs bort.</strong></p><br><br>";
+						echo '<div class="alert alert-success alert-dismissible" role="alert">
+  							 				    <button type="button" class="close" data-dismiss="alert">
+  											    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  										        <strong> $PicName togs bort.</strong></div><br><br>';
+
 					}
 				}
 			}
@@ -129,7 +141,11 @@
 						if($this->GetSaveds()) {
 								$images = new Images($this->getHiddenImgEdit(),$this->GetImageComments());
 							  	$this->imagesModel->EditImagesInformation($images);
-							  	echo "<p class='bg-success col-sm-4'><strong>Uppdatering av ".$this->getHiddenImgEdit(). "  har sparat!</p></strong><br><br>";
+							  	echo '<div class="alert alert-success alert-dismissible" role="alert">
+  							 				    <button type="button" class="close" data-dismiss="alert">
+  											    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  										        <strong> Uppdatering av '.$this->getHiddenImgEdit(). '  har sparat!</strong></div><br><br>';
+
 						}
 					}
 				}
@@ -181,14 +197,13 @@
 							 if ($imgToUpload) {
 								$images = new Images($_FILES[$this->fileName]['name'],$this->GetComment());
 							 	$this->imagesModel->addImages($images);
+							 	
 							 	//change filem mode, 0755 read and execute.
 							 	chmod($this->imgRoot.$_FILES[$this->fileName]['name'], 0755);
 							  	imagedestroy($imgCreateFromJ);
 						      	imagedestroy($ImgCreateColor);
 						      	$this->cookieStorage->SaveMessageCookie(self::$UPLOADEDSUCCESSED);
 						      	header('Location: ?page=Avaliable');
-					 			//$this->available->renderAllPicsForUsers();
-							 	//return $this->available->DisplayAllImages(self::$UPLOADEDSUCCESSED);
 							 	}	
 						}
 					}

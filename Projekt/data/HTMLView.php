@@ -18,8 +18,10 @@
 								<link rel="stylesheet" href="../data/css/bootstrap-theme.min.css">
 							</head>
 							<body>'.
+							'<div class="navbar navbar-default">'.
 							'<div class="container-fluid">'.
 								$body .
+								 '</div>'.
 								'</div>'.
 								'<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>'.
 							'</body>

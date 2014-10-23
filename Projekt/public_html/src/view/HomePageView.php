@@ -17,7 +17,12 @@
 			$htmlHomePage = "<h2>Välkommen till HH fastigheter , här är våran ledigt.</h2>";
 			$htmlHomePage .= '<div class="fadein">';
 			foreach ($Images as $value) {
-				 $htmlHomePage .= '<img src="'.$value.'" id="ImgSize" class="img-responsive" >';
+				if($value != "") {
+					 $htmlHomePage .= '<img src="'.$value.'" id="ImgSize" class="img-responsive" >';
+				}
+				else {
+						$htmlHomePage .= '<img src="Bild-Saknas.jpg" id="ImgSize" class="img-responsive" >';
+				}
 			}
 			$htmlHomePage .= '</div>';
 			return $htmlHomePage;

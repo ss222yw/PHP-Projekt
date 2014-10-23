@@ -114,7 +114,7 @@ class available{
 	public function areYouSure() {
 			$remove = '<form id="delete" enctype="multipart/form-data" method="post" action="">'.
 			'<fieldset class="delete">'.
-			'<strong>Vill du verkligen ta bort '.$_SESSION[$this->session].' med beskrivningen ?</strong>'.
+			'<div class="alert alert-danger role="alert"><strong>Vill du verkligen ta bort '.$_SESSION[$this->session].' med beskrivningen ?</strong></div>'.
 			'<br>'.
 			'<br>'.
 			'<input type="hidden" name="'.$this->hiddenImg.'" value="'.$_SESSION[$this->session].'">'.

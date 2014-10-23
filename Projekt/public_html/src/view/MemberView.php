@@ -8,8 +8,16 @@
 		private $mainView;
 		private $sessionModel;
 		private $safeID;
-		private static $defaultLoginSuccessMessage = "<p class='text-success'>Inloggning lyckades.</p><br>";
-		private static $autoLoginSuccessMessage = "<p class='text-success'>Inloggning lyckades och vi kommer ihåg dig nästa gång.</p><br>";
+		private static $defaultLoginSuccessMessage = '<div class="alert alert-success alert-dismissible" role="alert">
+  							 						 <button type="button" class="close" data-dismiss="alert">
+  									      		     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  									       		     <strong>Inloggning lyckades</strong></div><br><br>';
+
+		private static $autoLoginSuccessMessage = '<div class="alert alert-success alert-dismissible" role="alert">
+  							 				      <button type="button" class="close" data-dismiss="alert">
+  									              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  									              <strong>Inloggning lyckades och vi kommer ihåg dig nästa gång.</strong></div><br><br>';
+   
 		private static $cookieLoginSuccessMessage = "";
 		private static $cookieUsernameErrMsg = 'CookieUsername does not exist!';
 		private static $cookiePasswordErrMsg = 'CookiePassword does not exist!';
@@ -47,7 +55,6 @@
 							'<h2>' . $username . ' är inloggad.</h2>' .
 							$successMessage .
 						
-						//'<a href="?logout">Logga ut<a/>'.
 						'<input type="submit" name="logout" id="submit" value="Logga ut" class="btn btn-primary"/>'.
 						'</fieldset>'.
 							'</div>'.

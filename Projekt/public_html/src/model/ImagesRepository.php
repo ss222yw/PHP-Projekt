@@ -18,7 +18,6 @@
 
  		public function AddPics(Images $img) {
  			try {	
- 					//$f = new ImagesRepository();
  					$db = $this->connectionToDataBase();
  					$sql = "INSERT INTO $this->tabel (".self::$imgName. ", " .self::$Comment. ")VALUES(?,?)";
  					$params = array($img->getImgName(),$img->GetMSG());

@@ -29,7 +29,7 @@
 
 
 		public function showMenu() {	
-				$html = '<nav class="navbar navbar-default" role="navigation">';
+				$html = '<nav class="navbar navbar-inverse" role="navigation">';
 				$html .='<div class="navbar-header">
      					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       				     <span class="sr-only">Toggle navigation</span>

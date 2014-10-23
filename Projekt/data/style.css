@@ -2,24 +2,6 @@
   <style type="text/css">
 
 
-
-  form#upload {
-      float: right;
-    margin-top: -180px;
-    background-color: #C5E4FF;
-  }
-   #memberView fieldset {
-    width: 24%;
-    float: right;
-    margin-top: -170px;
-    background-color: #C5E4FF;
-  }
-
-
-
-
-
-
   #hh {
     width: 25%;
     height: 25%;
@@ -42,16 +24,7 @@
     left: 1%;
   }
 
-  fieldset.Edit {
-  width: 26%;
-  background-color: whitesmoke;
-  }
-
-  fieldset.delete {
-    width: 40%;
-    background-color: rgb(102, 33, 33);
-    color: azure;
-  }
+ 
   </style>
 
 

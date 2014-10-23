@@ -3,9 +3,22 @@
 	require_once(HelperPath.DS.'HTMLView.php');
 
 	class LoginView {
-		private static $newUserSuccessMsg = '<p class="text-success">Registrering av ny användare lyckades.</p><br>';
-		private static $logOutSuccessMessage = "<p class='text-success'>Du är nu utloggad.</p><br>";
-		private static $corruptCookieLogoutMessage = "<p class='text-danger'>Fel information i cookie.</p><br>";
+		private static $newUserSuccessMsg = '<div class="alert alert-success alert-dismissible" role="alert">
+  							 				 <button type="button" class="close" data-dismiss="alert">
+  									         <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  									         <strong>Registrering av ny användare lyckades.</strong></div><br><br>';
+
+		private static $logOutSuccessMessage = '<div class="alert alert-success alert-dismissible" role="alert">
+  							 				    <button type="button" class="close" data-dismiss="alert">
+  											    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  										        <strong>Du är nu utloggad.</strong></div><br><br>';
+
+		private static $corruptCookieLogoutMessage = '<div class="alert alert-danger alert-dismissible" role="alert">
+  							 				          <button type="button" class="close" data-dismiss="alert">
+  											          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  										              <strong>Fel information i cookie.</strong></div><br><br>';
+
+
 		private $mainView;
 		private $regView;
 		private $safe;
@@ -44,8 +57,9 @@
 
 			$loginHTML = 
 			'<br>'.
-			'<form id="upload" class="form-horizontal" enctype="multipart/form-data" method="post" action="">' .
-					'<legend>Login - Skriv in användarnamn och lösenord</legend>' .
+			'<form class="form-horizontal" enctype="multipart/form-data" method="post" action="">' .
+					'<h3>Login - Skriv in användarnamn och lösenord</h3>' .
+				'<div class="navbar navbar-default">'.
 					$responseMessages .
 					'<div class="form-group">'.
 					'<div class="col-xs-8">'.
@@ -65,6 +79,7 @@
 					'<br>'.
 					'<br>'.
 					'<a href="?registrera" name="registrera">Registrera dig</a>'.
+					'</div>'.
 			'</form>';
 
 			$_SESSION['LoginValues']['username'] = "";
