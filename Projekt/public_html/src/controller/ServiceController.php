@@ -21,27 +21,27 @@
 		}
 
 		//Funcations for service form.
-		public function getServiceName() {
+		private function getServiceName() {
 			return $this->service->getName();
 		}
 
-		public function getServiceEmail() {
+		private function getServiceEmail() {
 			return $this->service->getEmail();
 		}
 
-		public function getServiceMsg() {
+		private function getServiceMsg() {
 			return $this->service->getMsg();
 		}
 
-		public function getServiceTel() {
+		private function getServiceTel() {
 			return $this->service->getTel();
 		}
 
-		public function getServiceAprtNr() {
+		private function getServiceAprtNr() {
 			return $this->service->getAprtNumber();
 		}
 
-		public function didPressSend() {
+		private function didPressSend() {
 			return $this->service->hasSubmitToService();
 		}
 

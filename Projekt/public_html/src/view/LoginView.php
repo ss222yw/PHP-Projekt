@@ -57,27 +57,16 @@
 
 			$loginHTML = 
 			'<br>'.
-			'<form class="form-horizontal" enctype="multipart/form-data" method="post" action="">' .
-					'<h3>Login - Skriv in användarnamn och lösenord</h3>' .
+			'<form id="upload" class="form-inline" enctype="multipart/form-data" method="post" action="">' .
 					$responseMessages .
-					'<div class="form-group">'.
-					'<div class="col-xs-8">'.
-					'<label for="username">Användarnamn: </label>' .
 					'<input type="text" name="username" class="form-control" placeholder="Användarnamn" value="' . $this->GetUsername() . '" maxlength="30" id="username" /> ' .
-					'</div>'.
-					'</div>'.
-					'<div class="form-group">'.
-					'<div class="col-xs-8" >'.
-					'<label for="password">Lösenord: </label>' .
 					'<input type="password" name="password" class="form-control" placeholder="Lösenord" maxlength="30" id="password" /> ' .
-					'</div>'.
-					'</div>'.
-					'<label for="rememberMe">Håll mig inloggad :</label>'.
-					'<input id="rememberMe" type="checkbox" name="rememberMe">'.
+					'<label for="rememberMe">Håll mig inloggad </label>&nbsp;&nbsp;'.
+					'<input id="rememberMe" type="checkbox" name="rememberMe">&nbsp;&nbsp;'.
 		 			'<input type="submit" name="submit" id="submit" value="Logga in" class="btn btn-primary " />'.
 					'<br>'.
 					'<br>'.
-					'<a href="?registrera" name="registrera">Registrera dig</a>'.
+					'&nbsp;&nbsp;&nbsp;&nbsp;Ingen konto? <a href="?registrera" name="registrera">Registrera dig här</a>'.
 			'</form>';
 
 			$_SESSION['LoginValues']['username'] = "";

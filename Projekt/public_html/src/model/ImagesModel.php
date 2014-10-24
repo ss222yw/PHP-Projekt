@@ -10,7 +10,6 @@
  		}
 
  		public function removeImages($img) {
-
  			$this->imagesRepository->delete($img);
 						 
  		}

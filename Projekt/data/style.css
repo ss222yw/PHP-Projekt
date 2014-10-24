@@ -2,10 +2,7 @@
   <style type="text/css">
 
 
-  #hh {
-    width: 25%;
-    height: 25%;
-  }
+  
 
   textarea {
     resize: none;
@@ -24,16 +21,23 @@
     left: 1%;
   }
 
- 
+  div#middel {
+    margin-top: 5%;
+  }
+
   </style>
-
-
-     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script>
   $(function(){
     $('.fadein img:gt(0)').hide();
     setInterval(function(){$('.fadein :first-child').fadeOut().next('img').fadeIn().end().appendTo('.fadein');}, 3500);
     });
   </script>
+
+
+
+
+
 
 

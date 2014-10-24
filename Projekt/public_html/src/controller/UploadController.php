@@ -19,12 +19,12 @@
 		private static $UPLOADEDSUCCESSED = '<div class="alert alert-success alert-dismissible" role="alert">
   							 				 <button type="button" class="close" data-dismiss="alert">
   											 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  										     <strong>Bilden har laddats upp!</strong></div><br><br>';
+  										     <strong>Bilden har laddats upp!</strong></div>';
 
-		private static $ErrorUPLOAD_ERR_TYPE = '<div class="alert alert-success alert-dismissible" role="alert">
+		private static $ErrorUPLOAD_ERR_TYPE = '<div class="alert alert-danger alert-dismissible" role="alert">
   							 				    <button type="button" class="close" data-dismiss="alert">
   											    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  										        <strong>Bilden måste vara av typen gif,jepg,jpg eller png!</strong></div><br><br>';
+  										        <strong>Bilden måste vara av typen gif,jepg,jpg eller png!</strong></div>';
 
 
 
@@ -41,51 +41,51 @@
 		}
 
 		//Get input and other stuff from upload view class.
-		public function DidHasSubmit() {
+		private function DidHasSubmit() {
 			return $this->uploadPage->hasSubmitToUpload();
 		}
 
-		public function getFileName() {
+		private function getFileName() {
 			 return $this->uploadPage->GetImgName();
 		}
 
-		public function GetComment() {
+		private function GetComment() {
 			return $this->uploadPage->getComments();
 		}
 
 
 
 		//Send image path to validation class.
-		public function getImgPath() {
+		private function getImgPath() {
 			$this->validation->getImgRoot($this->imgRoot);
 		}
 
 		// Get input and other stuff from available view class.
-		public function hasSubmitToDelImg() {
+		private function hasSubmitToDelImg() {
 			return $this->available->hasSubmitToDel();
 		}
 
-		public function hasSubmitToEdits() {
+		private function hasSubmitToEdits() {
 			return $this->available->hasSubmitToEdit();
 		}
 
-		public function getHiddenID() {
+		private function getHiddenID() {
 			return $this->available->getHiddenId();
 		}
 
-		public function getHiddenImg() {
+		private function getHiddenImg() {
 			return $this->available->getSessionHidden();
 		}
 
-		public function getConforimYes() {
+		private function getConforimYes() {
 			return $this->available->getYesDel();
 		}
 
-		public function getConforimNo() {
+		private function getConforimNo() {
 			return $this->available->getNoDel();
 		}
 
-		public function GetImageComments() {
+		private function GetImageComments() {
 			return $this->available->GetImageComment();
 		}
 
@@ -111,7 +111,7 @@
 						echo '<div class="alert alert-success alert-dismissible" role="alert">
   							 				    <button type="button" class="close" data-dismiss="alert">
   											    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  										        <strong> $PicName togs bort.</strong></div><br><br>';
+  										        <strong> '.$PicName.' togs bort.</strong></div>';
 
 					}
 				}
@@ -122,16 +122,16 @@
 			}		
 		}
 
-		public function GetSaveds() {
+		private function GetSaveds() {
 			return $this->available->GetSaved();
 		}
 
-		public function getHiddenImgEdit() {
+		private function getHiddenImgEdit() {
 			return $this->available->getSessionHiddenEdit();
 		}
 
 		//Edit comments
-		public function EditImagesInfo() {
+		private function EditImagesInfo() {
 			if ($this->hasSubmitToEdits()) {
 				$this->available->renderEditUploadedInformation();
 			}
@@ -144,7 +144,7 @@
 							  	echo '<div class="alert alert-success alert-dismissible" role="alert">
   							 				    <button type="button" class="close" data-dismiss="alert">
   											    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  										        <strong> Uppdatering av '.$this->getHiddenImgEdit(). '  har sparat!</strong></div><br><br>';
+  										        <strong> Uppdatering av '.$this->getHiddenImgEdit(). '  har sparat!</strong></div>';
 
 						}
 					}
@@ -170,6 +170,7 @@
 
 						if (file_exists($this->imgRoot.$_FILES[$this->fileName]['name'])) {
 
+							//Get image name and image extension to add a counter to the exists image.
 							$FileNameInfo = new SplFileInfo($_FILES[$this->fileName]['name']);
 							$extension = $FileNameInfo->getExtension();
 							$pointEx = substr(strrchr($_FILES[$this->fileName]['name'],"."), -4);
@@ -184,20 +185,28 @@
 						
 						
 						if ($_FILES[$this->fileName]['size'] < 5000000) {
+
 							//Resize images before uploaded to folder.
+
+							// Create a new image from file or URL.
 							$imgCreateFromJ = imagecreatefromjpeg($_FILES[$this->fileName]['tmp_name']);
+							// Get image width and height.
 							$imgWidth =	getimagesize($_FILES[$this->fileName]['tmp_name'])[0];
 							$imgHeigth = getimagesize($_FILES[$this->fileName]['tmp_name'])[1];
+
 							$newImgWidth = 400;
 							$newImgHeight = ($imgHeigth/$imgWidth) * $newImgWidth;
+							//Create a new true color image
 							$ImgCreateColor = imagecreatetruecolor($newImgWidth, $newImgHeight);
+							//Copy and resize part of an image with new image size.
 							imagecopyresampled($ImgCreateColor, $imgCreateFromJ, 0, 0, 0, 0, $newImgWidth, $newImgHeight, $imgWidth, $imgHeigth);
+							// creates a JPEG from uploaded image.
 							$imgToUpload = imagejpeg($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
 
 							 if ($imgToUpload) {
 								$images = new Images($_FILES[$this->fileName]['name'],$this->GetComment());
 							 	$this->imagesModel->addImages($images);
-							 	
+
 							 	//change filem mode, 0755 read and execute.
 							 	chmod($this->imgRoot.$_FILES[$this->fileName]['name'], 0755);
 							  	imagedestroy($imgCreateFromJ);

@@ -5,7 +5,6 @@
 
 	require_once("../data/pathConfig.php");
 	$navigationController = new NavigationController();
-	echo "<div class='navbar navbar-default'><div class='container-fluid'><h1>NybroHH fastigheter</h1></div></div>";
 	// Run Application
     $navigationController->doControll();
     

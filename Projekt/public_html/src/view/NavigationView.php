@@ -27,7 +27,7 @@
 		}
 
 
-
+		//Show menu
 		public function showMenu() {	
 				$html = '<nav class="navbar navbar-default" role="navigation">';
 				$html .='<div class="navbar-header">
@@ -48,11 +48,12 @@
 				$html .= "</ul>";
 				$html .= "</div>";
 				$html .="</nav>";
-			    $html .= "<a href='?".self::$page."=".self::$HomePage."'><img src='hhfastigheter.gif' class='img-thumbnail' id='hh'></a><br>";	
+			    $html .= "<a href='?".self::$page."=".self::$HomePage."'><img src='apple-touch-icon-144x144.png' class='img-thumbnail' id='hh'></a><br>";	
 				return $html;
 
 		}
 
+		// render show menu
 		public function renderShowMenu() {
 
 			$html = $this->showMenu();

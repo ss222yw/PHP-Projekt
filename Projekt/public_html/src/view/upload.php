@@ -22,18 +22,17 @@ class upload {
 			}
 			
 			echo  $responseMessages;
-			$uploadForm = 	'<h3>Ladda upp en bild på bostad/lokal med/utan beskrivning.</h3><br>'.
+			$uploadForm = 	'<h4>Ladda upp en bild på bostad/lokal med/utan beskrivning.</h4>'.
 			'<div id=upload>'.
-			'<form enctype="multipart/form-data" method="post" action="">' .
+			'<form class="form-horizontal" enctype="multipart/form-data" method="post" action="">' .
 			'<fieldset class="upload">' .
-			'Välj en bild'.
 			'<br>'.
-			'<input type="File" name="'.$this->images.'"class="btn btn-default" >'.
+			'<input type="File" name="'.$this->images.'"" >'.
 			'<br>'.
 			'<br>'.
 			'Beskriv bilden'.
 			'<br>'.
-			'<textarea name="'.$this->msg.'" cols="45" rows="5" maxlength="500" placeholder="Beskriv bilden här... " wrap="hard">'.$this->getComments().'</textarea>' .
+			'<textarea name="'.$this->msg.'" cols="35" rows="5"  maxlength="500" placeholder="Beskriv bilden här... " wrap="hard">'.$this->getComments().'</textarea>' .
 			'<br>'.
 			'<br>'.
 			'<input type="submit" name="'.$this->upload.'" value="Ladda upp" class="btn btn-info" >'.

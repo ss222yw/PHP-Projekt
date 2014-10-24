@@ -22,24 +22,24 @@
 
 
 		//funcations for contact from 
-		public function getContctName() {
+		private function getContctName() {
 			return $this->contact->getName();
 		}
 
-		public function getContactEmail() {
+		private function getContactEmail() {
 			return $this->contact->getEmail();
 		}
 
-		public function getContactMsg() {
+		private function getContactMsg() {
 			return $this->contact->getMsg();
 		}
 
-		public function didPressSend() {
+		private function didPressSend() {
 			return $this->contact->hasSubmitToSend();
 		}
 
 		//Send input to validation method.
-		public function sendContactFormInfo() {
+		private function sendContactFormInfo() {
 			$Name = $this->getContctName();
 			$Email = $this->getContactEmail();
 			$Message = $this->getContactMsg();

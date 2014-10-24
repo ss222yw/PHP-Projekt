@@ -38,24 +38,12 @@ class RegView{
 					'<h2>Registrera ny användare</h2> '.
 					'<form  class="form-horizontal" enctype="multipart/form-data" method="post" action="?page=Registrera">' .
 					$responseMessages .
-					'<div class="form-group">'.
-					'<div class="col-xs-4">'.
 					'<label for="'.$this->username.'">Namn :  </label>' .
 					'<input type="text" name="'.$this->username.'" class="form-control" placeholder="Namn minst 3 tecken" value="'.strip_tags($this->GetUserName()).'" maxlength="30" id="username" /> ' .
-					'</div>'.
-					'</div>'.
-					'<div class="form-group">'.
-					'<div class="col-xs-4" >'.
 					'<label for="'.$this->passwordOne.'">Lösenord : </label>' .
 					'<input type="password" name="'.$this->passwordOne.'" class="form-control" placeholder="Lösenord minst 6 tecken" maxlength="30" id="password" /> ' .
-					'</div>'.
-					'</div>'.
-					'<div class="form-group">'.
-					'<div class="col-xs-4">'.
 					'<label for="'.$this->passwordTwo.'">Reptera Lösenord : </label>' .
 					'<input type="password" name="'.$this->passwordTwo.'" class="form-control" placeholder="Reptera lösenord" maxlength="30" id="passwordTwo" /> ' .
-					'</div>'.
-					'</div>'.
 					'<input type="submit" name="Registrera" id="submit" value="Registrera" class="btn btn-default"/>'.
 					'<br>'.
 					'<br>'.

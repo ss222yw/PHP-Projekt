@@ -16,6 +16,11 @@
 								<title>NybroHH fastigheter</title>
 								<link rel="stylesheet" href="../data/css/bootstrap.min.css">
 								<link rel="stylesheet" href="../data/css/bootstrap-theme.min.css">
+								<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+								<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57x57.png" />
+								<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72.png" />
+								<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114.png" />
+								<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144.png" />
 							</head>
 							<body>'.
 							'<div class="navbar navbar-default">'.

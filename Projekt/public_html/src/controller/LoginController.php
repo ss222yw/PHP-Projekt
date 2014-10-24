@@ -39,35 +39,35 @@
 
 
 		//Get input from register class.
-		public function getuser() {
+		private function getuser() {
 			return $this->regView->GetUserName();
 		}
 
-		public function getPassword() {
+		private function getPassword() {
 			return $this->regView->GetPasswordOne();	
 		}
 
-		public function getSafePassword() {
+		private function getSafePassword() {
 
 			return $this->regView->getSafePassword();
 		}
 
-		public function getPasswordTwo() {
+		private function getPasswordTwo() {
 
 			return $this->regView->GetPasswordTwo();
 		}
 
 		//Get input from login class.
-		public function getUsernameFromLoginView() {
+		private function getUsernameFromLoginView() {
 
 			return $this->loginView->GetUsername();
 		}
-		public function getPasswordFromLoginView() {
+		private function getPasswordFromLoginView() {
 
 			return $this->loginView->GetPassword();
 		}
 
-		public function getWebSiteAndIpAdress(){
+		private function getWebSiteAndIpAdress(){
  			return $this->loginView->getWebBrowserAndIpAdress();
  		}
 	

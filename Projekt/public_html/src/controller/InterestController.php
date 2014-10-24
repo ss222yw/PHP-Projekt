@@ -2,7 +2,7 @@
 	
 
 	//the require once here just to show the coupling between classes.	
-	require_once(ViewPath.DS.'InterestView.php');
+	require_once(ViewPath.DS.'interestView.php');
 	require_once(ModelPath.DS.'validation.php');
 	require_once(ModelPath.DS.'emailInterest.php');
 
@@ -15,30 +15,30 @@
 		public function __construct() {
 
 			$this->validation = new Validation();
-			$this->interest = new InterestView();
+			$this->interest = new interestView();
 			$this->emailInterest = new emailInterest();
 
 		}
 
 		//Funcation for interset form.
-		public function getInterstName() {
+		private function getInterstName() {
 			return $this->interest->getName();
 		}
 
-		public function getInterstEmail() {
+		private function getInterstEmail() {
 			return $this->interest->getEmail();
 		}
 
-		public function getInterstMsg() {
+		private function getInterstMsg() {
 			return $this->interest->getMsg();
 		}
 
-		public function didPressSend() {
+		private function didPressSend() {
 			return $this->interest->hasSubmitToIntreset();
 		}
 
 		// Send input to validation method.
-		public function getInfoForValidtion() {
+		private function getInfoForValidtion() {
 			$Name = $this->getInterstName();
 			$Email = $this->getInterstEmail();
 			$Message = $this->getInterstMsg();

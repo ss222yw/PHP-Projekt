@@ -15,7 +15,7 @@
  			$this->tabel = "pictures";
  		}
 
-
+ 		//Added image name and comment to db.
  		public function AddPics(Images $img) {
  			try {	
  					$db = $this->connectionToDataBase();
@@ -26,14 +26,12 @@
 						
  			} catch (PDOException $ex) {
 
- 				echo $ex;
- 				//die('An unknown error hase happened');
+ 				die('An unknown error hase happened');
  			}
  		}
 
-
+ 		// delete image name and comment from db.
  		public function delete($img) {
- 
  			try {
  					$db = $this->connectionToDataBase();
  					$sql = "DELETE FROM $this->tabel WHERE imgName = ?";
@@ -42,13 +40,12 @@
 					$query->execute($params);
 				
  			} catch (Exception $e) {
- 				echo $e;
- 			//	die('An unknown error hase happened');
+ 				die('An unknown error hase happened');
 				
  			}
  		}
 
-
+ 		// save updating image comment.
  		public function saveEdit(Images $img) {
 			try {
 				$db = $this->connectionToDataBase();
@@ -58,10 +55,11 @@
 				$query->execute($params);
 			}
 			catch (Exception $e) {
-				echo $e;
+				die('An unknown error hase happened');
 			}
 		}
 
+		//Get everything from tabel Image.
 		public function getImagesInformation($name) {
 			try {
 				$f = new ImagesRepository();
@@ -79,7 +77,7 @@
 				return NULL;
 			}
 			catch (Exception $e) {
-				echo $e;
+				die('An unknown error hase happened');
 			}
 		}
 	

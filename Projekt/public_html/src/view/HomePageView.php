@@ -14,17 +14,20 @@
 
 		public function homePageForm() {
 			$Images = glob("src/view/Images/*.*");
-			$htmlHomePage = "<h2>Välkommen till HH fastigheter , här är våran ledigt.</h2>";
+			$htmlHomePage = '<div id="middelText">';
+			$htmlHomePage .= '<h3>Välkommen till HH fastigheter , här är våran ledigt för mer info tryck <a href="?page=Avaliable">här</a></h3>';
+			$htmlHomePage .= '</div>';
+			$htmlHomePage .= '<div id="middel">';
 			$htmlHomePage .= '<div class="fadein">';
 			foreach ($Images as $value) {
-				if($value != "") {
+				if(basename($value) != "") {
 					 $htmlHomePage .= '<img src="'.$value.'" id="ImgSize" class="img-responsive" >';
 				}
 				else {
 						$htmlHomePage .= '<img src="Bild-Saknas.jpg" id="ImgSize" class="img-responsive" >';
 				}
 			}
-			$htmlHomePage .= '</div>';
+			$htmlHomePage .= '</div></div>';
 			return $htmlHomePage;
 		}
 

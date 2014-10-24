@@ -41,7 +41,7 @@
 		public function GetUsername () {
 			return $_SESSION[self::$sessionUserHeadCategory][self::$sessionUsername];
 		}
-
+		
 		public function LoginAdmin($safeId,$web) {
 		
 				if ($safeId == 1) {

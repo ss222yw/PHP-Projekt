@@ -11,12 +11,12 @@
 		private static $defaultLoginSuccessMessage = '<div class="alert alert-success alert-dismissible" role="alert">
   							 						 <button type="button" class="close" data-dismiss="alert">
   									      		     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  									       		     <strong>Inloggning lyckades</strong></div><br><br>';
+  									       		     <strong>Inloggning lyckades</strong></div>';
 
 		private static $autoLoginSuccessMessage = '<div class="alert alert-success alert-dismissible" role="alert">
   							 				      <button type="button" class="close" data-dismiss="alert">
   									              <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  									              <strong>Inloggning lyckades och vi kommer ihåg dig nästa gång.</strong></div><br><br>';
+  									              <strong>Inloggning lyckades och vi kommer ihåg dig nästa gång.</strong></div>';
    
 		private static $cookieLoginSuccessMessage = "";
 		private static $cookieUsernameErrMsg = 'CookieUsername does not exist!';
@@ -49,15 +49,10 @@
 				$username = $_COOKIE[self::$sessionUsername];
 			}
 
-			$memberHTML = '<div id="memberView">'.
-						'<form id="logout" enctype="multipart/form-data" method="post" action="">'.
-						'<fieldset class="memberView">' .
-							'<h2>' . $username . ' är inloggad.</h2>' .
+			$memberHTML = 	'<form id="logout" enctype="multipart/form-data" method="post" action="">'.
+							'<h4>' . $username . ' är inloggad.</h4>' .
 							$successMessage .
-						
 						'<input type="submit" name="logout" id="submit" value="Logga ut" class="btn btn-primary"/>'.
-						'</fieldset>'.
-							'</div>'.
 							'</form>';
 
 			return $memberHTML;

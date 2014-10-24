@@ -126,7 +126,7 @@ class available{
 		return $remove;
 	}
 
-
+	//Edit form for image comment.
 	public function EditUploadedInformation() {
 
 			$img = $this->imagesModel->getImages($this->getHiddenId());
@@ -155,9 +155,7 @@ class available{
 	}
 
 	public function hasSubmitToEdit() {
-		//var_dump(isset($_POST[$this->EditInfo]));
 		if (isset($_POST[$this->EditInfo])) {
-			# code...
 			return true;
 		}
 	}
@@ -192,7 +190,6 @@ class available{
 
 	public function getSessionHiddenEdit() {
 		if (isset($_POST[$this->hiddenImgEdit])) {
-			# code...
 			return $_POST[$this->hiddenImgEdit];
 		}
 	}
@@ -206,14 +203,12 @@ class available{
 
 	public function GetImageComment() {
 		if (isset($_POST[$this->msg])) {
-			# code...
 			return nl2br($_POST[$this->msg]);
 		}
 	}
 
 	public function GetSaved() {
 		if (isset($_POST[$this->SaveEdit])) {
-			# code...
 			return true;
 		}
 	}

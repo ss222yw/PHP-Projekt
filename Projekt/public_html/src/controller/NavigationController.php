@@ -54,7 +54,7 @@ ob_start();
 		//Render menu.
 		public function doControll() {
 					
-		$this->navigationView->renderShowMenu();
+			$this->navigationView->renderShowMenu();
 			try {
 					 
 					
@@ -124,7 +124,7 @@ ob_start();
 						echo '<div class="alert alert-danger alert-dismissible" role="alert">
   							  <button type="button" class="close" data-dismiss="alert">
   							  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  							  <strong>Logga in</strong> först för att kunna skicka intressanmälan!</div><br><br>';
+  							  <strong>Logga in</strong> först för att kunna skicka intressanmälan!</div>';
 					}
 						break;
 					case NavigationView::$service:
@@ -142,7 +142,7 @@ ob_start();
 						echo '<div class="alert alert-danger alert-dismissible" role="alert">
   							  <button type="button" class="close" data-dismiss="alert">
   							  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  							  <strong>Logga in</strong> först för att kunna skicka anmälan!</div><br><br>';
+  							  <strong>Logga in</strong> först för att kunna skicka anmälan!</div>';
 					}
 						break;			
 
