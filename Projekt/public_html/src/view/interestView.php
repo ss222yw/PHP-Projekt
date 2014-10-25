@@ -39,7 +39,7 @@
 			'<label>Ditt namn : </label>'.
 			'<input type="text" name="'.$this->name.'" value="'.$this->GetName.'" maxlength="30" class="form-control" placeholder="Namnet krävs">' .
 			'<label>Din epost : </label>'.
-			'<input type="email" name="'.$this->email.'" maxlength="50"  class="form-control" placeholder="epost krävs" value="'.$this->GetEmail.'">' .
+			'<input type="text" name="'.$this->email.'" maxlength="50"  class="form-control" placeholder="epost krävs" value="'.$this->GetEmail.'">' .
 			'<label>Önskemål & Inflyttningsdatum : </label>'.
 			'<textarea name="'.$this->msg.'" maxlength="500" cols="45" rows="5" class="form-control" placeholder="Beskriv din önskemål här..." wrap="hard">'.$this->GetMeg.'</textarea>' .
 			'<input type="submit" name= "'.$this->send.'" value="Skicka intresseanmälan" class="btn btn-default">'.

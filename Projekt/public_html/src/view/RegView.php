@@ -37,17 +37,17 @@ class RegView{
 
 					'<h2>Registrera ny användare</h2> '.
 					'<form  class="form-horizontal" enctype="multipart/form-data" method="post" action="?page=Registrera">' .
-					$responseMessages .
-					'<label for="'.$this->username.'">Namn :  </label>' .
-					'<input type="text" name="'.$this->username.'" class="form-control" placeholder="Namn minst 3 tecken" value="'.strip_tags($this->GetUserName()).'" maxlength="30" id="username" /> ' .
-					'<label for="'.$this->passwordOne.'">Lösenord : </label>' .
-					'<input type="password" name="'.$this->passwordOne.'" class="form-control" placeholder="Lösenord minst 6 tecken" maxlength="30" id="password" /> ' .
-					'<label for="'.$this->passwordTwo.'">Reptera Lösenord : </label>' .
-					'<input type="password" name="'.$this->passwordTwo.'" class="form-control" placeholder="Reptera lösenord" maxlength="30" id="passwordTwo" /> ' .
-					'<input type="submit" name="Registrera" id="submit" value="Registrera" class="btn btn-default"/>'.
-					'<br>'.
-					'<br>'.
-					'<a href="?login">Tillbaka</a>'.
+						$responseMessages .
+						'<label for="'.$this->username.'">Namn :  </label>' .
+						'<input type="text" name="'.$this->username.'"  placeholder="Namn minst 3 tecken" class="form-control" value="' .strip_tags($this->GetUserName()). '" maxlength="30"  /> ' .
+						'<label for="'.$this->passwordOne.'">Lösenord : </label>' .
+						'<input type="password" name="'.$this->passwordOne.'" class="form-control" placeholder="Lösenord minst 6 tecken" maxlength="30" id="password" /> ' .
+						'<label for="'.$this->passwordTwo.'">Reptera Lösenord : </label>' .
+						'<input type="password" name="'.$this->passwordTwo.'" class="form-control" placeholder="Reptera lösenord" maxlength="30" id="passwordTwo" /> ' .
+						'<input type="submit" name="Registrera" id="submit" value="Registrera" class="btn btn-default"/>'.
+						'<br>'.
+						'<br>'.
+						'<a href="?page=HomePage">Tillbaka</a>'.
 					'</form>';
 			return $RegHTML;
 
@@ -62,20 +62,20 @@ class RegView{
 
 	public function GetUserName() {
 		if (isset($_POST[$this->username])) {
-			return htmlentities($_POST[$this->username]);	
+			return $_POST[$this->username];	
 		}
 	}
 
 
 	public function GetPasswordOne() {
 		if (isset($_POST[$this->passwordOne])) {
-			return htmlentities($_POST[$this->passwordOne]);
+			return $_POST[$this->passwordOne];
 		}	
 	}
 
 	public function GetPasswordTwo() {
 		if (isset($_POST[$this->passwordTwo])) {
-			return htmlentities($_POST[$this->passwordTwo]);
+			return $_POST[$this->passwordTwo];
 		}
 	}
 

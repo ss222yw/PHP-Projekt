@@ -27,24 +27,26 @@
 		}
 
 
+
 		//Show menu
 		public function showMenu() {	
 				$html = '<nav class="navbar navbar-default" role="navigation">';
 				$html .='<div class="navbar-header">
-     					 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      				     <span class="sr-only">Toggle navigation</span>
-				         <span class="icon-bar"></span>
-				         <span class="icon-bar"></span>
-				         <span class="icon-bar"></span>
-				         </button>
+     					   <button type="button" class="navbar-toggle collapsed"
+     					 	 data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      				     	 <span class="sr-only">Toggle navigation</span>
+				             <span class="icon-bar"></span>
+				             <span class="icon-bar"></span>
+				             <span class="icon-bar"></span>
+				           </button>
 				         </div>';
 				$html .= '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">';
-			    $html .= "<ul class='nav nav-pills'>";
-			    $html .= "<li><a href='?".self::$page."=".self::$HomePage."'>Hem</a></li>&nbsp;&nbsp;";
-				$html .= "<li><a href='?".self::$page."=".self::$Avaliable."'>Ledigt</a></li>&nbsp&nbsp;";
-				$html .= "<li><a href='?".self::$page."=".self::$contact."'>Kontakta oss</a></li>&nbsp;&nbsp;";
-				$html .= "<li><a href='?".self::$page."=".self::$interest."'>Intresseanmälan</a></li>&nbsp;&nbsp;";
-				$html .= "<li><a href='?".self::$page."=".self::$service."'>Felanmälan</a></li><br>";
+			    $html .= "<ul class='nav navbar-nav'>";
+			    $html .= "<li><a href='?".self::$page."=".self::$HomePage."'>Hem</a></li>";
+				$html .= "<li><a href='?".self::$page."=".self::$Avaliable."'>Ledigt</a></li>";
+				$html .= "<li><a href='?".self::$page."=".self::$contact."'>Kontakta oss</a></li>";
+				$html .= "<li><a href='?".self::$page."=".self::$interest."'>Intresseanmälan</a></li>";
+				$html .= "<li><a href='?".self::$page."=".self::$service."'>Felanmälan</a></li>";
 				$html .= "</ul>";
 				$html .= "</div>";
 				$html .="</nav>";

@@ -190,6 +190,8 @@
 
 							// Create a new image from file or URL.
 							$imgCreateFromJ = imagecreatefromjpeg($_FILES[$this->fileName]['tmp_name']);
+							$imgCreateFromP = imagecreatefrompng($_FILES[$this->fileName]['tmp_name']);
+							$imgCreateFromG = imagecreatefromgif($_FILES[$this->fileName]['tmp_name']);
 							// Get image width and height.
 							$imgWidth =	getimagesize($_FILES[$this->fileName]['tmp_name'])[0];
 							$imgHeigth = getimagesize($_FILES[$this->fileName]['tmp_name'])[1];
@@ -200,16 +202,23 @@
 							$ImgCreateColor = imagecreatetruecolor($newImgWidth, $newImgHeight);
 							//Copy and resize part of an image with new image size.
 							imagecopyresampled($ImgCreateColor, $imgCreateFromJ, 0, 0, 0, 0, $newImgWidth, $newImgHeight, $imgWidth, $imgHeigth);
-							// creates a JPEG from uploaded image.
-							$imgToUpload = imagejpeg($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
+						    imagecopyresampled($ImgCreateColor, $imgCreateFromP, 0, 0, 0, 0, $newImgWidth, $newImgHeight, $imgWidth, $imgHeigth);
+						   	imagecopyresampled($ImgCreateColor, $imgCreateFromG, 0, 0, 0, 0, $newImgWidth, $newImgHeight, $imgWidth, $imgHeigth);
 
-							 if ($imgToUpload) {
+
+							// creates a JPEG from uploaded image.
+							$imgToUploadJ = imagejpeg($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
+							$imgToUploadP = imagepng($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
+							$imgToUploadG = imagegif($ImgCreateColor,$this->imgRoot.$_FILES[$this->fileName]['name'],100);
+							 if ($imgToUploadJ || $imgToUploadP || $imgToUploadG ) {
 								$images = new Images($_FILES[$this->fileName]['name'],$this->GetComment());
 							 	$this->imagesModel->addImages($images);
 
 							 	//change filem mode, 0755 read and execute.
 							 	chmod($this->imgRoot.$_FILES[$this->fileName]['name'], 0755);
 							  	imagedestroy($imgCreateFromJ);
+							  	imagedestroy($imgCreateFromP);
+							  	imagedestroy($imgCreateFromG);
 						      	imagedestroy($ImgCreateColor);
 						      	$this->cookieStorage->SaveMessageCookie(self::$UPLOADEDSUCCESSED);
 						      	header('Location: ?page=Avaliable');

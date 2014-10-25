@@ -79,6 +79,11 @@
   										          <strong>Som fel har inträffat</strong></div>';
 
 	//Message for Contact function.
+  	private static $ErrorMsgAndEmail = '<div class="alert alert-danger alert-dismissible" role="alert">
+  							 		    <button type="button" class="close" data-dismiss="alert">
+  									    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  								        <strong>Eposten och meddelandet kan inte vara tom!</strong></div>';										          
+
 	private static $ErrorNameMessage = '<div class="alert alert-danger alert-dismissible" role="alert">
   							 		    <button type="button" class="close" data-dismiss="alert">
   									    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -143,18 +148,20 @@
 
 	}
 
-	// public function getImgName($upload) {
-	// 	$this->fileName = $upload;
-	// }
+	public function getImgName($upload) {
+		$this->fileName = $upload;
+	}
 
 	//validation to reistration.
 	public function ValidateRegistration ($username,$password,$passwordTwo) {
+
+			var_dump($username != strip_tags($username));
 
 			if (mb_strlen($username) < 3 && mb_strlen($password) < 6) {
 				return self::$ErrorPasswordAndUserNameMessage;
 			}
 
-		    if ($username == null || mb_strlen($username) < 3) {
+		    else if ($username == null || mb_strlen($username) < 3) {
 				return self::$ErrorUserNameMessage;
 			}
 			
@@ -251,6 +258,10 @@
 				return self::$ErrorMiniName;
 			}
 
+			else if($Email == null && $Message == null) {
+				return self::$ErrorMsgAndEmail;
+			}
+
 			else if ($Email == null) {
 				return self::$ErrorEmptyEmail;
 			}
@@ -288,6 +299,11 @@
 			else if (mb_strlen($Name) < 3) {
 				return self::$ErrorMiniName;
 			}
+			
+			else if($Email == null && $Message == null) {
+				return self::$ErrorMsgAndEmail;
+			}
+
 			else if ($Email == null) {
 				return self::$ErrorEmptyEmail;
 			}
