@@ -1,8 +1,8 @@
 PHP-Projekt
 ===========
-För installation av databasen gå till data -> Documents -> README och läs mer där!
+For installation of the database go to data -> README And read more there!
 
-Tillgång till applikationen http://www.sahibsahib.com/
+Access to the application http://www.sahibsahib.com/
 
 Sahib Sahib ud 13 LNU
 
