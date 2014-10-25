@@ -124,27 +124,14 @@
   								    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   								    <strong>Meddelandet kan inte vara mindre än tre tecken!</strong></div>';
 
-	private static $ErrorTel = '<div class="alert alert-danger alert-dismissible" role="alert">
-  							    <button type="button" class="close" data-dismiss="alert">
-  							    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  							    <strong>Telefon Nummer består av siffror!Ingen bokstav tilllåtet.</strong></div>';
-
-	private static $ErrorAprtNr = '<div class="alert alert-danger alert-dismissible" role="alert">
-  							 	   <button type="button" class="close" data-dismiss="alert">
-  								   <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  								   <strong>Lägenhetens nummer består av siffror!Ingen bokstav tillåtet.</strong></div>';
-
-
 	//Regex validation.
 	private $emailExp;
 	private $Exp;
-	private $NrExp;
 
 	public function __construct(){
 		//Regx took from http://www.phpportalen.net/.
 		$this->emailExp = "/^[a-z0-9\å\ä\ö._-]+@[a-z0-9\å\ä\ö.-]+\.[a-z]{2,6}$/i";
 		$this->Exp = "/^([a-zA-ZÅÄÖåäö]{2,10})([- ]{1})?([a-zA-ZÅÄÖåäö]{2,10})?$/";
-		$this->NrExp = "/^[0-9]+$/";
 
 	}
 
@@ -299,7 +286,7 @@
 			else if (mb_strlen($Name) < 3) {
 				return self::$ErrorMiniName;
 			}
-			
+
 			else if($Email == null && $Message == null) {
 				return self::$ErrorMsgAndEmail;
 			}
@@ -345,6 +332,11 @@
 			else if (mb_strlen($Name) < 3) {
 				return self::$ErrorMiniName;
 			}
+
+			else if($Email == null && $Message == null) {
+				return self::$ErrorMsgAndEmail;
+			}
+
 			else if ($Email == null) {
 				return self::$ErrorEmptyEmail;
 			}
@@ -369,13 +361,6 @@
 				return self::$ErrorEmailMessage;
 			}	
 
-			else if ($AprtNr != null && !preg_match($this->NrExp,$AprtNr)) {
-				return self::$ErrorAprtNr;
-			}
-
-			else if ($TEL != null && !preg_match($this->NrExp,$TEL)) {
-				return self::$ErrorTel;
-			}
 				
 				return true;
 		}

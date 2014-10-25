@@ -48,7 +48,7 @@
 			'<label>Lgh Nr : </label>'.
 			'<input type="text" name="'.$this->aprtM.'" maxlength="10" class="form-control" placeholder="Frivilligt" value="'.$this->GetApartNr.'">' .
 			'<label>Din epost : </label>'.
-			'<input type="email" name="'.$this->email.'" maxlength="50" class="form-control" placeholder="Epost krävs" value="'.$this->GetEmail.'">' .
+			'<input type="text" name="'.$this->email.'" maxlength="50" class="form-control" placeholder="Epost krävs" value="'.$this->GetEmail.'">' .
 			'<label>Telefon : </label>'.
 			'<input type="tel" name="'.$this->tel.'" maxlength="30" class="form-control"  placeholder="Frivilligt" value="'.$this->GetTel.'">' .
 			'<label>Ditt anmäla : </label>'.
@@ -66,13 +66,13 @@
 
 		public function getName() {
 			if (isset($_POST[$this->name])) {
-				return htmlentities($_POST[$this->name]);
+				return $_POST[$this->name];
 			}
 		}
 
 		public function getEmail() {
 			if (isset($_POST[$this->email])) {
-				return htmlentities($_POST[$this->email]);
+				return $_POST[$this->email];
 			}
 		}
 
@@ -85,13 +85,13 @@
 
 		public function getTel() {
 			if (isset($_POST[$this->tel])) {
-				return htmlentities($_POST[$this->tel]);
+				return $_POST[$this->tel];
 			}
 		}
 
 		public function getAprtNumber() {
 			if (isset($_POST[$this->aprtM])) {
-				return htmlentities($_POST[$this->aprtM]);
+				return $_POST[$this->aprtM];
 			}
 		}
 
