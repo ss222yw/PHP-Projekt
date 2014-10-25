@@ -1,7 +1,8 @@
 <?php
 	
+	//the require once here just to show the coupling between classes.	
+	require_once(HelperPath.DS.'Database.php');
 
- 	//TODO:: Should i really save the image name in the databse ??? When it is just the Admin who can upload image!
  	class ImagesRepository extends Database {
 
 

@@ -1,4 +1,10 @@
 <?php
+
+	//the require once here just to show the coupling between classes.	
+	require_once(HelperPath.DS.'HTMLView.php');
+	require_once(ModelPath.DS.'SessionModel.php');
+	require_once(ViewPath.DS.'MemberView.php');
+	require_once(ControllerPath.DS.'LoginController.php');
 	
 	class NavigationView {
 

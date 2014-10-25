@@ -1,7 +1,6 @@
 <?php
 	
 
-	//TODO:: Remove the class or continue....
 	class Images {
 
 		private $imgName;

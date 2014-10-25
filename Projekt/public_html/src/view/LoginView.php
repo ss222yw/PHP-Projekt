@@ -1,6 +1,7 @@
 <?php
-
+	//the require once here just to show the coupling between classes.	
 	require_once(HelperPath.DS.'HTMLView.php');
+	require_once(ViewPath.DS.'RegView.php');
 
 	class LoginView {
 		private static $newUserSuccessMsg = '<div class="alert alert-success alert-dismissible" role="alert">
@@ -24,6 +25,10 @@
 		private $safe;
 		private $remote_ip;
 		private $user_agent;
+		private $username = "username";
+		private $password = "password";
+		private $rememberMe = "rememberMe";
+		private $submit = "submit";
  
 		function __construct () {
 
@@ -39,7 +44,7 @@
 		}
 
 		public function getSafeInputPassword() {
-			return $this->safe->create_hash($this->GetUsername());
+			return $this->safe->create_hash($this->GetUsername());	
 		}
 		public function getNewUserSuccessMsg() {
 			return self::$newUserSuccessMsg;
@@ -59,17 +64,17 @@
 			'<br>'.
 			'<form id="upload" class="form-inline" enctype="multipart/form-data" method="post" action="">' .
 					$responseMessages .
-					'<input type="text" name="username" class="form-control" placeholder="Användarnamn" value="' . $this->GetUsername() . '" maxlength="30" id="username" /> ' .
-					'<input type="password" name="password" class="form-control" placeholder="Lösenord" maxlength="30" id="password" /> ' .
+					'<input type="text" name="'.$this->username.'" class="form-control" placeholder="Användarnamn" value="' . $this->GetUsername() . '" maxlength="30" id="username" /> ' .
+					'<input type="password" name="'.$this->password.'" class="form-control" placeholder="Lösenord" maxlength="30" id="password" /> ' .
 					'<label for="rememberMe">Håll mig inloggad </label>&nbsp;&nbsp;'.
-					'<input id="rememberMe" type="checkbox" name="rememberMe">&nbsp;&nbsp;'.
-		 			'<input type="submit" name="submit" id="submit" value="Logga in" class="btn btn-primary " />'.
+					'<input id="rememberMe" type="checkbox" name="'.$this->rememberMe.'">&nbsp;&nbsp;'.
+		 			'<input type="submit" name="'.$this->submit.'" id="submit" value="Logga in" class="btn btn-primary " />'.
 					'<br>'.
 					'<br>'.
 					'&nbsp;&nbsp;&nbsp;&nbsp;Ingen konto? <a href="?registrera" name="registrera">Registrera dig här</a>'.
 			'</form>';
 
-			$_SESSION['LoginValues']['username'] = "";
+			$_SESSION['LoginValues'][$this->username] = "";
 
 			return $loginHTML;			
 		}	
@@ -91,24 +96,24 @@
 		public function GetUsername () {
 
 			// Is called from LoginController
-			if (isset($_POST['username'])) {
+			if (isset($_POST[$this->username])) {
 				
-				return $_POST['username'];
+				return $_POST[$this->username];
 			}
 		}
 
 		public function GetPassword () {
 
 			// Is called from LoginController
-			if (isset($_POST['password'])) {
+			if (isset($_POST[$this->password])) {
 				
-				return $_POST['password'];
+				return $_POST[$this->password];
 			}
 		}
 
 		public function UserPressLoginButton () {
 
-			return isset($_POST['submit']);
+			return isset($_POST[$this->submit]);
 		}
 
 
@@ -116,9 +121,9 @@
 
 			$isChecked = false;
 
-			if (isset($_POST['rememberMe'])) {
+			if (isset($_POST[$this->rememberMe])) {
 				
-				$isChecked = $_POST['rememberMe'];
+				$isChecked = $_POST[$this->rememberMe];
 			}
 
 			return ($isChecked == 'true' || $isChecked == 'on') ? true : false;

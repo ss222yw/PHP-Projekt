@@ -1,5 +1,8 @@
 <?php
 
+	//the require once here just to show the coupling between classes.	
+	require_once(ModelPath.DS.'UserModel.php');
+	
 	class SessionModel {
 
 			private $isLoggedIn = false;
@@ -41,7 +44,7 @@
 		public function GetUsername () {
 			return $_SESSION[self::$sessionUserHeadCategory][self::$sessionUsername];
 		}
-		
+
 		public function LoginAdmin($safeId,$web) {
 		
 				if ($safeId == 1) {

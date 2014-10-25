@@ -1,5 +1,7 @@
 <?php
 
+
+	
 	class CookieStorage {
 
 		public $username;
@@ -13,7 +15,7 @@
 		private static $cookieMsg = "msg";
 		
 		public function __construct() {
-			$this->safe = new safe();
+			
 		}
 
 		public function SaveUserCredentials ($username, $password, $cookieTimestamp,$safeId) {

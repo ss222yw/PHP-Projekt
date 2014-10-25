@@ -1,5 +1,8 @@
 <?php
-
+	
+	//the require once here just to show the coupling between classes.	
+	require_once(HelperPath.DS.'HTMLView.php');
+	
 	class HomePageView {
 
 		private $mainView;
