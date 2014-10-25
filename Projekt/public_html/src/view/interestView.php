@@ -31,7 +31,7 @@
 				$responseMessages .= '<strong>' . $message . '</strong>';
 			}
 
-	 		echo '<h3>'.$responseMessages.'</h3>';
+	 		echo $responseMessages;
 
 			$Interest =
 			'<h2>Sökande</h2>'.

@@ -58,7 +58,6 @@
 
 		public function GetAdminSafeID() {
 			if (isset($_COOKIE[self::$admin])) {
-				# code...
 				return $_COOKIE[self::$admin];
 			}
 		}

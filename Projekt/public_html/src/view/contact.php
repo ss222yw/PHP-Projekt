@@ -33,9 +33,9 @@
 			}
 
 			
-			echo '<h4>'.$responseMessages.'</h4>';
+			echo $responseMessages;
 			$contactUs =
-			'<h2>Var vänlig och kontakta oss</h2>'.
+			'<h3>Var vänlig och kontakta oss</h3>'.
 			'<form class="form-horizontal"  method="post" action="">'.
 			'<label><strong>Ditt namn</strong> : </label>'.
 			'<input type="text" name="'.$this->name.'" maxlength="30" value="'.$this->GetName.'"  class="form-control" placeholder="Namnet krävs">' .
